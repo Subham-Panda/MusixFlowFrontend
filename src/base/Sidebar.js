@@ -22,12 +22,12 @@ class Sidebar extends Component {
                 <div className="side-bar-navigation">
                     <Link to={'/inflowmusic'}>
                         <div className={activePage === "inflowmusic" ? "nav-link-main active" : "nav-link-main"} onClick={() => this.setState({ activePage: "inflowmusic" })}>
-                            <img src={assetsImages.wallet} />
+                            <img src={assetsImages.home} />
                         </div>
                     </Link>
                     <Link to={'/news'}>
                         <div className={activePage === "demo1" ? "nav-link-main active" : "nav-link-main"} onClick={() => this.setState({ activePage: "demo1" })}>
-                            <img src={assetsImages.wallet} />
+                            <img src={assetsImages.dashboard} />
                         </div>
                     </Link>
                     <Link to={'/leaderboard'}>
@@ -37,17 +37,17 @@ class Sidebar extends Component {
                     </Link>
                     <Link to={'/accountsettings'}>
                     <div className={activePage === "demo3" ? "nav-link-main active" : "nav-link-main"} onClick={() => this.setState({ activePage: "demo3" })}>
-                        <img src={assetsImages.wallet} />
+                        <img src={assetsImages.inventory} />
                     </div>
                     </Link>
                     <Link to={'/lebels'}>
                     <div className={activePage === "demo4" ? "nav-link-main active" : "nav-link-main"} onClick={() => this.setState({ activePage: "demo4" })}>
-                        <img src={assetsImages.wallet} />
+                        <img src={assetsImages.calendar} />
                     </div>
                     </Link>
                     <Link to={'/'}>
                     <div className={activePage === "demo5" ? "nav-link-main active" : "nav-link-main"} onClick={() => this.setState({ activePage: "demo5" })}>
-                        <img src={assetsImages.wallet} />
+                        <img src={assetsImages.orders} />
                     </div>
                     </Link>
                     <div  className={activePage === "demo6" ? "nav-link-main settings-icon active" : "nav-link-main settings-icon"} onClick={() => this.setState({ activePage: "demo6" })}>

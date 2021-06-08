@@ -39,7 +39,7 @@ class Mydashboard extends Component {
                             <div className="below-row">
                                 <div className="date-row-main">
                                     <div className="left-pricing">
-                                        <div className="price-tag">$ 1,357</div>
+                                        <div className="price-tag"> <span>$</span> 1,357</div>
                                         <div className="short-des">+18% last month</div>
                                     </div>
                                     <div className="right-side">
@@ -145,7 +145,7 @@ class Mydashboard extends Component {
                         <div className="total-balance-row">
                             <div className="heading-cols">
                                 <div className="card-heading">Total Wallet Balance</div>
-                                <div className="dollor-price">$ 5, 109</div>
+                                <div className="dollor-price"><span>$</span> 5, 109</div>
                                 <div className="small-heading">+8  last week</div>
                             </div>
                             <div className="btn-filter">
@@ -181,7 +181,7 @@ class Mydashboard extends Component {
                 {/* -----------My-NFTs----------------------- */}
                 
                 <div className="mynfts-row-main">
-                        <div className="first-col">
+                        <div className="second-col">
                             <Mynftdropdown />
                         </div>
                         <div className="center-col">

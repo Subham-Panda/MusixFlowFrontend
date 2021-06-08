@@ -1,7 +1,28 @@
+
+@font-face {
+    src: url("./assets/fonts/Rubik-Regular.ttf");
+    font-family: Rubik;
+    font-weight: normal;
+}
+
+@font-face {
+    src: url("./assets/fonts/Rubik-Medium.ttf");
+    font-family: Rubik-Medium;
+    font-weight: normal;
+}
+
+@font-face {
+    src: url("./assets/fonts/Rubik-Bold.ttf");
+    font-family: Rubik-bold;
+    font-weight: normal;
+}
+
+
 body{
     background: #000 !important;
     color: #fff !important;
     overflow-x: hidden;
+    font-family: Rubik,Rubik-Medium,Rubik-bold,sans-serif !important;
 }
 html {
     overflow-x: hidden;
@@ -12,14 +33,30 @@ html {
 }
 
 .main-comman-wrapping {
+    position: relative;
     margin-left: 105px;
     margin-top: 90px;
+    background: url("./assets/images/background-pattern.svg") repeat-y fixed;
+}
+
+.main-comman-wrapping:before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0, 0.9);
+    top: 0;
+    left: 0;
 }
 
 
 /* --------------------Global-css--------------- */
 .dashboard-wrapper-main {
-    padding: 30px;
+    padding: 35px 30px;
+    position: relative;
+    z-index: 1;
+
+
 }
 
 .heading {
@@ -31,7 +68,7 @@ html {
 }
 .card-heading {
     color: #aaaaaa;
-    font-size: 16px;
+    font-size: 15px;
     line-height: normal;
     letter-spacing: 0.09em;
     font-weight: 600;
@@ -89,14 +126,18 @@ html {
     margin-bottom: 0px;
 }
 
+.first-row-main-dash .left-col .below-row .left-pricing .price-tag span {
+    font-size: 18px;
+}
+
 .below-row canvas {
     height: 150px !important;
 }
 
 .first-row-main-dash .left-col .below-row .left-pricing .short-des {
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 1px;
-    color: #aaaaaa;
+    color: #888888;
 }
 
 .first-row-main-dash .left-col .below-row .date-row-main {
@@ -113,6 +154,8 @@ html {
     padding: 0;
     position: relative;
     padding-right: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .first-row-main-dash .left-col .below-row .right-side .custom-drop .customised-dashdrop .btn::after{
@@ -131,10 +174,9 @@ html {
 
 .first-row-main-dash .left-col .below-row .right-side .labal {
     margin-top: -4px;
-    font-size: 12px;
-    color: #aaaaaa;
+    font-size: 11px;
+    color: #888888;
     letter-spacing: 1px;
-    font-weight: 600;
 }
 
 .progress-bar-cust .progress {
@@ -153,27 +195,36 @@ html {
 .spiner-bar-row .comman-col:first-child {
     margin-right: 40px;
     padding-right: 40px;
-    border-right: 1px solid #ccc;
+    border-right: 2px solid #444444;
     padding-left: 10px;
 }
 
+.comman-div-for-pro .spiner-bar-row .comman-col:first-child {
+    border-right: 2px solid #555555;
+}
+
 .spiner-bar-row .comman-col {
+    width: 50%;
     display: flex;
     align-items: center;
 }
 .spiner-bar-row .comman-col .spinner {
     margin-right: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .spiner-bar-row .comman-col .right-side-value span.small-heading {
     display: block;
-    font-size: 12px;
-    color: #aaaaaa;
+    font-size: 11px;
+    color: rgba(255,255,255, 0.5);
+    letter-spacing: 2px;
 }
 
 .spiner-bar-row .comman-col .right-side-value {
     font-size: 23px;
-    font-weight: 500;
+    font-weight: bolder;
+    letter-spacing: 0.5px;
 }
 
 .first-row-main-dash .right-col {
@@ -189,7 +240,7 @@ html {
 }
 
 .comman-div-for-pro {
-    display: grid;
+    display: flex;
     justify-content: center;
     background: #444;
     padding: 30px;
@@ -197,7 +248,7 @@ html {
     margin: auto;
     margin-top: 80px;
     border-radius: 4px;
-
+    flex-direction: column;
 }
 
 
@@ -206,6 +257,11 @@ html {
 }
 .comman-div-for-pro .spiner-bar-row .comman-col:first-child {
     padding-left: 0;
+    justify-content: flex-end;
+}
+
+.comman-div-for-pro .spiner-bar-row .comman-col .right-side-value {
+    font-weight: 500;
 }
 
 .comman-div-for-pro .spiner-bar-row:first-child .comman-col {
@@ -213,31 +269,31 @@ html {
 }
 
 .last-row-pricing {
-    padding: 30px;
+    padding:10px 30px;
     width: 80%;
     background: #444;
     margin: auto;
     margin-top: 20px;
     display: flex;
     align-items: center;
-    border-radius: 4px;
 }
 
 .last-row-pricing .comman-priced:first-child {
     padding-right: 30px;
-    margin-right: 30px;
-    border-right: 1px solid #ccc;
+    margin-right: 40px;
+    border-right: 2px solid #555;
 }
 
 .last-row-pricing .comman-priced span.small-heading {
     display: block;
     font-size: 12px;
-    color: #aaaaaa;
+    color: rgba(255,255,255, 0.5);
+    letter-spacing: 2px;
 }
 
 .last-row-pricing .comman-priced {
     width: 100%;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
 }
 
@@ -264,10 +320,14 @@ html {
     line-height: normal;
 }
 
+.Second-row-wave-chart .total-balance-row .heading-cols .dollor-price span {
+    font-size: 20px;
+}
+
 .Second-row-wave-chart .total-balance-row .heading-cols .small-heading {
-    font-size: 18px;
+    font-size: 12px;
     line-height: normal;
-    color: #aaaaaa;
+    color: #888888;
 }
 .Second-row-wave-chart .total-balance-row .btn-filter a {
     display: inline-block;
@@ -287,7 +347,7 @@ html {
 .deposite-earning-row:before {
     position: absolute;
     content: '';
-    background: #ccc;
+    background: #444;
     width: 1px;
     left: 0;
     right: 0;
@@ -299,7 +359,7 @@ html {
 .deposite-earning-row .deposits .square-lab {
     width: 26px;
     height: 26px;
-    background: #6e3ed1;
+    background: #6B16D1;
     border-radius: 7px;
     margin-right: 10px;
 }
@@ -307,7 +367,7 @@ html {
 .deposite-earning-row .earning .square-lab {
     width: 26px;
     height: 26px;
-    background: #5594eb;
+    background: #5594EB;
     border-radius: 7px;
     margin-right: 10px;
 }
@@ -324,12 +384,14 @@ html {
 .deposite-earning-row .deposite-heaing span.labal-heading {
     font-size: 18px;
     margin-bottom: 2px;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 .deposite-earning-row .deposite-heaing span.percent {
     font-size: 12px;
-    color: #aaaaaa;
-    font-weight: 600;
+    color: rgba(255,255,255, 0.5);
+    font-weight: 500;
+    letter-spacing: 2px;
 }
 
 .mynfts-row-main {
@@ -340,25 +402,30 @@ html {
     align-items: center;
 }
 
-.mynfts-row-main .first-col .Mynft-drop-component-main .title-name {
+.mynfts-row-main .second-col {
+    text-align: left;
+    width: fit-content  ;
+}
+
+.mynfts-row-main .second-col .Mynft-drop-component-main .title-name {
     font-size: 17px;
     color: #aaa;
     font-weight: 600;
-    margin-bottom: 4px;
+    line-height: 1;
 }
 
-.mynfts-row-main .first-col .Mynft-drop-component-main .dropdown .btn {
+.mynfts-row-main .second-col .Mynft-drop-component-main .dropdown .btn {
     background: none !important;
     box-shadow: none !important;
     border: none !important;
     padding: 0;
-    font-size: 14px;
-    color: #aaa;
+    font-size: 13px;
+    color: #888;
     font-weight: 500;
     padding-right: 15px !important;
 }
 
-.mynfts-row-main .first-col .Mynft-drop-component-main .dropdown .btn::after {
+.mynfts-row-main .second-col .Mynft-drop-component-main .dropdown .btn::after {
     left: 6px;
     position: relative;
     top: 3px;
@@ -713,7 +780,8 @@ button.search-btn img {
     color: #8c82df;
 }
 .login-page-main .left-cols-main {
-    background: linear-gradient(to top, rgb(70, 29, 149) 0%, rgb(37, 36, 151) 100%);
+    /*background: linear-gradient(to top, rgb(70, 29, 149) 0%, rgb(37, 36, 151) 100%);*/
+    background: linear-gradient(145deg, rgba(37,36,151,1) 0%, rgba(81,26,148,1) 100%);
     width: 50%;
 }
 .login-page-main .left-cols-main .logos-row {
@@ -722,9 +790,13 @@ button.search-btn img {
 }
 .new-row-for-descriptions {
     padding: 60px 100px;
+    height: calc(100% - 250px);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 .new-row-for-descriptions .login-headings {
-    margin-bottom: 60px;
+    margin-bottom: 45px;
     font-size: 40px;
     font-weight: 600;
     line-height: 1.5;
@@ -739,16 +811,18 @@ p.descriptions-main {
 button.login-btn {
     background: #fff;
     border: none;
-    padding: 11px 60px;
+    padding: 11px 55px;
     border-radius: 50px;
-    box-shadow: 0px 3px 5px #3c3b3b;
+    box-shadow: 0 8px 5px rgba(60, 59, 59, 0.2);
     margin-right: 10px;
 }
 .login-page-main .right-cols-main {
     width: 50%;
-    background: #10051e;
+    background: linear-gradient(235deg, rgba(0,0,0,1) 0%, rgba(98,32,177,1) 100%);
     padding: 130px 70px;
-    padding-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .login-page-main .right-cols-main .creat-name-main {
     font-size: 35px;
@@ -763,17 +837,24 @@ button.login-btn {
     width: 40px;
     height: 40px;
     margin-right: 15px;
-    background: #4b4caf;
+    background: #4C4CAB;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 100%;
     text-align: center;
+    padding: 10px;
 }
+
+.login-page-main .right-cols-main .social-icons a.call-icon img,
+.login-page-main .right-cols-main .social-icons a.mail-icon img {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+}
+
 .login-page-main .right-cols-main .social-icons a img {
-    width: 20px;
-    height: 20px;
+    width: 100%;
 }
+
 .login-page-main .right-cols-main .or-use {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -781,7 +862,7 @@ button.login-btn {
     font-weight: 600;
 }
 .login-page-main .right-cols-main .comman-row-input {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     position: relative;
 }
 .login-page-main .right-cols-main .comman-row-input.persons-row::before{
@@ -835,12 +916,13 @@ button.sign-up-btn {
     margin-right: 20px;
     border: none;
     border-radius: 50px;
-    background: linear-gradient(to top, rgb(70, 29, 149) 0%, rgb(37, 36, 151) 100%);
+    background: linear-gradient(0deg, rgba(101,32,181,1) 0%, rgba(59,72,193,1) 100%);
     color: #fff;
     padding: 13px 40px;
     font-size: 13px;
     font-weight: 600;
-    box-shadow: 0px 0px 13px #403f3f;
+    /*box-shadow: 0px 0px 13px #403f3f;*/
+    box-shadow: 0 5px 16px 1px rgba(64, 63, 63, 0.4);
 }
 
 .grids-main-inputs {
@@ -988,6 +1070,14 @@ button.sign-up-btn {
     transition: 0.6s all ease;
 }
 
+.progress {
+    background-color: #444444;
+}
+
+.progress-bar {
+    background-color: #732CF5;
+}
+
 /* ---------------Responsive----------------- */
 
 @media (max-width:1400px){
@@ -1013,26 +1103,15 @@ button.sign-up-btn {
     }
     .last-row-pricing{
         width: 90%;
-        padding: 20px;
     }
     .Second-row-wave-chart .total-balance-row .heading-cols .dollor-price {
         font-size: 35px;
     }
-    .Second-row-wave-chart .total-balance-row .heading-cols .small-heading {
-        font-size: 13px;
-    }
     .card-heading{
         font-size: 14px;
     }
-    .deposite-earning-row .deposite-heaing span.labal-heading {
-        font-size: 16px;
-    }
     .songs-grid-main .song-card-main .song-details .song-name {
         font-size: 16px;
-    }
-    .mynfts-row-main .first-col .Mynft-drop-component-main .title-name {
-        font-size: 14px; 
-        margin-bottom: -2px;
     }
     
 }
@@ -1097,6 +1176,11 @@ button.sign-up-btn {
         padding-bottom: 20px;
         font-size: 30px;
     }
+
+    button.login-btn {
+        margin-bottom: 15px;
+        padding: 11px 44px;
+    }
 }
 
 
@@ -1157,7 +1241,6 @@ button.sign-up-btn {
     }
     .login-page-main .right-cols-main {
         width: 50%;
-        background: #10051e;
         padding: 90px 70px;
         padding-bottom: 0px;
     }
@@ -1229,11 +1312,6 @@ button.sign-up-btn {
     .login-page-main .left-cols-main{
         width: 100%;
     }
-    .login-page-main .right-cols-main {
-        width: 100%;
-        background: #10051e;
-        padding: 90px 70px;
-    }
     .new-row-for-descriptions {
         padding: 80px 70px;
     }
@@ -1266,7 +1344,7 @@ button.sign-up-btn {
     }
     .login-page-main .right-cols-main {
         width: 100%;
-        background: #10051e;
+        background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(98,32,177,1) 100%);
         padding: 60px 30px;
     }
     .login-page-main .right-cols-main .creat-name-main {
@@ -1462,5 +1540,22 @@ button.sign-up-btn {
     }
     .gray-cards-main .table-main table {
         width: 650px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-page-main .right-cols-main .social-icons a {
+        width: 35px;
+        height: 35px;
+        padding: 7px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .login-page-main .right-cols-main .social-icons a {
+        /*width: 30px;*/
+        /*height: 30px;*/
+        /*padding: 7px;*/
     }
 }

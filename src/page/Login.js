@@ -181,21 +181,23 @@ const Login = () => {
             Connecting fans and artists in new ways.
             <br /> Invest in artists. Collect their NFTs. and vote on their
           </p>
-          <button
-            className="login-btn"
-            onClick={() => {
-              setAuthSelectFlag(!authSelectFlag);
-              setForgotPasswordFlag(false);
-            }}
-          >
-            {authSelectFlag ? "Sign Up" : "Login"}
-          </button>
-          <button
-            className="login-btn"
-            onClick={() => setForgotPasswordFlag(!forgotPasswordFlag)}
-          >
-            Forgot Password
-          </button>
+          <div className="button">
+            <button
+              className="login-btn"
+              onClick={() => {
+                setAuthSelectFlag(!authSelectFlag);
+                setForgotPasswordFlag(false);
+              }}
+            >
+              {authSelectFlag ? "Sign Up" : "Login"}
+            </button>
+            <button
+              className="login-btn"
+              onClick={() => setForgotPasswordFlag(!forgotPasswordFlag)}
+            >
+              Forgot Password
+            </button>
+          </div>
         </div>
       </div>
       <div className="right-cols-main">
@@ -209,13 +211,13 @@ const Login = () => {
         </div>
         {forgotPasswordFlag ? null : (
           <div className="social-icons">
-            <a href="#" onClick={() => setPhoneRegisterFlag(false)}>
+            <a className="mail-icon" href="#" onClick={() => setPhoneRegisterFlag(false)}>
               {" "}
-              <img src={assetsImages.envelope} style={{ color: "red" }} />
+              <img src={assetsImages.envelope} />
             </a>
-            <a href="#" onClick={() => setPhoneRegisterFlag(true)}>
+            <a className="call-icon" href="#" onClick={() => setPhoneRegisterFlag(true)}>
               {" "}
-              <img src={assetsImages.telephone} style={{ color: "red" }} />
+              <img src={assetsImages.telephone} />
             </a>
             <a
               href="#"
@@ -230,7 +232,7 @@ const Login = () => {
             </a>
             <a href="#">
               {" "}
-              <img src={assetsImages.twitter} style={{ color: "red" }} />
+              <img src={assetsImages.twitter} />
             </a>
             <a href="#">
               {" "}

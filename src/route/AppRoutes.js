@@ -18,7 +18,7 @@ export const AppRoutes = () => {
   return (
     <Switch>
       <PublicRoutes path="/login" component={Login} exact/>
-       <PrivateRoutes path="/" component={Mydashboard} exact />
+       <PrivateRoutes    path="/" component={Mydashboard} exact />
        <PrivateRoutes path="/inflowmusic" component={Inflowmusic} exact />
        <PrivateRoutes path="/news" component={News} exact />
        <PrivateRoutes path="/leaderboard" component={Leaderboard} exact />

@@ -18,6 +18,11 @@ import linkedin from "../assets/images/linkedin.svg"
 import telephone from '../assets/images/telephone.svg'
 import google from '../assets/images/google.svg'
 import envelope from '../assets/images/envelope.svg'
+import home from '../assets/images/home.svg'
+import dashboard from '../assets/images/dashboard.svg'
+import inventory from '../assets/images/inventory.svg'
+import calendar from '../assets/images/calendar.svg'
+import orders from '../assets/images/orders.svg'
 
 export const assetsImages = {
     logo: logo,
@@ -39,5 +44,11 @@ export const assetsImages = {
     linkedin:linkedin,
     telephone: telephone,
     google:google,
-    envelope: envelope
+    envelope: envelope,
+    home:home,
+    dashboard:dashboard,
+    inventory:inventory,
+    calendar:calendar,
+    orders:orders,
+
 }
