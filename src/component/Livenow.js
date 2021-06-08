@@ -14,13 +14,13 @@ class Livenow extends Component{
                 <div className="main-rows-main">
                     <div className="heading-text">Weezer</div>
                     <div className="fourth-row">
-                    <div className="comman-col">
-                        <img src={assetsImages.like} className="comman-icon" />
-                        561 Likes
+                    <div className="comman-col live-user">
+                        <img src={assetsImages.userWhite} className="comman-icon" />
+                        784
                     </div>
-                    <div className="comman-col">
-                        <img src={assetsImages.commnet} className="comman-icon" />
-                        103 Likes
+                    <div className="comman-col live-like">
+                        <img src={assetsImages.heartWhite} className="comman-icon" />
+                        189
                     </div>
 
                     </div>

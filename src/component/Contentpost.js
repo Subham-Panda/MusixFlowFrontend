@@ -43,7 +43,7 @@ class Contentpost extends Component{
                     </div>
                     <div className="comman-col">
                         <img src={assetsImages.commnet} className="comman-icon" />
-                        103 Likes
+                        91 Comments
                     </div>
 
                 </div>

@@ -23,6 +23,8 @@ import dashboard from '../assets/images/dashboard.svg'
 import inventory from '../assets/images/inventory.svg'
 import calendar from '../assets/images/calendar.svg'
 import orders from '../assets/images/orders.svg'
+import userWhite from '../assets/images/user-white.svg'
+import heartWhite from '../assets/images/heart-white.svg'
 
 export const assetsImages = {
     logo: logo,
@@ -50,5 +52,7 @@ export const assetsImages = {
     inventory:inventory,
     calendar:calendar,
     orders:orders,
+    userWhite:userWhite,
+    heartWhite:heartWhite,
 
 }

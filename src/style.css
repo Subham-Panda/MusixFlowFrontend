@@ -37,6 +37,7 @@ html {
     margin-left: 105px;
     margin-top: 90px;
     background: url("./assets/images/background-pattern.svg") repeat-y fixed;
+    background-size: cover;
 }
 
 .main-comman-wrapping:before {
@@ -44,7 +45,7 @@ html {
     content: '';
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0, 0.9);
+    background-color: rgba(0,0,0, 0.7);
     top: 0;
     left: 0;
 }
@@ -507,8 +508,8 @@ html {
     left: auto;
     right: 0;
     height: 1px;
-    width: 85%;
-    border: 1px dashed #848484;
+    width: 80%;
+    border: 1px dashed rgba(255,255,255, 0.3);
     top: 0;
     bottom: 0;
     margin: auto;
@@ -522,25 +523,25 @@ html {
 .artist-main .artist-name {
     text-align: center;
     margin-bottom: 15px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     line-height: normal;
 }
 .artist-main .short-desrip {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .artist-main .short-desrip .price-tag {
     margin-right: 20px;
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 300;
     line-height: normal;
 }
 .artist-main .short-desrip .tags-up {
     padding-left: 20px;
-    font-size: 11px;
+    font-size: 10px;
     position: relative;
-    top: 5px;
     font-weight: 600;
 }
 .artist-main .short-desrip .tags-up:before {
@@ -579,6 +580,8 @@ html {
     padding-top: 40px;
     margin-bottom: 60px;
     text-align: center;
+    font-size: 36px;
+    font-weight: 300;
 }
 button.search-btn img {
     width: 22px;
@@ -1078,6 +1081,21 @@ button.sign-up-btn {
     background-color: #732CF5;
 }
 
+.main-comman-wrapping .News-main {
+    position: relative;
+}
+
+.News-main .fourth-row .comman-col {
+    color: #ffffff;
+}
+
+.News-main .fourth-row .comman-col + .comman-col {
+    color: #858997;
+}
+.News-main .fourth-row .comman-col + .comman-col.live-like {
+    color: #ffffff;
+}
+
 /* ---------------Responsive----------------- */
 
 @media (max-width:1400px){
@@ -1403,6 +1421,16 @@ button.sign-up-btn {
     .gray-cards-main .inner-first-card-row .col-rights-main .first-headings{
         font-size: 18px;
     }
+
+    .side-bar-main .side-bar-navigation .nav-link-main {
+        padding: 5px 0;
+    }
+
+    .grid-for-artist {
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 20px;
+        grid-row-gap: 50px;
+    }
 }
 
 
@@ -1432,9 +1460,8 @@ button.sign-up-btn {
         font-size: 21px;
       }
       .spiner-bar-row .comman-col:first-child {
-        margin-right: 10px;
+        margin-right: 30px;
         padding-right: 10px;
-        border-right: none;
         padding-left: 0px;
       }
       .spiner-bar-row .comman-col .right-side-value {
@@ -1442,14 +1469,13 @@ button.sign-up-btn {
         font-weight: 500;
       }
       .chart-row {
-          width: 100%;
+          width: 50%;
           margin: auto;
           margin-bottom: 60px;  
       }
       .last-row-pricing .comman-priced:first-child {
         padding-right: 20px;
         margin-right: 20px;
-        border-right: 1px solid #ccc;
       }
       .last-row-pricing .comman-priced span.small-heading{
         font-size: 10px;
@@ -1541,6 +1567,66 @@ button.sign-up-btn {
     .gray-cards-main .table-main table {
         width: 650px;
     }
+
+    .mynfts-row-main .center-col {
+        width: 80%;
+    }
+
+    .songs-grid-main {
+        grid-template-columns: repeat(4 ,1fr);
+    }
+
+}
+
+@media (max-width: 576px) {
+    .spiner-bar-row .comman-col:first-child {
+        margin-right: 0;
+        border: 0;
+    }
+
+    .spiner-bar-row .comman-col {
+        width: 100%;
+    }
+
+    .comman-div-for-pro .spiner-bar-row .comman-col {
+        width: 50%;
+        padding-left: 30px;
+    }
+
+    .spiner-bar-row .comman-col + .comman-col {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 2px solid #444;
+    }
+
+    .comman-div-for-pro .spiner-bar-row .comman-col + .comman-col {
+        margin-top: 0;
+    }
+
+    .spiner-bar-row {
+        flex-wrap: wrap;
+    }
+
+    .chart-row {
+        width: 60%;
+    }
+
+    .mynfts-row-main .center-col {
+        width: 70%;
+    }
+
+    .songs-grid-main {
+        grid-template-columns: repeat(3 ,1fr);
+        grid-column-gap: 15px;
+        grid-row-gap: 15px;
+    }
+
+    .grid-for-artist {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 15px;
+        grid-row-gap: 25px;
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -1550,6 +1636,54 @@ button.sign-up-btn {
         padding: 7px;
         margin-right: 10px;
     }
+
+    .comman-div-for-pro .spiner-bar-row .comman-col {
+        width: 100%;
+        padding: 0;
+    }
+
+    .comman-div-for-pro .spiner-bar-row:first-child .comman-col {
+        padding: 0;
+    }
+
+    .comman-div-for-pro .spiner-bar-row .comman-col:first-child {
+        justify-content: flex-start;
+        border-right: none;
+    }
+
+    .comman-div-for-pro .spiner-bar-row .comman-col + .comman-col,
+    .comman-div-for-pro .spiner-bar-row + .spiner-bar-row{
+        padding-top: 10px;
+        margin-top: 10px;
+        border-top: 2px solid #555555;
+    }
+
+    .last-row-pricing {
+        flex-wrap: wrap;
+    }
+
+    .last-row-pricing .comman-priced:first-child {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .last-row-pricing .comman-priced + .comman-priced {
+        padding-top: 15px;
+        border-top: 2px solid #555;
+        margin-top: 15px;
+    }
+
+    .chart-row {
+        width: 75%;
+    }
+
+    .grid-for-artist {
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 15px;
+        grid-row-gap: 25px;
+    }
+
 }
 
 @media (max-width: 360px) {
@@ -1557,5 +1691,19 @@ button.sign-up-btn {
         /*width: 30px;*/
         /*height: 30px;*/
         /*padding: 7px;*/
+    }
+
+    .chart-row {
+        width: 85%;
+    }
+
+    .mynfts-row-main .center-col {
+        width: 60%;
+    }
+
+    .songs-grid-main {
+        grid-template-columns: repeat(2 ,1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
     }
 }
