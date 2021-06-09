@@ -6,7 +6,7 @@ class Accountsettings extends Component {
     render(){
         return(
             <div class="dashboard-wrapper-main">
-                <div className="heading">Accountsettings</div>
+                <div className="heading">Account settings</div>
                 <div className="tab-settings-main">
 
                     <nav>
@@ -19,53 +19,55 @@ class Accountsettings extends Component {
                             <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Other</a>
                         </div>
                     </nav>
-                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                    <div class="tab-content pt-3" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                            <div className="grids-main-inputs">
-                                <div className="comman-grids">
-                                    <input placeholder="First Name" />
-                                </div>
-                                <div className="comman-grids">
-                                    <input placeholder="Last Name" />
-                                </div>
-                                <div className="comman-grids">
-                                    <input placeholder="City" />
-                                </div>
-                                <div className="comman-grids">
-                                    <Dropdown>
-                                        <Dropdown.Toggle id="dropdown-custom-1">
-                                          Country 
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu className="super-colors">
-                                                <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-                                                <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-                                                <Dropdown.Item eventKey="3" active>Active Item</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </div>
-                                <div className="comman-grids Address-main">
-                                    <input placeholder="Address" />
-                                </div>
-                                <div className="comman-grids">
-                                    <input placeholder="Postcode/ZIP                " />
-                                </div>
-                                <div className="comman-grids">
-                                    <Dropdown>
-                                        <Dropdown.Toggle id="dropdown-custom-1">
-                                            Currency
-                                        </Dropdown.Toggle>
-                                        <Dropdown.Menu className="super-colors">
-                                                <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-                                                <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-                                                <Dropdown.Item eventKey="3" active>Active Item</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-                                </div>
+                            <div className="account-setting-form">
+                                <div className="grids-main-inputs">
+                                    <div className="comman-grids">
+                                        <input placeholder="First Name" />
+                                    </div>
+                                    <div className="comman-grids">
+                                        <input placeholder="Last Name" />
+                                    </div>
+                                    <div className="comman-grids">
+                                        <input placeholder="City" />
+                                    </div>
+                                    <div className="comman-grids">
+                                        <Dropdown>
+                                            <Dropdown.Toggle id="dropdown-custom-1">
+                                              Country
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu className="super-colors">
+                                                    <Dropdown.Item eventKey="1">Action</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="3" active>Active Item</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </div>
+                                    <div className="comman-grids Address-main">
+                                        <input placeholder="Address" />
+                                    </div>
+                                    <div className="comman-grids">
+                                        <input placeholder="Postcode/ZIP                " />
+                                    </div>
+                                    <div className="comman-grids">
+                                        <Dropdown>
+                                            <Dropdown.Toggle id="dropdown-custom-1">
+                                                Currency
+                                            </Dropdown.Toggle>
+                                            <Dropdown.Menu className="super-colors">
+                                                    <Dropdown.Item eventKey="1">Action</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="3" active>Active Item</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </div>
 
 
-                            </div>
-                            <div className="save-changes-main">
-                                <button>Save Changes</button>
+                                </div>
+                                <div className="save-changes-main">
+                                    <button>Save Changes</button>
+                                </div>
                             </div>
 
                         </div>

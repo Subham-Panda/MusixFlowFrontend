@@ -1,4 +1,3 @@
-
 @font-face {
     src: url("./assets/fonts/Rubik-Regular.ttf");
     font-family: Rubik;
@@ -18,12 +17,13 @@
 }
 
 
-body{
+body {
     background: #000 !important;
     color: #fff !important;
     overflow-x: hidden;
-    font-family: Rubik,Rubik-Medium,Rubik-bold,sans-serif !important;
+    font-family: Rubik, Rubik-Medium, Rubik-bold, sans-serif !important;
 }
+
 html {
     overflow-x: hidden;
 }
@@ -45,7 +45,7 @@ html {
     content: '';
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     top: 0;
     left: 0;
 }
@@ -53,7 +53,7 @@ html {
 
 /* --------------------Global-css--------------- */
 .dashboard-wrapper-main {
-    padding: 35px 30px;
+    padding: 35px;
     position: relative;
     z-index: 1;
 
@@ -61,12 +61,13 @@ html {
 }
 
 .heading {
-    font-size: 28px;
+    font-size: 36px;
     margin-bottom: 25px;
     line-height: normal;
     font-weight: 400;
     text-transform: capitalize;
 }
+
 .card-heading {
     color: #aaaaaa;
     font-size: 15px;
@@ -84,8 +85,9 @@ html {
     grid-column-gap: 20px;
 
 }
+
 .first-row-main-dash .left-col,
-.first-row-main-dash .right-col{
+.first-row-main-dash .right-col {
     width: 50%;
 }
 
@@ -107,21 +109,22 @@ html {
 }
 
 .first-row-main-dash .left-col .above-row .inner-row,
-.first-row-main-dash .right-col  .inner-row {
+.first-row-main-dash .right-col .inner-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 24px;
-    
+
 }
 
 
 .first-row-main-dash .left-col .below-row {
     background: #2d323f;
     padding: 30px;
-    
+
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
+
 .first-row-main-dash .left-col .below-row .left-pricing .price-tag {
     font-size: 35px;
     margin-bottom: 0px;
@@ -146,6 +149,7 @@ html {
     align-items: center;
     justify-content: space-between;
 }
+
 .first-row-main-dash .left-col .below-row .right-side .custom-drop .customised-dashdrop .btn {
     margin-bottom: 8px;
     background: none !important;
@@ -159,11 +163,11 @@ html {
     letter-spacing: 1px;
 }
 
-.first-row-main-dash .left-col .below-row .right-side .custom-drop .customised-dashdrop .btn::after{
+.first-row-main-dash .left-col .below-row .right-side .custom-drop .customised-dashdrop .btn::after {
     position: absolute;
     content: '';
     border: none !important;
-    background: url(assets/images/down-arrow-white.svg)no-repeat;
+    background: url(assets/images/down-arrow-white.svg) no-repeat;
     background-size: 14px;
     width: 14px;
     height: 14px;
@@ -184,7 +188,6 @@ html {
     height: 3px;
     margin: 30px 0px;
 }
-
 
 
 .spiner-bar-row {
@@ -209,6 +212,7 @@ html {
     display: flex;
     align-items: center;
 }
+
 .spiner-bar-row .comman-col .spinner {
     margin-right: 20px;
     display: flex;
@@ -218,7 +222,7 @@ html {
 .spiner-bar-row .comman-col .right-side-value span.small-heading {
     display: block;
     font-size: 11px;
-    color: rgba(255,255,255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
     letter-spacing: 2px;
 }
 
@@ -256,6 +260,7 @@ html {
 .comman-div-for-pro .spiner-bar-row {
     align-items: inherit !important;
 }
+
 .comman-div-for-pro .spiner-bar-row .comman-col:first-child {
     padding-left: 0;
     justify-content: flex-end;
@@ -270,7 +275,7 @@ html {
 }
 
 .last-row-pricing {
-    padding:10px 30px;
+    padding: 10px 30px;
     width: 80%;
     background: #444;
     margin: auto;
@@ -288,7 +293,7 @@ html {
 .last-row-pricing .comman-priced span.small-heading {
     display: block;
     font-size: 12px;
-    color: rgba(255,255,255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
     letter-spacing: 2px;
 }
 
@@ -298,12 +303,13 @@ html {
     font-weight: 600;
 }
 
-.Second-row-wave-chart{
+.Second-row-wave-chart {
     margin-top: 20px;
     background: #2f3443;
     border-radius: 8px;
     padding: 30px;
 }
+
 .Second-row-wave-chart .total-balance-row {
     display: flex;
     justify-content: space-between;
@@ -330,6 +336,7 @@ html {
     line-height: normal;
     color: #888888;
 }
+
 .Second-row-wave-chart .total-balance-row .btn-filter a {
     display: inline-block;
 }
@@ -345,6 +352,7 @@ html {
     margin-top: 40px;
     position: relative;
 }
+
 .deposite-earning-row:before {
     position: absolute;
     content: '';
@@ -388,9 +396,10 @@ html {
     font-weight: 700;
     letter-spacing: 1px;
 }
+
 .deposite-earning-row .deposite-heaing span.percent {
     font-size: 12px;
-    color: rgba(255,255,255, 0.5);
+    color: rgba(255, 255, 255, 0.5);
     font-weight: 500;
     letter-spacing: 2px;
 }
@@ -405,7 +414,7 @@ html {
 
 .mynfts-row-main .second-col {
     text-align: left;
-    width: fit-content  ;
+    width: fit-content;
 }
 
 .mynfts-row-main .second-col .Mynft-drop-component-main .title-name {
@@ -450,10 +459,10 @@ html {
     width: 60%;
 }
 
-.mynfts-row-main .center-col::before{
+.mynfts-row-main .center-col::before {
     position: absolute;
     content: '';
-    background: url(assets/images/search-icon.svg)no-repeat;
+    background: url(assets/images/search-icon.svg) no-repeat;
     background-size: 100%;
     width: 20px;
     height: 20px;
@@ -473,7 +482,7 @@ html {
 
 .songs-grid-main {
     display: grid;
-    grid-template-columns: repeat(5 ,1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 20px;
     grid-row-gap: 20px;
 }
@@ -487,6 +496,7 @@ html {
     font-weight: 700;
     line-height: normal;
 }
+
 .songs-grid-main .song-card-main .song-details .artist-name {
     font-size: 14px;
     line-height: normal;
@@ -495,6 +505,7 @@ html {
 .Inflow-music-main .inner-music-wrapper {
     margin-top: 50px;
 }
+
 .artist-heading {
     font-size: 22px;
     position: relative;
@@ -502,6 +513,7 @@ html {
     margin-bottom: 30px;
     font-weight: 600;
 }
+
 .artist-heading:before {
     position: absolute;
     content: '';
@@ -509,17 +521,19 @@ html {
     right: 0;
     height: 1px;
     width: 80%;
-    border: 1px dashed rgba(255,255,255, 0.3);
+    border: 1px dashed rgba(255, 255, 255, 0.3);
     top: 0;
     bottom: 0;
     margin: auto;
 }
+
 .grid-for-artist {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-column-gap: 40px;
     grid-row-gap: 80px;
 }
+
 .artist-main .artist-name {
     text-align: center;
     margin-bottom: 15px;
@@ -527,23 +541,27 @@ html {
     font-weight: 600;
     line-height: normal;
 }
+
 .artist-main .short-desrip {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .artist-main .short-desrip .price-tag {
     margin-right: 20px;
     font-size: 14px;
     font-weight: 300;
     line-height: normal;
 }
+
 .artist-main .short-desrip .tags-up {
     padding-left: 20px;
     font-size: 10px;
     position: relative;
     font-weight: 600;
 }
+
 .artist-main .short-desrip .tags-up:before {
     position: absolute;
     content: '';
@@ -557,25 +575,30 @@ html {
     bottom: 0;
     margin: auto;
 }
+
 .see-all-artist {
     text-align: center;
     margin-top: 90px;
     margin-bottom: 90px;
 }
+
 .see-all-artist a {
     font-size: 20px;
     line-height: normal;
     color: #fff;
     font-weight: 500;
 }
+
 .see-all-nft {
     margin-bottom: 30px;
 }
+
 .News-main .inner-wrapper-news {
     width: 800px;
     margin: auto;
     margin-bottom: 80px;
 }
+
 .News-main .inner-wrapper-news .heading {
     padding-top: 40px;
     margin-bottom: 60px;
@@ -583,26 +606,33 @@ html {
     font-size: 36px;
     font-weight: 300;
 }
+
 button.search-btn img {
     width: 22px;
 }
+
 .search-input-main {
-    margin-top: 60px;
+    margin-top: 100px;
     margin-bottom: 30px;
     position: relative;
 }
+
 .search-input-main input {
     width: 100%;
-    background: #202b6d;
+    background: rgba(71, 95, 242, 0.45);
     border: none;
     color: #fff;
     padding: 30px 40px;
     border-radius: 50px;
     outline: none;
 }
+
 .search-input-main input::placeholder {
     color: #fff;
+    font-size: 16px;
+    font-family: Rubik;
 }
+
 .search-input-main button.search-btn {
     position: absolute;
     right: 20px;
@@ -614,52 +644,71 @@ button.search-btn img {
     border: none;
     padding: 0;
     margin: auto;
-    background: linear-gradient(to top, rgb(70, 29, 149) 0%, rgb(37, 36, 151) 100%);
+    background: linear-gradient(0deg, rgba(115, 44, 245, 1) 50%, rgba(30, 13, 143, 1) 100%);
 }
+
 .table-filter-btn-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
 }
+
 .table-filter-btn-row .left-col-fillter {
     display: flex;
     align-items: center;
 }
+
 .table-filter-btn-row .left-col-fillter .comman-btn {
     margin-right: 10px;
 }
+
 .table-filter-btn-row .left-col-fillter .comman-btn .btn {
-    background: #151f46;
+    background: #141E46;
     border: none;
     padding: 12px 15px;
     font-size: 14px;
-    color: #6987b9;
+    color: #6987B9;
     box-shadow: none !important;
+    font-weight: 600;
 }
+
+.table-filter-btn-row .left-col-fillter .comman-btn .btn:after {
+    margin-left: 0.5em;
+    vertical-align: 0.1em;
+}
+
 .table-filter-btn-row .right-col-filter {
     display: flex;
     align-items: center;
-    
+
 }
-.table-filter-btn-row .right-col-filter .right-col-btn{
+
+.table-filter-btn-row .right-col-filter .right-col-btn {
     margin-left: 20px;
 }
+
 .table-filter-btn-row .right-col-filter .right-col-btn button {
-    background: #151f46;
+    background: #141E46;
     border: none;
     padding: 12px 15px;
     font-size: 14px;
     color: #6987b9;
     box-shadow: none !important;
     border-radius: 5px;
+    font-weight: 600;
 }
+
 .main-table-for-lader-board table {
     width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
 }
+
 .first-col {
     width: 50px;
 }
+
 .second-col {
     width: 190px;
     text-align: center;
@@ -668,15 +717,19 @@ button.search-btn img {
 .third-col {
     width: 220px;
 }
+
 .fourth-col {
     width: 220px;
 }
+
 .fifth-col {
     width: 190px;
 }
+
 .sixth-col {
     width: 290px;
 }
+
 .seventh-col {
     width: 160px;
 }
@@ -687,32 +740,53 @@ button.search-btn img {
     padding: 20px;
     padding-bottom: 30px;
 }
+
 .main-table-for-lader-board table tbody tr td {
-    background: #151f46;
+    background: #141E46;
     padding: 20px;
 }
+
+.main-table-for-lader-board table tbody tr td .artist-pic img {
+    width: 50px;
+}
+
+.main-table-for-lader-board table tbody tr td.first-col {
+    border-radius: 5px 0 0 5px;
+    color: #8A94A4;
+
+}
+
+.main-table-for-lader-board table tbody tr td.seventh-col {
+    border-radius: 0 5px 5px 0;
+}
+
 .first-col {
     padding-left: 18px;
 }
+
 .artist-pic img {
     width: 60px;
     border-radius: 100%;
 }
+
 .artist-pic {
     text-align: center;
 }
+
 .name {
     text-align: center;
     margin-top: 8px;
     font-size: 16px;
 }
+
 .green-light {
     position: relative;
-    color: #66db4b;
+    color: #1BDA48;
     font-size: 16px;
     padding-right: 20px;
     display: inline-block;
 }
+
 .green-light:before {
     position: absolute;
     content: '';
@@ -720,7 +794,29 @@ button.search-btn img {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 8px solid #66db4b;
+    border-bottom: 8px solid #1BDA48;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.red-light {
+    position: relative;
+    color: #DA361B;
+    font-size: 16px;
+    padding-right: 20px;
+    display: inline-block;
+}
+
+.red-light:before {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #DA361B;
     right: 0;
     top: 0;
     bottom: 0;
@@ -732,19 +828,23 @@ button.search-btn img {
     justify-content: flex-end;
     margin-top: 30px;
 }
+
 .next-btn-main button {
-    background: #151f46;
+    background: #141E46;
     border: none;
     padding: 12px 15px;
     font-size: 14px;
     color: #6987b9;
     box-shadow: none !important;
     border-radius: 5px;
+    font-weight: 600;
 }
+
 .tab-settings-main {
-    background: #222223;
+    background: #222222;
     padding-top: 20px;
 }
+
 .tab-settings-main nav .nav-tabs {
     display: flex;
     flex-wrap: inherit;
@@ -752,45 +852,59 @@ button.search-btn img {
     border: none;
     background: #282828;
 }
+
+.account-setting-form {
+    background-color: #282828;
+    padding-bottom: 50px;
+}
+
 .tab-settings-main nav .nav-tabs a.nav-item {
     flex: inherit;
-    padding: 25px 20px;
+    padding: 25px;
     color: #888888;
     font-size: 13px;
     text-transform: uppercase;
     font-weight: 600;
     background: none;
-    border: navajowhite;
+    border: none;
+    letter-spacing: 2px;
 }
+
 .tab-settings-main nav .nav-tabs a.nav-item.active {
-    border-bottom: 3px solid #432995;
+    border-bottom: 3px solid #5594EB;
     color: #fff;
 }
+
 .login-page-main {
     height: 100vh;
     background: #000;
     display: flex;
     overflow: hidden;
 }
+
 .login-page-main .left-cols-main .logos-row img {
     width: 80px;
     margin-right: 20px;
-    
+
 }
+
 .login-page-main .left-cols-main .logos-row {
     font-size: 45px;
     font-weight: 600;
     color: #8c82df;
 }
+
 .login-page-main .left-cols-main {
     /*background: linear-gradient(to top, rgb(70, 29, 149) 0%, rgb(37, 36, 151) 100%);*/
-    background: linear-gradient(145deg, rgba(37,36,151,1) 0%, rgba(81,26,148,1) 100%);
+    background: linear-gradient(145deg, rgba(37, 36, 151, 1) 0%, rgba(81, 26, 148, 1) 100%);
     width: 50%;
 }
+
 .login-page-main .left-cols-main .logos-row {
     padding: 70px 80px;
     padding-bottom: 20px;
 }
+
 .new-row-for-descriptions {
     padding: 60px 100px;
     height: calc(100% - 250px);
@@ -798,12 +912,14 @@ button.search-btn img {
     justify-content: center;
     flex-direction: column;
 }
+
 .new-row-for-descriptions .login-headings {
     margin-bottom: 45px;
     font-size: 40px;
     font-weight: 600;
     line-height: 1.5;
 }
+
 p.descriptions-main {
     font-size: 13px;
     color: #fff;
@@ -811,6 +927,7 @@ p.descriptions-main {
     font-weight: 500;
     margin-bottom: 70px;
 }
+
 button.login-btn {
     background: #fff;
     border: none;
@@ -819,23 +936,27 @@ button.login-btn {
     box-shadow: 0 8px 5px rgba(60, 59, 59, 0.2);
     margin-right: 10px;
 }
+
 .login-page-main .right-cols-main {
     width: 50%;
-    background: linear-gradient(235deg, rgba(0,0,0,1) 0%, rgba(98,32,177,1) 100%);
+    background: linear-gradient(235deg, rgba(0, 0, 0, 1) 0%, rgba(98, 32, 177, 1) 100%);
     padding: 130px 70px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .login-page-main .right-cols-main .creat-name-main {
     font-size: 35px;
     font-weight: 600;
     margin-bottom: 30px;
 }
+
 .login-page-main .right-cols-main .social-icons {
     display: flex;
     align-items: center;
 }
+
 .login-page-main .right-cols-main .social-icons a {
     width: 40px;
     height: 40px;
@@ -864,14 +985,16 @@ button.login-btn {
     font-size: 14px;
     font-weight: 600;
 }
+
 .login-page-main .right-cols-main .comman-row-input {
     margin-bottom: 20px;
     position: relative;
 }
-.login-page-main .right-cols-main .comman-row-input.persons-row::before{
+
+.login-page-main .right-cols-main .comman-row-input.persons-row::before {
     position: absolute;
     content: '';
-    background: url(assets/images/user.svg)no-repeat;
+    background: url(assets/images/user.svg) no-repeat;
     background-size: 18px;
     height: 18px;
     width: 18px;
@@ -881,10 +1004,11 @@ button.login-btn {
     left: 12px;
 
 }
-.login-page-main .right-cols-main .comman-row-input.email-row::before{
+
+.login-page-main .right-cols-main .comman-row-input.email-row::before {
     position: absolute;
     content: '';
-    background: url(assets/images/email.svg)no-repeat;
+    background: url(assets/images/email.svg) no-repeat;
     background-size: 18px;
     height: 18px;
     width: 18px;
@@ -893,10 +1017,11 @@ button.login-btn {
     margin: auto;
     left: 12px;
 }
-.login-page-main .right-cols-main .comman-row-input.password-row::before{
+
+.login-page-main .right-cols-main .comman-row-input.password-row::before {
     position: absolute;
     content: '';
-    background: url(assets/images/password.svg)no-repeat;
+    background: url(assets/images/password.svg) no-repeat;
     background-size: 18px;
     height: 18px;
     width: 18px;
@@ -905,6 +1030,7 @@ button.login-btn {
     margin: auto;
     left: 12px;
 }
+
 .login-page-main .right-cols-main .comman-row-input input {
     width: 60%;
     padding: 10px 10px;
@@ -914,12 +1040,13 @@ button.login-btn {
     box-shadow: none !important;
     padding-left: 40px;
 }
+
 button.sign-up-btn {
     margin-top: 40px;
     margin-right: 20px;
     border: none;
     border-radius: 50px;
-    background: linear-gradient(0deg, rgba(101,32,181,1) 0%, rgba(59,72,193,1) 100%);
+    background: linear-gradient(0deg, rgba(101, 32, 181, 1) 0%, rgba(59, 72, 193, 1) 100%);
     color: #fff;
     padding: 13px 40px;
     font-size: 13px;
@@ -934,13 +1061,21 @@ button.sign-up-btn {
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 30px;
     grid-row-gap: 30px;
+    background-color: #282828;
 }
+
 .grids-main-inputs .comman-grids input {
     width: 100%;
     background: #373737;
     border: none;
     padding: 20px;
+    color: #ffffff;
 }
+
+.grids-main-inputs .comman-grids input:focus {
+    outline: 4px solid #707070;
+}
+
 
 .grids-main-inputs .comman-grids .dropdown .btn {
     width: 100%;
@@ -953,6 +1088,7 @@ button.sign-up-btn {
     box-shadow: none !important;
     position: relative;
 }
+
 .grids-main-inputs .comman-grids .dropdown .btn::after {
     position: absolute;
     right: 13px;
@@ -960,23 +1096,26 @@ button.sign-up-btn {
     bottom: 0;
     margin: auto;
 }
+
 .grids-main-inputs .comman-grids.Address-main {
     grid-column-start: 1;
     grid-column-end: -1;
 }
+
 .save-changes-main {
-    padding: 0px 100px;
+    padding: 0 100px;
     text-align: right;
-    margin-bottom: 51px;
 }
+
 .save-changes-main button {
-    background: linear-gradient(to top, rgb(70, 29, 149) 0%, rgb(37, 36, 151) 100%);
+    background: linear-gradient(0deg, rgba(101, 32, 181, 1) 20%, rgba(59, 72, 193, 1) 100%);
     color: #fff;
     border: none;
     padding: 16px 100px;
     font-size: 14px;
     border-radius: 100px;
     font-weight: 600;
+    letter-spacing: 1px;
 }
 
 .labels-mains .inner-row-labels-main {
@@ -984,12 +1123,14 @@ button.sign-up-btn {
     padding: 25px 30px;
     border-radius: 10px;
 }
+
 .labels-mains .inner-row-labels-main .small-row-heading .small-headings {
     font-size: 25px;
     margin-bottom: 5px;
     line-height: normal;
     font-weight: 600;
 }
+
 .labels-mains .inner-row-labels-main .small-row-heading .short-descriptions {
     font-size: 15px;
     font-weight: 400;
@@ -1005,35 +1146,42 @@ button.sign-up-btn {
     grid-column-gap: 40px;
     grid-row-gap: 50px;
 }
+
 .rocnations-artist-main .heading {
     margin-bottom: 5px;
 }
+
 .rocnations-artist-main .small-descriptions {
     font-size: 17px;
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 30px;
 }
+
 .gray-cards-main {
     background: #2f3443;
     padding: 30px;
     border-radius: 10px;
 }
+
 .gray-cards-main .inner-first-card-row {
     display: flex;
     align-items: center;
     margin-bottom: 40px;
 }
+
 .gray-cards-main .inner-first-card-row img {
     width: 65px;
     border-radius: 10px;
     margin-right: 15px;
 }
+
 .gray-cards-main .inner-first-card-row .col-rights-main .first-headings {
-    font-size: 25px;
+    font-size: 22px;
     font-weight: 600;
     line-height: normal;
     text-transform: uppercase;
 }
+
 .gray-cards-main .inner-first-card-row .col-rights-main .songs-name {
     font-size: 14px;
     line-height: normal;
@@ -1042,34 +1190,42 @@ button.sign-up-btn {
 .gray-cards-main .table-main table tr .first-col {
     padding-left: 0;
 }
+
 .gray-cards-main .table-main table {
     width: 100%;
 }
+
 .gray-cards-main .table-main table tr .first-col img {
     width: 50px;
-    border-radius: 10px;
 }
+
 .gray-cards-main .table-main .second-col {
     text-align: inherit;
     width: 250px;
 }
+
 .gray-cards-main .table-main .third-col {
     width: 250px;
 }
+
 .gray-cards-main .table-main .fourth-col {
     width: 260px;
 }
+
 .gray-cards-main .table-main .fifth-col {
     width: 70px;
 }
+
 .gray-cards-main .table-main table tr td, .gray-cards-main .table-main table tr th {
     padding: 15px 13px !important;
 }
-.gray-cards-main .table-main table tr, .gray-cards-main .table-main table tr td{
+
+.gray-cards-main .table-main table tr, .gray-cards-main .table-main table tr td {
     transition: 0.6s all ease;
 }
+
 .gray-cards-main .table-main table tr:hover td {
-    background: linear-gradient(to top, rgb(70, 29, 149) 0%, rgb(37, 36, 151) 100%);
+    background: #5653E8;
     transition: 0.6s all ease;
 }
 
@@ -1092,103 +1248,124 @@ button.sign-up-btn {
 .News-main .fourth-row .comman-col + .comman-col {
     color: #858997;
 }
+
 .News-main .fourth-row .comman-col + .comman-col.live-like {
     color: #ffffff;
 }
 
 /* ---------------Responsive----------------- */
 
-@media (max-width:1400px){
+@media (max-width: 1400px) {
     .main-comman-wrapping {
         margin-left: 70px;
         margin-top: 72px;
     }
+
     .dashboard-wrapper-main {
         padding: 20px;
     }
-    .heading{
+
+    .heading {
         font-size: 22px;
         margin-bottom: 22px;
     }
+
     .first-row-main-dash {
         display: flex;
         grid-column-gap: 10px;
     }
+
     .comman-div-for-pro {
         padding: 20px;
         width: 90%;
         margin-top: 60px;
     }
-    .last-row-pricing{
+
+    .last-row-pricing {
         width: 90%;
     }
+
     .Second-row-wave-chart .total-balance-row .heading-cols .dollor-price {
         font-size: 35px;
     }
-    .card-heading{
+
+    .card-heading {
         font-size: 14px;
     }
+
     .songs-grid-main .song-card-main .song-details .song-name {
         font-size: 16px;
     }
-    
+
 }
 
 
-@media (max-width:1200px){
-    .first-row-main-dash .left-col .below-row .right-side .custom-drop .customised-dashdrop .btn{
+@media (max-width: 1200px) {
+    .first-row-main-dash .left-col .below-row .right-side .custom-drop .customised-dashdrop .btn {
         font-size: 15px;
     }
-    .first-row-main-dash .left-col .below-row .right-side .labal{
-        font-size:10px ;
+
+    .first-row-main-dash .left-col .below-row .right-side .labal {
+        font-size: 10px;
     }
-    .Second-row-wave-chart{
+
+    .Second-row-wave-chart {
         margin-top: 10px;
     }
+
     .first-row-main-dash .left-col .below-row .left-pricing .price-tag {
         font-size: 27px;
     }
+
     .comman-div-for-pro {
         padding: 20px;
         width: 90%;
         margin-top: 20px;
     }
+
     .search-input-main {
-        margin-top: 30px;
-        margin-bottom: 30px;
-        position: relative;
+        margin-top: 50px;
     }
-    .search-input-main input{
+
+    .search-input-main input {
         padding: 20px 40px;
     }
-    .search-input-main button.search-btn{
+
+    .search-input-main button.search-btn {
         right: 15px;
         width: 40px;
         height: 40px;
     }
+
     button.search-btn img {
         width: 13px;
     }
+
     .main-table-for-lader-board {
         overflow-x: auto;
     }
+
     .main-table-for-lader-board table {
         width: 1440px;
         overflow-x: hidden;
     }
-    .login-page-main .right-cols-main .comman-row-input input{
+
+    .login-page-main .right-cols-main .comman-row-input input {
         width: 80%;
     }
+
     .new-row-for-descriptions .login-headings {
         margin-bottom: 40px;
         font-size: 32px;
         font-weight: 600;
         line-height: 1.5;
     }
+
     .login-page-main .left-cols-main .logos-row img {
         width: 70px;
         margin-right: 20px;
     }
+
     .login-page-main .left-cols-main .logos-row {
         padding: 50px 80px;
         padding-bottom: 20px;
@@ -1199,127 +1376,176 @@ button.sign-up-btn {
         margin-bottom: 15px;
         padding: 11px 44px;
     }
+
+    .main-table-for-lader-board table tbody tr td.second-col,
+    .main-table-for-lader-board table thead tr th.second-col {
+        width: 150px;
+    }
+
+    .main-table-for-lader-board table thead tr th.sixth-col {
+        width: 200px;
+    }
+
+    .main-table-for-lader-board table tbody tr td.third-col,
+    .main-table-for-lader-board table thead tr th.third-col,
+    .main-table-for-lader-board table tbody tr td.fourth-col,
+    .main-table-for-lader-board table thead tr th.fourth-col,
+    .main-table-for-lader-board table tbody tr td.fifth-col,
+    .main-table-for-lader-board table thead tr th.fifth-col {
+        width: 150px;
+    }
 }
 
 
-@media (max-width:1100px){
+@media (max-width: 1100px) {
     .last-row-pricing {
         width: 100%;
         padding: 20px;
         margin-top: 10px;
     }
+
     .comman-div-for-pro {
         padding: 20px;
         width: 100%;
         margin-top: -20px;
     }
+
     .first-row-main-dash .left-col .above-row a img, .first-row-main-dash .right-col a img {
         width: 21px;
         cursor: pointer;
     }
-    .first-row-main-dash .right-col{
+
+    .first-row-main-dash .right-col {
         padding: 20px;
     }
-    .first-row-main-dash .left-col .above-row{
+
+    .first-row-main-dash .left-col .above-row {
         padding: 20px;
     }
-    .first-row-main-dash .left-col .below-row{
+
+    .first-row-main-dash .left-col .below-row {
         padding: 20px;
     }
-    .progress-bar-cust .progress{
+
+    .progress-bar-cust .progress {
         margin: 40px 0px;
     }
+
     .see-all-artist {
         text-align: center;
         margin-top: 70px;
         margin-bottom: 50px;
     }
+
     .see-all-nft {
         margin-bottom: 30px !important;
     }
-    .News-main .inner-wrapper-news{
+
+    .News-main .inner-wrapper-news {
         width: 90%;
     }
+
     .News-main .inner-wrapper-news .heading {
         padding-top: 40px;
         margin-bottom: 30px;
         text-align: center;
     }
+
     .search-input-main input {
         padding: 16px 30px;
     }
+
     .search-input-main button.search-btn {
         right: 15px;
         width: 35px;
         height: 35px;
     }
+
     .artist-pic img {
         width: 50px;
         border-radius: 100%;
     }
+
     .login-page-main .right-cols-main {
         width: 50%;
         padding: 90px 70px;
         padding-bottom: 0px;
     }
+
     .table-main {
         overflow-x: auto;
     }
+
     .gray-cards-main .table-main table {
         width: 1100px;
     }
 }
 
-@media (max-width:991px){
+@media (max-width: 991px) {
     .first-row-main-dash {
         flex-direction: column;
     }
-    .first-row-main-dash .left-col, .first-row-main-dash .right-col{
+
+    .first-row-main-dash .left-col, .first-row-main-dash .right-col {
         width: 100%;
     }
-    .first-row-main-dash .left-col{
+
+    .first-row-main-dash .left-col {
         margin-bottom: 20px;
     }
+
     .main-comman-wrapping {
         margin-left: 50px;
         margin-top: 66px;
     }
+
     .heading {
         font-size: 18px;
         margin-bottom: 20px;
     }
+
     .dashboard-wrapper-main {
         padding: 12px;
     }
-    .mynfts-row-main .center-col input{
+
+    .mynfts-row-main .center-col input {
         font-size: 12px;
     }
+
     .mynfts-row-main .first-col .Mynft-drop-component-main .title-name {
         font-size: 11px;
         margin-bottom: -2px;
     }
+
     .mynfts-row-main .last-icon a img {
         width: 20px;
     }
+
     .mynfts-row-main .center-col {
         width: 50%;
     }
-    .mynfts-row-main .first-col .Mynft-drop-component-main .dropdown .btn{
+
+    .mynfts-row-main .first-col .Mynft-drop-component-main .dropdown .btn {
         font-size: 12px;
     }
-    .Dropdown-main-header .dropdown .btn::after{
+
+    .Dropdown-main-header .dropdown .btn::after {
         width: 10px;
         height: 10px;
     }
+
     .header-main .right-col-main .profile-dropdown .Dropdown-main-header .dropdown .btn {
         padding-right: 10px;
     }
+
     .Inflow-music-main .inner-music-wrapper {
         margin-top: 30px;
     }
+
     .see-all-artist {
         margin-top: 30px;
     }
+
     .login-page-main {
         height: auto;
         background: #000;
@@ -1327,32 +1553,39 @@ button.sign-up-btn {
         overflow: inherit;
         flex-direction: column;
     }
-    .login-page-main .left-cols-main{
+
+    .login-page-main .left-cols-main {
         width: 100%;
     }
+
     .new-row-for-descriptions {
         padding: 80px 70px;
     }
+
     .login-page-main .left-cols-main .logos-row {
         padding: 40px 80px;
         padding-bottom: 0px;
         font-size: 30px;
     }
+
     .login-page-main .left-cols-main .logos-row {
         padding: 20px 20px;
         padding-bottom: 0px;
         font-size: 26px;
     }
+
     .new-row-for-descriptions {
         padding: 30px 30px;
         padding-bottom: 80px;
     }
+
     .new-row-for-descriptions .login-headings {
         margin-bottom: 25px;
         font-size: 23px;
         font-weight: 600;
         line-height: 1.5;
     }
+
     p.descriptions-main {
         font-size: 12px;
         color: #fff;
@@ -1360,38 +1593,46 @@ button.sign-up-btn {
         font-weight: 500;
         margin-bottom: 40px;
     }
+
     .login-page-main .right-cols-main {
         width: 100%;
-        background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(98,32,177,1) 100%);
+        background: linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(98, 32, 177, 1) 100%);
         padding: 60px 30px;
     }
+
     .login-page-main .right-cols-main .creat-name-main {
         font-size: 25px;
         font-weight: 600;
         margin-bottom: 30px;
     }
+
     .login-page-main .right-cols-main .or-use {
         margin-top: 20px;
         margin-bottom: 20px;
         font-size: 12px;
         font-weight: 600;
     }
+
     .login-page-main .right-cols-main .comman-row-input input {
         width: 100%;
     }
-    button.login-btn{
+
+    button.login-btn {
         padding: 7px 40px;
         font-size: 12px;
     }
+
     .tab-settings-main nav .nav-tabs {
         flex-direction: column;
         justify-content: inherit !important;
         text-align: left !important;
     }
+
     .tab-settings-main nav .nav-tabs a.nav-item {
         text-align: center;
         padding: 17px 20px;
     }
+
     .grids-main-inputs {
         padding: 30px 20px;
         display: grid;
@@ -1399,26 +1640,34 @@ button.sign-up-btn {
         grid-column-gap: 30px;
         grid-row-gap: 30px;
     }
+
     .save-changes-main {
-        padding: 0px 100px;
-        margin-bottom: 51px;
+        padding: 0;
         text-align: center;
-        margin-top: 20px;
     }
-    .labels-mains .inner-row-labels-main{
+
+    .grids-main-inputs .comman-grids input,
+    .grids-main-inputs .comman-grids .dropdown .btn {
+        padding: 15px;
+    }
+
+    .labels-mains .inner-row-labels-main {
         padding: 21px 20px;
     }
+
     .labels-mains .inner-row-labels-main .small-row-heading .small-headings {
         font-size: 18px;
         margin-bottom: 5px;
         line-height: normal;
         font-weight: 600;
     }
+
     .labels-mains .inner-row-labels-main .small-row-heading .short-descriptions {
         font-size: 12px;
         font-weight: 400;
     }
-    .gray-cards-main .inner-first-card-row .col-rights-main .first-headings{
+
+    .gray-cards-main .inner-first-card-row .col-rights-main .first-headings {
         font-size: 18px;
     }
 
@@ -1431,139 +1680,187 @@ button.sign-up-btn {
         grid-column-gap: 20px;
         grid-row-gap: 50px;
     }
+
+    .grids-main-inputs .comman-grids input,
+    .grids-main-inputs .comman-grids .dropdown .btn {
+        padding: 15px;
+    }
+
+    .grids-main-inputs .comman-grids .dropdown .btn::after {
+        top: 26px;
+    }
+
+    .save-changes-main button {
+        padding: 16px 70px;
+    }
 }
 
 
-@media (max-width:767px){
-    .header-main .right-col-main .notified-main{
+@media (max-width: 767px) {
+    .header-main .right-col-main .notified-main {
         display: none;
     }
+
     .dashboard-wrapper-main {
         padding: 12px 15px;
         padding-top: 20px;
     }
+
     .heading {
         font-size: 16px;
         margin-bottom: 15px;
     }
+
     .main-comman-wrapping {
         margin-left: 40px;
         margin-top: 56px;
     }
+
     .first-row-main-dash .left-col .above-row {
         padding: 12px;
     }
+
     .first-row-main-dash .left-col .below-row {
         padding: 12px;
-      }
-      .first-row-main-dash .left-col .below-row .left-pricing .price-tag {
+    }
+
+    .first-row-main-dash .left-col .below-row .left-pricing .price-tag {
         font-size: 21px;
-      }
-      .spiner-bar-row .comman-col:first-child {
+    }
+
+    .spiner-bar-row .comman-col:first-child {
         margin-right: 30px;
         padding-right: 10px;
         padding-left: 0px;
-      }
-      .spiner-bar-row .comman-col .right-side-value {
+    }
+
+    .spiner-bar-row .comman-col .right-side-value {
         font-size: 16px;
         font-weight: 500;
-      }
-      .chart-row {
-          width: 50%;
-          margin: auto;
-          margin-bottom: 60px;  
-      }
-      .last-row-pricing .comman-priced:first-child {
+    }
+
+    .chart-row {
+        width: 50%;
+        margin: auto;
+        margin-bottom: 60px;
+    }
+
+    .last-row-pricing .comman-priced:first-child {
         padding-right: 20px;
         margin-right: 20px;
-      }
-      .last-row-pricing .comman-priced span.small-heading{
+    }
+
+    .last-row-pricing .comman-priced span.small-heading {
         font-size: 10px;
-      }
-      .first-row-main-dash .right-col {
+    }
+
+    .first-row-main-dash .right-col {
         padding: 12px;
-      }
-    
-      .Second-row-wave-chart{
+    }
+
+    .Second-row-wave-chart {
         padding: 12px;
-      }
-      .Second-row-wave-chart .total-balance-row .heading-cols .dollor-price {
+    }
+
+    .Second-row-wave-chart .total-balance-row .heading-cols .dollor-price {
         font-size: 24px;
     }
-    .deposite-earning-row{
+
+    .deposite-earning-row {
         grid-column-gap: 50px;
     }
+
     .deposite-earning-row .deposite-heaing span.labal-heading {
         font-size: 12px;
     }
+
     .deposite-earning-row .deposits .square-lab,
-    .deposite-earning-row .earning .square-lab{
+    .deposite-earning-row .earning .square-lab {
         width: 16px;
         height: 16px;
         border-radius: 4px;
     }
-    .mynfts-row-main{
+
+    .mynfts-row-main {
         margin-top: 20px;
     }
+
     .mynfts-row-main .first-col {
         display: none;
     }
+
     .mynfts-row-main .center-col {
         width: 90%;
     }
+
     .Inflow-music-main .inner-music-wrapper {
         margin-top: 10px;
     }
-    .artist-heading:before{
+
+    .artist-heading:before {
         display: none;
     }
+
     .table-filter-btn-row {
         flex-direction: column;
         align-items: inherit;
         margin-bottom: 0px;
     }
+
     .table-filter-btn-row .left-col-fillter {
         width: 100%;
         margin-bottom: 10px;
     }
+
     .table-filter-btn-row .left-col-fillter .comman-btn {
         width: 50%;
     }
-    .table-filter-btn-row .left-col-fillter .comman-btn:last-child{
+
+    .table-filter-btn-row .left-col-fillter .comman-btn:last-child {
         margin-right: 0px;
     }
+
     .table-filter-btn-row .left-col-fillter .comman-btn .btn {
         width: 100%;
     }
+
     .table-filter-btn-row .right-col-filter .right-col-btn {
         margin-left: 10px;
     }
+
     .table-filter-btn-row .right-col-filter .right-col-btn:first-child {
         margin-left: 0px;
     }
+
     .table-filter-btn-row .right-col-filter .right-col-btn button {
         width: 100%;
     }
+
     .table-filter-btn-row .right-col-filter .right-col-btn {
         width: 50%;
     }
+
     .gray-cards-main {
         background: #2f3443;
         padding: 20px;
         border-radius: 6px;
     }
+
     .gray-cards-main .inner-first-card-row .col-rights-main .first-headings {
         font-size: 15px;
     }
+
     .gray-cards-main .inner-first-card-row .col-rights-main .songs-name {
         font-size: 11px;
         line-height: normal;
-    }    
+    }
+
     .gray-cards-main .inner-first-card-row img {
         width: 50px;
         border-radius: 10px;
         margin-right: 10px;
     }
+
     .gray-cards-main .table-main table {
         width: 650px;
     }
@@ -1573,7 +1870,20 @@ button.sign-up-btn {
     }
 
     .songs-grid-main {
-        grid-template-columns: repeat(4 ,1fr);
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .search-input-main {
+        margin-top: 30px;
+    }
+
+    .grids-main-inputs .comman-grids input,
+    .grids-main-inputs .comman-grids .dropdown .btn {
+        padding: 10px 15px;
+    }
+
+    .grids-main-inputs .comman-grids .dropdown .btn::after {
+        top: 21px;
     }
 
 }
@@ -1616,7 +1926,7 @@ button.sign-up-btn {
     }
 
     .songs-grid-main {
-        grid-template-columns: repeat(3 ,1fr);
+        grid-template-columns: repeat(3, 1fr);
         grid-column-gap: 15px;
         grid-row-gap: 15px;
     }
@@ -1652,7 +1962,7 @@ button.sign-up-btn {
     }
 
     .comman-div-for-pro .spiner-bar-row .comman-col + .comman-col,
-    .comman-div-for-pro .spiner-bar-row + .spiner-bar-row{
+    .comman-div-for-pro .spiner-bar-row + .spiner-bar-row {
         padding-top: 10px;
         margin-top: 10px;
         border-top: 2px solid #555555;
@@ -1702,8 +2012,17 @@ button.sign-up-btn {
     }
 
     .songs-grid-main {
-        grid-template-columns: repeat(2 ,1fr);
+        grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 10px;
         grid-row-gap: 10px;
+    }
+
+    .save-changes-main {
+        padding: 0 20px;
+    }
+
+    .save-changes-main button {
+        padding: 16px 0;
+        width: 100%;
     }
 }

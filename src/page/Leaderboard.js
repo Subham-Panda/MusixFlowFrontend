@@ -100,7 +100,7 @@ class Leaderboard extends Component {
                             </tr>
                             <tr>
                                 <td className="first-col">
-                                    <div className="numbers">1</div>
+                                    <div className="numbers">2</div>
                                 </td>
                                 <td className="second-col">
                                     <div className="artist-pic">
@@ -118,7 +118,7 @@ class Leaderboard extends Component {
                                     <div className="total-artist">178</div>
                                 </td>
                                 <td className="sixt-col">
-                                    <div className="green-light">0.92%</div>
+                                    <div className="red-light">0.05%</div>
                                 </td>
                                 <td className="seventh-col">
                                     <img src={assetsImages.imgchart} />

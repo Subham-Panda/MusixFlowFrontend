@@ -25,6 +25,14 @@ import calendar from '../assets/images/calendar.svg'
 import orders from '../assets/images/orders.svg'
 import userWhite from '../assets/images/user-white.svg'
 import heartWhite from '../assets/images/heart-white.svg'
+import artistbg from '../assets/images/artist-background.jpg'
+import button from '../assets/images/button.svg'
+import verifed from '../assets/images/verifed.svg'
+import poster from '../assets/images/album-poster.jpg'
+import star from '../assets/images/star.svg'
+import starwhite from '../assets/images/star-white.svg'
+import prev from '../assets/images/prev.svg'
+import next from '../assets/images/next.svg'
 
 export const assetsImages = {
     logo: logo,
@@ -54,5 +62,13 @@ export const assetsImages = {
     orders:orders,
     userWhite:userWhite,
     heartWhite:heartWhite,
+    artistbg:artistbg,
+    button:button,
+    verifed:verifed,
+    poster:poster,
+    star:star,
+    starwhite:starwhite,
+    prev:prev,
+    next:next,
 
 }
