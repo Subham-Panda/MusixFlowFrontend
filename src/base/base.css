@@ -10,7 +10,7 @@
     right: 0;
     width: 100%;
     top: 0;
-    z-index: 1;
+    z-index: 5;
 }
 
 .header-main .left-col-main {
@@ -22,10 +22,20 @@
     align-items: center;
 }
 
+.header-main .right-col-main .wallet-button {
+    background: linear-gradient(
+            0deg
+            , rgba(101, 32, 181, 1) 20%, rgba(59, 72, 193, 1) 100%);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 100px;
+}
+
 .header-main .right-col-main .notified-main {
     margin-right: 20px;
     padding-right: 20px;
-    border-right: 1px solid #444;
+    border-right: 3px solid #444;
 }
 
 .header-main .right-col-main .profile-dropdown .Dropdown-main-header .dropdown .btn {
@@ -45,7 +55,7 @@
     width: 100px;
     bottom: 0;
     background: #131313;
-    z-index: 1;
+    z-index: 6;
 }
 
 .side-bar-main .logo-website-main {
@@ -68,6 +78,10 @@
 .side-bar-main .side-bar-navigation .nav-link-main img {
     width: 25px;
     margin: auto;
+}
+
+.side-bar-main .side-bar-navigation .nav-link-main.active img {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
 }
 
 .side-bar-main .side-bar-navigation .nav-link-main {

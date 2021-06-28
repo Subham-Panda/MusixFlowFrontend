@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class Labels extends Component {
     render(){
         return(
-            <div class="dashboard-wrapper-main labels-mains">
+            <div className="dashboard-wrapper-main labels-mains">
                  <div className="heading">Labels</div>
                  
                  <div className="inner-row-labels-main">

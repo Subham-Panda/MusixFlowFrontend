@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import Wallet from "../../utils/wallet";
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -13,6 +14,7 @@ export const authSlice = createSlice({
         state.token = action.payload.token
     },
     logout: () => {
+      Wallet.disconnect(true);
       localStorage.removeItem("persist:root");
       window.location.href = "/login";
     }

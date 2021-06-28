@@ -18,9 +18,9 @@ import { persistStore } from "redux-persist";
 import store from "./store/configureStore";
 import App from "./App";
 //style
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import './style.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const persistor = persistStore(store);
 

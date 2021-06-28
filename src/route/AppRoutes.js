@@ -12,6 +12,9 @@ import Labels from "../page/Labels";
 import Rocnations from "../page/Rocnations";
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
+import Artistpic from "../component/Artistpic";
+import Artist from "../component/Artist";
+import Artistmanagement from "../component/Artistmanagement";
 
 
 export const AppRoutes = () => {
@@ -25,6 +28,8 @@ export const AppRoutes = () => {
        <PrivateRoutes path="/accountsettings" component={Accountsettings} exact />
        <PrivateRoutes path='/lebels' component={Labels} exact />
        <PrivateRoutes path='/rocnations' component={Rocnations} exact />
+       <PrivateRoutes path='/artist' component={Artist} exact />
+       <PrivateRoutes path='/artistmanage' component={Artistmanagement} exact />
        <PrivateRoutes path="/demo" component={DemoPage} exact />
        <PrivateRoutes path="/login" component={Login} exact />
     </Switch>

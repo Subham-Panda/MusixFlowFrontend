@@ -8,7 +8,7 @@ class Inflowmusic extends Component {
         return(
             <div className="Inflow-music-main">
                 <Banner/>
-                <div class="dashboard-wrapper-main inner-music-wrapper">
+                <div className="dashboard-wrapper-main inner-music-wrapper">
                     <div className="artist-heading">Featured Artists</div>
                     <div className="grid-for-artist">
                         <Artistpic />

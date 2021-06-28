@@ -14,19 +14,10 @@ import Song from '../component/Song';
 
 
 class Mydashboard extends Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-           
-        }
-    }
-
     render() {
         return (
-            <div class="dashboard-wrapper-main">
+            <div className="dashboard-wrapper-main">
                 <div className="heading">My dashboard</div>
-
                 <div className="first-row-main-dash">
                         <div className="left-col">
                             <div className="above-row">
@@ -39,7 +30,7 @@ class Mydashboard extends Component {
                             <div className="below-row">
                                 <div className="date-row-main">
                                     <div className="left-pricing">
-                                        <div className="price-tag">$ 1,357</div>
+                                        <div className="price-tag"> <span>$</span> 1,357</div>
                                         <div className="short-des">+18% last month</div>
                                     </div>
                                     <div className="right-side">
@@ -84,7 +75,7 @@ class Mydashboard extends Component {
                             <div className="chart-row">
                                     <Doughnetchart />
                             </div>
-                            <div class="comman-div-for-pro">
+                            <div className="comman-div-for-pro">
                                 <div className="spiner-bar-row">
                                     <div className="comman-col">
                                             <div className="spinner">
@@ -126,7 +117,7 @@ class Mydashboard extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="last-row-pricing"> 
+                            <div className="last-row-pricing">
                                     <div className="comman-priced">
                                         $13,555
                                         <span className="small-heading">Total Artist Balance</span>
@@ -145,7 +136,7 @@ class Mydashboard extends Component {
                         <div className="total-balance-row">
                             <div className="heading-cols">
                                 <div className="card-heading">Total Wallet Balance</div>
-                                <div className="dollor-price">$ 5, 109</div>
+                                <div className="dollor-price"><span>$</span> 5, 109</div>
                                 <div className="small-heading">+8  last week</div>
                             </div>
                             <div className="btn-filter">
@@ -162,14 +153,14 @@ class Mydashboard extends Component {
                             <div className="deposits">
                                 <div className="square-lab"></div>
                                 <div className="deposite-heaing">
-                                    <span className="labal-heading">Deposits</span>                                    
+                                    <span className="labal-heading">Deposits</span>
                                     <span className="percent">+11.7%</span>
                                 </div>
                             </div>
                             <div className="earning">
                                 <div className="square-lab"></div>
                                 <div className="deposite-heaing">
-                                    <span className="labal-heading">Earnings</span>                                    
+                                    <span className="labal-heading">Earnings</span>
                                     <span className="percent">+11.7%</span>
                                 </div>
                             </div>
@@ -179,9 +170,9 @@ class Mydashboard extends Component {
                 </div>
 
                 {/* -----------My-NFTs----------------------- */}
-                
+
                 <div className="mynfts-row-main">
-                        <div className="first-col">
+                        <div className="second-col">
                             <Mynftdropdown />
                         </div>
                         <div className="center-col">
@@ -211,5 +202,4 @@ class Mydashboard extends Component {
         )
     }
 }
-
 export default Mydashboard
