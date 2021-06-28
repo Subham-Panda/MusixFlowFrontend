@@ -8,11 +8,11 @@ class Slider extends Component {
             <div className="new-slider-main">
                 <div className="slider">
                     <input type="radio" name="testimonial" id="t-2" />
-                    <input type="radio" name="testimonial" id="t-3" checked />
+                    <input type="radio" name="testimonial" id="t-3" checked onChange={() => null} />
                     <input type="radio" name="testimonial" id="t-4" />
 
                     <div className="testimonials">
-                        <label className="item" For="t-1">
+                        <label className="item" htmlFor="t-1">
                             <img src={assetsImages.person} alt="picture"/>
                             <div className="information-row">
                                 <div className="name-person">
@@ -28,7 +28,7 @@ class Slider extends Component {
 
                         </label>
 
-                        <label className="item" for="t-2">
+                        <label className="item" htmlFor="t-2">
                             <img src={assetsImages.person} alt="picture" />
                             <div className="information-row">
                                 <div className="name-person">
@@ -43,7 +43,7 @@ class Slider extends Component {
                             </div>
 
                         </label>
-                        <label className="item" for="t-3">
+                        <label className="item" htmlFor="t-3">
                             <img src={assetsImages.person} alt="picture" />
                             <div className="information-row">
                                 <div className="name-person">
@@ -57,7 +57,7 @@ class Slider extends Component {
                             </div>
 
                         </label>
-                        <label className="item" for="t-4">
+                        <label className="item" htmlFor="t-4">
                             <img src={assetsImages.person} alt="picture" />
                             <div className="information-row">
                                 <div className="name-person">
@@ -71,7 +71,7 @@ class Slider extends Component {
 
                             </div>
                         </label>
-                        <label className="item" For="t-5">
+                        <label className="item" htmlFor="t-5">
                             <img src={assetsImages.person} alt="picture"/>
                             <div className="information-row">
                                 <div className="name-person">
@@ -89,9 +89,9 @@ class Slider extends Component {
                     </div>
                     <div className="dots">
 
-                        <label for="t-2"></label>
-                        <label for="t-3"></label>
-                        <label for="t-4"></label>
+                        <label htmlFor="t-2"/>
+                        <label htmlFor="t-3"/>
+                        <label htmlFor="t-4"/>
 
                     </div>
                 </div>

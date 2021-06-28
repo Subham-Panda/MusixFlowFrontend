@@ -33,6 +33,17 @@ import star from '../assets/images/star.svg'
 import starwhite from '../assets/images/star-white.svg'
 import prev from '../assets/images/prev.svg'
 import next from '../assets/images/next.svg'
+import background from '../assets/images/profile-background.svg'
+import fullscreen from '../assets/images/full-screen.svg'
+import money from '../assets/images/money.svg'
+import options from '../assets/images/options.svg'
+import arrowup from '../assets/images/arrow-up.svg'
+import success from '../assets/images/success.svg'
+import sale from '../assets/images/sale.svg'
+import reports from '../assets/images/reports.svg'
+import reportIcon from '../assets/images/report-img.svg'
+import reviews from '../assets/images/reviews.svg'
+import circle from '../assets/images/circle.svg'
 
 export const assetsImages = {
     logo: logo,
@@ -70,5 +81,16 @@ export const assetsImages = {
     starwhite:starwhite,
     prev:prev,
     next:next,
+    background:background,
+    fullscreen:fullscreen,
+    money:money,
+    options:options,
+    arrowup:arrowup,
+    success:success,
+    sale:sale,
+    reports:reports,
+    reportIcon:reportIcon,
+    reviews:reviews,
+    circle:circle,
 
 }

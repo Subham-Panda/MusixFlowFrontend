@@ -4,7 +4,7 @@ import { assetsImages } from "../constants/images"
 class Rocnations extends Component {
     render(){
         return(
-            <div class="dashboard-wrapper-main rocnations-artist-main">
+            <div className="dashboard-wrapper-main rocnations-artist-main">
                  <div className="heading">ROCNATION's Artists</div>
                  <div className="small-descriptions">Lorem ipsums main</div>
 

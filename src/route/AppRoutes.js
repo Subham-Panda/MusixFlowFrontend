@@ -14,13 +14,14 @@ import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 import Artistpic from "../component/Artistpic";
 import Artist from "../component/Artist";
+import Artistmanagement from "../component/Artistmanagement";
 
 
 export const AppRoutes = () => {
   return (
     <Switch>
       <PublicRoutes path="/login" component={Login} exact/>
-       <PrivateRoutes    path="/" component={Mydashboard} exact />
+       <PrivateRoutes path="/" component={Mydashboard} exact />
        <PrivateRoutes path="/inflowmusic" component={Inflowmusic} exact />
        <PrivateRoutes path="/news" component={News} exact />
        <PrivateRoutes path="/leaderboard" component={Leaderboard} exact />
@@ -28,6 +29,7 @@ export const AppRoutes = () => {
        <PrivateRoutes path='/lebels' component={Labels} exact />
        <PrivateRoutes path='/rocnations' component={Rocnations} exact />
        <PrivateRoutes path='/artist' component={Artist} exact />
+       <PrivateRoutes path='/artistmanage' component={Artistmanagement} exact />
        <PrivateRoutes path="/demo" component={DemoPage} exact />
        <PrivateRoutes path="/login" component={Login} exact />
     </Switch>

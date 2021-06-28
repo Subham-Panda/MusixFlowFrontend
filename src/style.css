@@ -1253,6 +1253,509 @@ button.sign-up-btn {
     color: #ffffff;
 }
 
+.profile-dropdown-main {
+    padding: 0;
+    background-color: #2F3443;
+    border-radius: 25px 0 25px 25px;
+    overflow: hidden;
+    transform: translate(-330px, 90px) !important;
+    border: none;
+    position: relative;
+    overflow: unset;
+}
+
+.profile-dropdown-main:before {
+    position: absolute;
+    content: '';
+    border-bottom: 50px solid #2F3443;
+    border-left: 50px solid transparent;
+    right: 0;
+    top: -40px;
+}
+
+.profile-dropdown-card .card-header {
+    border-bottom: 0;
+    padding: 20px;
+}
+
+.profile-dropdown-card .card-header span {
+    text-shadow: none;
+    color: #ffffff;
+    opacity: 1;
+    cursor: pointer;
+    font-size: 20px;
+    display: block;
+    float: unset;
+    text-align: right;
+}
+
+.Profile-dropdown-img {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-dropdown-card .background-img-wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+}
+
+.profile-dropdown-card .background-img-wrapper .img-wrapper {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.profile-dropdown-card .background-img-wrapper .img-wrapper .full-scree-icon,
+.profile-dropdown-card .background-img-wrapper .img-wrapper .money-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: #444444;
+    display: flex;
+}
+
+.profile-dropdown-card .background-img-wrapper .img-wrapper .profile-img img {
+    width: 65px;
+    border-radius: 50%;
+}
+
+.profile-dropdown-card .user-details {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+.profile-dropdown-card .user-details .user-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.profile-dropdown-card .user-details .edit-button {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background-color: #5594EB;
+    border-radius: 5px;
+    padding: 10px 35px;
+    border: 0;
+}
+.profile-dropdown-card .user-profile-details ul  {
+    color: #ffffff;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.profile-dropdown-card .user-profile-details ul  li{
+    text-align: center;
+    list-style: none;
+    padding: 0 20px;
+}
+.profile-dropdown-card .user-profile-details ul  li + li{
+    border-left: 2px solid #707070;
+}
+.profile-dropdown-card .user-profile-details ul  li .number{
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+.profile-dropdown-card .user-profile-details ul  li .name{
+    font-size: 12px;
+    font-family: Rubik-Medium;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 2px;
+}
+
+.profile-dropdown-card .user-details .user-album {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255, 0.5);
+    margin-bottom: 20px;
+}
+
+.profile-dropdown-card  .profile-card-body {
+    background-color: #2F3443;
+    margin: 40px 20px 20px 40px;
+    height: 190px;
+    overflow: auto;
+}
+
+.profile-dropdown-card .profile-card-body .card-body-title {
+    color: #AAAAAA;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.profile-dropdown-card .profile-card-body ul.following-list {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.profile-dropdown-card .profile-card-body ul.following-list li {
+    display: flex;
+}
+
+ul.following-list li .user{
+    margin-right: 15px;
+}
+
+ul.following-list li + li .user{
+    padding-top: 20px;
+}
+
+ul.following-list li .user img{
+    width: 50px;
+    border-radius: 50%;
+}
+
+ul.following-list li .follower-details{
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+ul.following-list li + li .follower-details{
+    padding-top: 20px;
+    border-top: 2px solid #707070;
+}
+
+ul.following-list li .follower-details .follower-content .album-name{
+    color: #ffffff;
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+ul.following-list li .follower-details .follower-content .album-id{
+    color: rgba(255,255,255, 0.5);
+    display: block;
+    font-size: 12px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(200px);
+}
+
+ul.following-list li .follower-details .option-btn{
+    background-color: transparent;
+    border: 0;
+    padding-left: 15px;
+
+}
+
+.edit-profile-modal .modal-dialog {
+    background-color: #2F3443;
+    border-radius: 20px;
+}
+
+.edit-profile-modal .modal-dialog .modal-content {
+    background-color: #2F3443;
+    border-radius: 20px;
+    padding: 30px 50px;
+}
+
+.edit-profile-modal.success .modal-body .success-popup-content {
+    text-align: center;
+    padding-top: 100px;
+}
+
+.edit-profile-modal.success .modal-body .success-popup-content h2.title {
+    font-family: Rubik-Medium;
+    font-weight: 700;
+    font-size: 36px;
+    margin: 15px 0 5px;
+    letter-spacing: 2px;
+}
+
+.edit-profile-modal.success .modal-body .success-popup-content p {
+    font-family: Rubik;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.edit-profile-modal .modal-dialog .modal-header {
+    text-align: center;
+    padding: 0;
+    border-bottom: 0;
+    position: relative;
+}
+
+.edit-profile-modal .modal-dialog .modal-header span.title {
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.edit-profile-modal .modal-dialog .modal-header button.close {
+    position: absolute;
+    right: 0;
+    box-shadow: none;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 18px;
+    opacity: 1;
+    padding: 15px 15px;
+    cursor: pointer;
+}
+
+.edit-profile-modal .modal-dialog .modal-body .form-group .form-control {
+    background-color: rgba(235, 235, 235, 0.1);
+    border: 0;
+    border-radius: 0;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 15px;
+    height: auto;
+}
+
+.sell-total-amount {
+    text-align: center;
+    color: rgba(255,255,255, 0.5);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+.edit-profile-modal .modal-body .form-group .form-control:focus {
+    outline: 4px solid #707070;
+}
+
+.edit-profile-modal .modal-body .user-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.edit-profile-modal .modal-body .user-profile-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.edit-profile-modal .modal-body .user-profile img {
+    width: 120px;
+    border-radius: 50%;
+    border: 2px solid rgba(86, 83, 232, 0.66);
+}
+
+.edit-profile-modal .modal-body .user-profile-background img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.btn-gradiant {
+    border-radius: 50px;
+    border: 0;
+    background: linear-gradient(0deg, rgba(101, 32, 181, 1) 0%, rgba(59, 72, 193, 1) 100%);
+    color: #ffffff;
+}
+
+.edit-profile-modal .modal-body .upload-profile,
+.edit-profile-modal .modal-body .upload-profile-background {
+    margin-top: 15px;
+    font-size: 15px;
+    padding: 15px;
+    width: 100%;
+}
+
+.edit-profile-modal.newvote .modal-body .upload-profile {
+    width: 95px;
+    height: 95px;
+    background: linear-gradient(45deg, rgba(101, 32, 181, 1) 0%, rgba(59, 72, 193, 1) 100%);
+    border: 10px solid #2A2E3B;
+    font-size: 50px;
+    font-weight: 700;
+    margin: 15px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.edit-profile-modal .modal-footer {
+    border-top: 0;
+    padding-top: 40px;
+    justify-content: center;
+}
+
+.edit-profile-modal .modal-footer .save-btn {
+    padding: 15px 35px;
+    letter-spacing: 2px;
+    min-width: 150px;
+}
+
+.artist-management {
+    padding-bottom: 0;
+    margin-bottom: 30px;
+}
+
+.artist-management .card {
+    background-color: #2F3443;
+    padding: 20px;
+    border-radius: 15px;
+    height: 100%;
+}
+
+.artist-management .card.button-card {
+    min-height: 450px;
+}
+
+.artist-management .card .artist-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.artist-management .card .artist-title span {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: Rubik-bold;
+    letter-spacing: 1px;
+}
+
+.artist-management .card .artist-poll {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.artist-management .card .artist-poll .poll-green {
+    color: #00CD98;
+}
+
+.artist-management .card .artist-poll img{
+    margin-right: 5px;
+}
+
+.artist-management .card .artist-poll .amount{
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.artist-management .card .first-row-main-dash .left-col{
+    width: 100%;
+}
+
+.artist-management .card .first-row-main-dash .left-col .below-row{
+    background-color: transparent;
+}
+
+.artist-management .card .first-row-main-dash .left-col .below-row{
+    background-color: transparent;
+}
+
+.artist-management .card .footer-btn {
+    text-align: center;
+}
+
+.artist-management .card.button-card .footer-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: calc(400px - 20px);
+}
+
+.artist-management .card .footer-btn .btn-gradiant{
+    margin: 0 auto 20px;
+    padding: 15px 35px;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+
+.artist-management .card .fans-list ul {
+    margin: 20px 0 0;
+    padding: 0;
+    max-height: 310px;
+    overflow: auto;
+}
+
+.artist-management .card .fans-list ul li {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.artist-management .card .fans-list ul li + li {
+    padding-top: 20px;
+}
+
+.artist-management .card .fans-list ul li .fan-profile img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.artist-management .card .fans-list ul li .fan-details{
+    display: flex;
+    align-items: center;
+    padding-right: 10px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.artist-management .card .fans-list ul li .fan-details .donate-amount{
+    color: #C3C6D1;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: Rubik-bold;
+    letter-spacing: 1px;
+    width: 80px;
+}
+
+.artist-management .card .fans-list ul li .fan-details .fan-details-content span.name{
+    display: block;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: Rubik-Medium;
+}
+
+.artist-management .card .fans-list ul li .fan-details .fan-details-content span.content{
+    color: #858997;
+    font-weight: 400;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*max-width: 200px;*/
+    display: block;
+}
+
+.artist-management .card .fans-list .see-all-btn{
+    display: flex;
+    justify-content: center;
+    margin: 25px auto 0;
+    border: 0;
+    background-color: transparent;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+
+}
+
 /* ---------------Responsive----------------- */
 
 @media (max-width: 1400px) {
@@ -1479,6 +1982,10 @@ button.sign-up-btn {
     .gray-cards-main .table-main table {
         width: 1100px;
     }
+
+    .artist-management .card .artist-poll .amount {
+        font-size: 30px;
+    }
 }
 
 @media (max-width: 991px) {
@@ -1693,6 +2200,16 @@ button.sign-up-btn {
     .save-changes-main button {
         padding: 16px 70px;
     }
+
+    .artist-management .card .artist-title span,
+    .artist-management .card .footer-btn .btn-gradiant{
+        font-size: 15px;
+    }
+
+    .artist-management .card .artist-poll .amount {
+        font-size: 25px;
+    }
+
 }
 
 
@@ -1886,6 +2403,20 @@ button.sign-up-btn {
         top: 21px;
     }
 
+    .profile-dropdown-main {
+        transform: translate(-345px, 57px) !important;
+    }
+
+    .profile-dropdown-main:before {
+        border-bottom: 30px solid #2F3443;
+        border-left: 30px solid transparent;
+        top: -30px;
+    }
+
+    .profile-dropdown-card .card-header {
+        padding: 15px;
+    }
+
 }
 
 @media (max-width: 576px) {
@@ -1994,6 +2525,14 @@ button.sign-up-btn {
         grid-row-gap: 25px;
     }
 
+    .artist-management .card .artist-poll .amount {
+        font-size: 20px;
+    }
+
+    .edit-profile-modal .modal-dialog .modal-content {
+        padding: 30px;
+    }
+
 }
 
 @media (max-width: 360px) {
@@ -2024,5 +2563,8 @@ button.sign-up-btn {
     .save-changes-main button {
         padding: 16px 0;
         width: 100%;
+    }
+    .edit-profile-modal .modal-dialog .modal-content {
+        padding: 20px;
     }
 }

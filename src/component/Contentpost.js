@@ -19,7 +19,7 @@ class Contentpost extends Component{
                             <div className="date-and-time-man">Today at 12.35 PM</div>   
                         </div>
                      </div>   
-                    <div class="share-post-drop">
+                    <div className="share-post-drop">
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
                                 <img src={assetsImages.threedot} />    

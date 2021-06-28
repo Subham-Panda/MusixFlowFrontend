@@ -13,15 +13,21 @@ import {
 } from "../utils/firebase";
 import firebase from "firebase";
 import { Link } from 'react-router-dom';
+import Loader from "../component/Loader";
+import SweetAlert from "react-bootstrap-sweetalert";
 
 const Login = () => {
   const dispatch = useDispatch();
   const uData = useSelector((state) => state.auth.data);
   console.log(uData);
   const history = useHistory();
-  const [authSelectFlag, setAuthSelectFlag] = useState(false);
+  const [authSelectFlag, setAuthSelectFlag] = useState(true);
   const [forgotPasswordFlag, setForgotPasswordFlag] = useState(false);
-  const [phoneRegisterFlag, setPhoneRegisterFlag] = useState(false);
+  const [phoneRegisterFlag, setPhoneRegisterFlag] = useState(true);
+  const [optSent, setOptSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [otpConfirmation, setOtpConfirmation] = useState(null);
+  const [alert, setAlert] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [errorFlg, setErrorFlg] = useState("");
   const [user, setUser] = useState({
@@ -29,6 +35,7 @@ const Login = () => {
     email: "",
     password: "",
     phone: "",
+    otp: "",
   });
   const captchaRef = React.useRef(null);
 
@@ -71,7 +78,7 @@ const Login = () => {
           );
           dispatch(login({ email, uid: user.uid, token: user.refreshToken }));
           console.log("+++", user);
-          alert("Login succesfully");
+          showAlert('Login Successful', 'success')
         } else {
           const { user: registeredUser } =
             await auth.createUserWithEmailAndPassword(email, password);
@@ -81,12 +88,12 @@ const Login = () => {
           registeredUser.sendEmailVerification();
           dispatch(login({ email, uid: user.uid, token: user.refreshToken }));
           console.log(user.uid);
-          alert("Check your email and verify account");
+          showAlert('Check your email and verify account', 'info')
         }
         // history.push("/");
       } catch (error) {
         console.error(error);
-        alert(error.message);
+        showAlert(error.message, error);
       }
     }
   };
@@ -94,42 +101,61 @@ const Login = () => {
 
   const handleRegisterWithPhone =async(event)=> {
     event.preventDefault();
-    if (user.phone.length < 10) {
-      setErrorFlg("phone");
-      setErrorMessage("Phone must be 10 charachter long");
-    }
-    else{
-      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(captchaRef.current, {
-        'size': 'invisible'})
-      const appVerifier = window.recaptchaVerifier;
-      const phoneNumber = '+' + user.phone;
-      auth
-        .signInWithPhoneNumber(String(phoneNumber), appVerifier)
-        .then(confirmResult =>
-          {
-          //alert("send successfully");
-          const code = window.prompt('Please enter the verification ' +
-          'code that was sent to your mobile device.');
-          confirmResult
-            .confirm(code)
-            .then((result) => {
-              const user = result.user;
-              console.log(user)
-              dispatch(login({ phoneNumber, uid: user.uid, token: user.refreshToken }));
-            })
-            .catch((error) => {
-              alert('otp error:',error)
-            });}
-        )
-        .catch(error =>
-          alert(`Sign In With Phone Number Error: ${error.message}`)
-        );
+    setLoading(true);
+    if (optSent) {
+      if (!user.otp) {
+        setErrorFlg("otp");
+        setErrorMessage("Please enter OTP sent to your phone");
+        return;
+      }
+      //alert("send successfully");
+      // const code = window.prompt('Please enter the verification ' +
+      //     'code that was sent to your mobile device.');
+      otpConfirmation
+          .confirm(user.otp)
+          .then((result) => {
+            setLoading(false);
+            showAlert('Login Successful', 'success')
+            setTimeout(() => {
+              const loginUser = result.user;
+              dispatch(login({ phoneNumber: user.phone, uid: loginUser.uid, token: loginUser.refreshToken }));
+              hideAlert()
+            }, 2000);
+          })
+          .catch((error) => {
+            showAlert('Invalid OTP', 'error');
+          });
+    } else {
+      if (user.phone.length < 10) {
+        setErrorFlg("phone");
+        setErrorMessage("Phone must be 10 charachter long");
+      }
+      else{
+        window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(captchaRef.current, {
+          'size': 'invisible'})
+        const appVerifier = window.recaptchaVerifier;
+        const phoneNumber = '+' + user.phone;
+        auth
+            .signInWithPhoneNumber(String(phoneNumber), appVerifier)
+            .then(confirmResult =>
+                {
+                  setOptSent(true);
+                  setOtpConfirmation(confirmResult);
+                  setLoading(false);
+                }
+            )
+            .catch(error =>
+                showAlert(`Sign In With Phone Number Error: ${error.message}`, 'error')
+            );
+      }
     }
   }
 
   const handleChange = (event) => {
     const { value, name } = event.target;
     setUser({ ...user, [name]: value });
+    setErrorFlg('');
+    setErrorMessage('');
   };
 
   const forgotPassword = () => {
@@ -137,7 +163,7 @@ const Login = () => {
       .sendPasswordResetEmail(user.email)
       .then((result) => {
         console.log(result);
-        alert("check your email for changing password");
+        showAlert('check your email for changing password', 'info');
       })
       .catch((error) => {
         console.error(error);
@@ -165,8 +191,19 @@ const Login = () => {
       });
   };
 
+  function showAlert(title, type) {
+    setAlert(<SweetAlert style={{ color: '#000' }} type={type} onConfirm={hideAlert} timeout={3000} title={title}/>)
+    setLoading(false);
+  }
+
+  function hideAlert() {
+    setAlert(null)
+  }
+
   return (
     <div className="login-page-main">
+      {loading && <Loader/>}
+      {alert}
       <div className='recaptcha-container' ref={captchaRef}></div>
       <div className="left-cols-main">
         <div className="logos-row">
@@ -192,7 +229,7 @@ const Login = () => {
               {authSelectFlag ? "Sign Up" : "Login"}
             </button>
             <button
-              className="login-btn"
+              className="login-btn d-none"
               onClick={() => setForgotPasswordFlag(!forgotPasswordFlag)}
             >
               Forgot Password
@@ -211,10 +248,10 @@ const Login = () => {
         </div>
         {forgotPasswordFlag ? null : (
           <div className="social-icons">
-            <a className="mail-icon" href="#" onClick={() => setPhoneRegisterFlag(false)}>
-              {" "}
-              <img src={assetsImages.envelope} />
-            </a>
+            {/*<a className="mail-icon" href="#" onClick={() => setPhoneRegisterFlag(false)}>*/}
+            {/*  {" "}*/}
+            {/*  <img src={assetsImages.envelope} />*/}
+            {/*</a>*/}
             <a className="call-icon" href="#" onClick={() => setPhoneRegisterFlag(true)}>
               {" "}
               <img src={assetsImages.telephone} />
@@ -251,6 +288,16 @@ const Login = () => {
         </div>
         {phoneRegisterFlag ? (
           <form onSubmit={handleRegisterWithPhone}>
+            {!authSelectFlag &&
+            <div className="comman-row-input persons-row">
+              <input
+                  placeholder="Name"
+                  type="text"
+                  name="displayName"
+                  value={user.displayName}
+                  onChange={handleChange}
+              />
+            </div>}
             <div className="comman-row-input email-row">
               <PhoneInput
                 country={"us"}
@@ -272,8 +319,31 @@ const Login = () => {
                     {errorMessage}
                   </div>
                 ) : null}
+            {optSent ? <>
+              <div className="comman-row-input password-row">
+                <input
+                    placeholder="OTP"
+                    type="text"
+                    name="otp"
+                    value={user.otp}
+                    onChange={handleChange}
+                />
+              </div>
+              {errorFlg == "otp" ? (
+                  <div
+                      style={{
+                        color: "red",
+                        marginTop: `-13px`,
+                        marginBottom: "15px",
+                        fontSize: "14px",
+                      }}
+                  >
+                    {errorMessage}
+                  </div>
+              ) : null}
+            </> : null}
             <button type="submit" className="sign-up-btn">
-              Register
+              {optSent ? (authSelectFlag ? 'Login' : 'Register') : 'Send OTP'}
             </button>
           </form>
         ) : (

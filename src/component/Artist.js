@@ -9,18 +9,29 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Totalbalancechart from "./Totalbalancechart";
 import Song from "./Song";
 import Mynftdropdown from "./Mynftdropdown";
+import {Modal} from "react-bootstrap";
 
 class Artistpic extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            profileModel: false
+        }
+    }
+
     render(){
         return(
             <div className="artist-background">
                 <div className="artist-main">
                     <div className="background">
                         <img src={assetsImages.artistbg} />
+                        <button className='edit-profile' type='button' onClick={() => this.setState({profileModel: !this.state.profileModel})}>
+                            EDIT PROFILE
+                        </button>
                     </div>
                     <div className="artist-details">
                         <div className="artist-main-details">
-                            <div className="artis-img">
+                            <div className="artis-img mb-0">
                                 <img src={assetsImages.artist} />
                             </div>
                             <div className="artist-content">
@@ -107,7 +118,7 @@ class Artistpic extends Component {
                             <div className='song-button'>
                                 <img src={assetsImages.button}/>
                                 <div className='button'>
-                                    <button className='btn sell-button'>
+                                    <button className='btn sell-button' type='button' onClick={() => this.setState({sell: !this.state.sell})}>
                                         Sell
                                     </button>
                                     <button className='btn buy-button'>
@@ -116,24 +127,6 @@ class Artistpic extends Component {
                                 </div>
                             </div>
                         </div>
-
-                        {/*<div className="deposite-earning-row">*/}
-                        {/*    <div className="deposits">*/}
-                        {/*        <div className="square-lab"></div>*/}
-                        {/*        <div className="deposite-heaing">*/}
-                        {/*            <span className="labal-heading">Deposits</span>*/}
-                        {/*            <span className="percent">+11.7%</span>*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-                        {/*    <div className="earning">*/}
-                        {/*        <div className="square-lab"></div>*/}
-                        {/*        <div className="deposite-heaing">*/}
-                        {/*            <span className="labal-heading">Earnings</span>*/}
-                        {/*            <span className="percent">+11.7%</span>*/}
-                        {/*        </div>*/}
-                        {/*    </div>*/}
-
-                        {/*</div>*/}
 
                     </div>
 
@@ -272,10 +265,21 @@ class Artistpic extends Component {
                                                     <img src={assetsImages.prev}/>
                                                 </button>
                                             </div>
-                                            <div className='bid-button'>
-                                                <button className='bid-icon btn'>
-                                                    Bid
-                                                </button>
+                                            <div className='center-button'>
+                                                <div className='bid-button'>
+                                                    <button className='bid-icon btn'>
+                                                        Bid
+                                                    </button>
+                                                </div>
+                                                <div className='bid-amount d-none'>
+                                                    <input className='form-control' type='text' placeholder='Enter bid amount'/>
+                                                    <div className='next-icon'>
+                                                        <img src={assetsImages.next}/>
+                                                    </div>
+                                                </div>
+                                                <div className='bid-text d-none'>
+                                                    You are the high bidder!
+                                                </div>
                                             </div>
                                             <div className='next-button'>
                                                 <button className='next-icon btn'>
@@ -319,7 +323,73 @@ class Artistpic extends Component {
                         <Song />
                     </div>
                 </div>
+
+                <Modal show={this.state.profileModel} className="edit-profile-modal" onHide={() => this.setState({profileModel: !this.state.profileModel})}>
+                    <Modal.Header closeButton>
+                        <span className='title'>
+                            Edit Profile
+                        </span>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <div className='form-group'>
+                            <label>Name</label>
+                            <input className='form-control' type='text' placeholder=''/>
+                        </div>
+
+                        <div className='user-profile'>
+                            <img src={assetsImages.artist} />
+                            <button className='upload-profile btn-gradiant' >
+                                Upload New Profile Picture
+                            </button>
+                        </div>
+
+                        <div className='user-profile-background'>
+                            <img src={assetsImages.artistbg} />
+                            <button className='upload-profile-background btn-gradiant'>
+                                Upload New Background Picture
+                            </button>
+                        </div>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <button className='save-btn btn-gradiant'>
+                            Save Edits
+                        </button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={this.state.sell} className="edit-profile-modal sell" onHide={() => this.setState({sell: !this.state.sell})}>
+                    <Modal.Header closeButton>
+                        <span className='title'>
+                            Sell Drake Token
+                        </span>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <div className='form-group'>
+                            <label>Number of Tokens</label>
+                            <input className='form-control' type='text' placeholder=''/>
+                        </div>
+
+                        <div className='form-group'>
+                            <label>Price</label>
+                            <input className='form-control' type='text' placeholder=''/>
+                        </div>
+
+                        <div className='sell-total-amount'>
+                            Amount you'll earn: $36.55
+                        </div>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <button className='save-btn btn-gradiant'>
+                            sell
+                        </button>
+                    </Modal.Footer>
+                </Modal>
             </div>
+
         )
     }
 }
