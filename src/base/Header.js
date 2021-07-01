@@ -72,7 +72,7 @@ class Header extends Component{
 
 
 const mapStateToProps = state => ({
-    wallet: state.wallet
+    wallet: state.wallet,
 });
 const mapDispatchToProps = {connected, disconnect}
 export default connect(

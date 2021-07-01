@@ -181,6 +181,7 @@ const Login = () => {
           login({ email: user.email, uid: user.uid, token: user.refreshToken })
         );
         //console.log('++++++',user.email, user.uid, token);
+        window.location.href="/"
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -192,8 +193,19 @@ const Login = () => {
   };
 
   function showAlert(title, type) {
-    setAlert(<SweetAlert style={{ color: '#000' }} type={type} onConfirm={hideAlert} timeout={3000} title={title}/>)
+    setAlert(<SweetAlert style={{ color: '#000' }} type={type} onConfirm={handleAlertConfirm(type)} timeout={3000} title={title}/>)
     setLoading(false);
+  }
+
+  function handleAlertConfirm(type){
+    if (type === 'success') {
+      hideAlert();
+      setTimeout(() => {
+        window.location.href="/"
+      },2500)
+    } else {
+      hideAlert();
+    }
   }
 
   function hideAlert() {
