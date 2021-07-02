@@ -1,26 +1,47 @@
-import React, { Component } from "react"
-import Banner from "../component/Banner"
-import Artistpic from "../component/Artistpic"
-import Song from "../component/Song"
+import React, { Component } from 'react';
+import Banner from '../component/Banner';
+import Artistpic from '../component/Artistpic';
+import Song from '../component/Song';
+import { Link } from 'react-router-dom';
 
 class Inflowmusic extends Component {
-    render(){
-        return(
+    render() {
+        return (
             <div className="Inflow-music-main">
-                <Banner/>
+                <Banner />
                 <div className="dashboard-wrapper-main inner-music-wrapper">
                     <div className="artist-heading">Featured Artists</div>
                     <div className="grid-for-artist">
-                        <Artistpic />
-                        <Artistpic />
-                        <Artistpic />
-                        <Artistpic />
-                        <Artistpic />
-                        <Artistpic />
-                        <Artistpic />
-                        <Artistpic />
-                        <Artistpic />
-                        <Artistpic />
+                        <Link to="/artist">
+                            <Artistpic />
+                        </Link>
+                        <Link to="/artist">
+                            <Artistpic />
+                        </Link>
+                        <Link to="/artist">
+                            <Artistpic />
+                        </Link>
+                        <Link to="/artist">
+                            <Artistpic />
+                        </Link>
+                        <Link to="/artist">
+                            <Artistpic />
+                        </Link>
+                        <Link to="/artist">
+                            <Artistpic />
+                        </Link>
+                        <Link to="/artist">
+                            <Artistpic />
+                        </Link>
+                        <Link to="/artist">
+                            <Artistpic />
+                        </Link>
+                        <Link to="/artist">
+                            <Artistpic />
+                        </Link>
+                        <Link to="/artist">
+                            <Artistpic />
+                        </Link>
                     </div>
                     <div className="see-all-artist">
                         <a href="#">See All Artists</a>
@@ -31,15 +52,15 @@ class Inflowmusic extends Component {
                         <Song />
                         <Song />
                         <Song />
-                        <Song />                
+                        <Song />
                     </div>
                     <div className="see-all-artist see-all-nft">
                         <a href="#">See All NFTs</a>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-export default Inflowmusic
+export default Inflowmusic;

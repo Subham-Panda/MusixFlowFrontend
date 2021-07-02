@@ -52,6 +52,13 @@ html {
 
 
 /* --------------------Global-css--------------- */
+
+a, a:hover, a:active, a:focus {
+    text-decoration: none;
+    color: white;
+}
+
+
 .dashboard-wrapper-main {
     padding: 35px;
     position: relative;
