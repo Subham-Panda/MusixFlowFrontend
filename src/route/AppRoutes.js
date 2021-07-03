@@ -15,10 +15,14 @@ import PrivateRoutes from './PrivateRoutes';
 import Artistpic from '../component/Artistpic';
 import Artist from '../component/Artist';
 import Artistmanagement from '../component/Artistmanagement';
+import CreateSocialToken from '../page/CreateSocialToken';
+import GetMintPrice from '../page/GetMintPrice';
 
 export const AppRoutes = () => {
     return (
         <Switch>
+            <Route path="/createsocialtoken" component={CreateSocialToken} exact />
+            <Route path="/getmintprice" component={GetMintPrice} exact />
             <PublicRoutes path="/login" component={Login} exact />
             <PublicRoutes path="/" component={Inflowmusic} exact />
             <PrivateRoutes path="/dashboard" component={Mydashboard} exact />
