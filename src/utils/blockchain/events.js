@@ -84,6 +84,7 @@ function getEventData(input, argsIdx, eventsIdx) {
                     events = (_b.sent()).events;
                     if (events === undefined)
                         throw new Error("events array undefined");
+                    console.log({ events: events });
                     args = events[eventsIdx !== null && eventsIdx !== void 0 ? eventsIdx : events.length - 1].args;
                     if (args === undefined)
                         throw new Error("args array undefined");

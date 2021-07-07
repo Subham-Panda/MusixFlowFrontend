@@ -33,7 +33,9 @@ export async function getEventData(
   ) as ContractTransaction;
   const { events } = await tx.wait();
   if (events === undefined) throw new Error("events array undefined");
+  console.log("EVENTS",{events})
   const { args } = events[eventsIdx ?? events.length - 1];
+  console.log("ARGS",{args})
   if (args === undefined) throw new Error("args array undefined");
   return argsIdx === undefined ? args : args[argsIdx];
 }

@@ -1,31 +1,228 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import './component.css';
 import { assetsImages } from "../constants/images";
-import artistbg from "../assets/images/artist-background.jpg";
-import Customdropdown from "./Customdropdown";
-import Performbar from "./Performbar";
-import ProgressBar from "react-bootstrap/ProgressBar";
-import CircularProgress from "@material-ui/core/CircularProgress";
+// import artistbg from "../assets/images/artist-background.jpg";
+// import Customdropdown from "./Customdropdown";
+// import Performbar from "./Performbar";
+// import ProgressBar from "react-bootstrap/ProgressBar";
+// import CircularProgress from "@material-ui/core/CircularProgress";
 import Totalbalancechart from "./Totalbalancechart";
 import Song from "./Song";
 import Mynftdropdown from "./Mynftdropdown";
 import {Modal} from "react-bootstrap";
+import Loader from "./Loader";
+import { Inflow } from '../inflow-solidity-sdk/src/Inflow';
+import { Contract, ethers, Wallet } from 'ethers';
+import SocialToken from '../artifacts/contracts/token/social/SocialToken.sol/SocialToken.json';
+import MockUSDC from '../artifacts/contracts/mocks/MockUSDC.sol/MockUSDC.json';
 
-class Artistpic extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            profileModel: false
+const Artistpic = () => {
+    // const [SocialTokenAddress, setSocialTokenAddress] = useState("0xa02c6b826ffCD48112a37Fd2495B8f1D0462715B")
+    const SocialTokenAddress = "0xDd4B0B9841B56c805926078d38487522f1efFf5B"
+    const [profileModel, setprofileModel] = useState(false)
+    const [sell, setsell] = useState(false)
+    const [buy, setbuy] = useState(false)
+    const [MintPrice, setMintPrice] = useState();
+    const [BurnPrice, setBurnPrice] = useState();
+    const [TokensToMint, setTokensToMint] = useState(0);
+    const [TokensToBurn, setTokensToBurn] = useState(0);
+    const [Balance, setBalance] = useState();
+
+
+    useEffect(() => {
+        const tokenPrice = setInterval(() => {
+            fetchTokenPrice();
+            fetchBurnPrice();
+        }, 10000)
+        getBalance()
+        return () => {
+            clearInterval(tokenPrice)
+        }
+    }, [])
+
+    
+
+    async function requestAccount() {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+    }
+
+    const getBalance = async () => {
+        if (
+            typeof window.ethereum !== 'undefined' &&
+            SocialTokenAddress &&
+            SocialTokenAddress !== ''
+        ) {
+            try {
+                await requestAccount();
+                const provider = new ethers.providers.Web3Provider(
+                    window.ethereum
+                );
+                const signer = provider.getSigner();
+                const signerAddress = await signer.getAddress();
+                const inflow = new Inflow(provider, 80001);
+                const balance = await inflow.balanceOf("SocialToken",signerAddress,SocialTokenAddress)
+                setBalance(balance[0]);
+                console.log(`BALANCE: ${balance[0]}`);
+            } catch (err) {
+                console.log(err);
+            }
         }
     }
 
-    render(){
+    const fetchTokenPrice = async () => {
+        if (
+            typeof window.ethereum !== 'undefined' &&
+            SocialTokenAddress &&
+            SocialTokenAddress !== ''
+        ) {
+            try {
+                await requestAccount();
+                const provider = new ethers.providers.Web3Provider(
+                    window.ethereum
+                );
+                const inflow = new Inflow(provider, 80001);
+                const mintPrice = await inflow.getMintPriceSocial(SocialTokenAddress,inflow.parseERC20("SocialToken","1"))
+                setMintPrice(mintPrice[0]);
+                return mintPrice;
+                // console.log(`MINT PRICE: ${mintPrice[0]}`);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+
+    const fetchBurnPrice = async () => {
+        if (
+            typeof window.ethereum !== 'undefined' &&
+            SocialTokenAddress &&
+            SocialTokenAddress !== ''
+        ) {
+            try {
+                await requestAccount();
+                const provider = new ethers.providers.Web3Provider(
+                    window.ethereum
+                );
+                const inflow = new Inflow(provider, 80001);
+                const burnPrice = await inflow.getBurnPriceSocial(SocialTokenAddress,inflow.parseERC20("SocialToken","1"))
+                setBurnPrice(burnPrice[0]);
+                console.log(`BURN PRICE: ${burnPrice[0]}`);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+
+    const displayTokenPrice = () => {
+        if (MintPrice && MintPrice !== '') {
+            return (<div className="dollor-price"><span>$</span> {MintPrice}</div>)
+        } else {
+            return <Loader/>
+        }
+    }
+
+    const displayBalance = () => {
+        if (MintPrice && MintPrice !== '') {
+            return (<div className="dollor-price">{Balance}</div>)
+        } else {
+            return <Loader/>
+        }
+    }
+    
+    const mint = async (social, usdc, amount) => {
+        const mintPrice = await social.getMintPrice(amount);
+        await (await usdc.mint(mintPrice)).wait(); // this line to be removed if the balance of usdc wallet issue is fixed
+        await (await usdc.approve(social.address, mintPrice)).wait();
+        await (await social.mint(amount)).wait();
+        return mintPrice;
+    }
+
+    const buyTokens = async () => {
+        if (
+            typeof window.ethereum !== 'undefined' &&
+            SocialTokenAddress &&
+            SocialTokenAddress !== ''
+        ) {
+            try {
+                await requestAccount();
+                const provider = new ethers.providers.Web3Provider(
+                    window.ethereum
+                );
+                const admin = new Wallet(process.env.REACT_APP_ADMIN_PVT_KEY, provider)
+                const signer = provider.getSigner();
+                const social = new Contract(
+                    SocialTokenAddress,
+                    SocialToken.abi,
+                    admin
+                )
+                const socialMinter = social.connect(signer)
+                const usdc = new Contract(
+                    process.env.REACT_APP_MOCKUSDC,
+                    MockUSDC.abi,
+                    admin
+                )
+                const usdcMinter = usdc.connect(signer);
+                const inflow = new Inflow(provider, 80001);
+                // const usdcBalance = await inflow.balanceOf("USDC", process.env.REACT_APP_MOCKUSDC)
+                // console.log({ usdcBalance })
+                // if (usdcBalance < TokensToMint * MintPrice) {
+                //     alert("YOU DONT HAVE ENOUGH USDC BALANCE AVAILABLE");
+                //     return
+                // }
+                // const allowance = await inflow.allowance("SocialToken", admin.getAddress(), signer.getAddress(), SocialTokenAddress)
+                // if (allowance > TokensToMint * MintPrice) {
+                //     await (await socialMinter.mint(inflow.parseERC20("SocialToken", String(TokensToMint)))).wait();
+                //     return
+                // }
+                await mint(socialMinter, usdcMinter, inflow.parseERC20("SocialToken", String(TokensToMint)));
+                console.log("MINT SUCCESSFULL")
+                getBalance();
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+
+    const burn = async (social, amount) => {
+        const burnPrice = await social.getBurnPrice(amount);
+        await (await social.burn(amount)).wait();
+        return burnPrice;
+    }
+
+    const sellTokens = async () => {
+        if (
+            typeof window.ethereum !== 'undefined' &&
+            SocialTokenAddress &&
+            SocialTokenAddress !== ''
+        ) {
+            try {
+                await requestAccount();
+                const provider = new ethers.providers.Web3Provider(
+                    window.ethereum
+                );
+                const admin = new Wallet(process.env.REACT_APP_ADMIN_PVT_KEY,provider)
+                const signer = provider.getSigner();
+                const social = new Contract(
+                    SocialTokenAddress,
+                    SocialToken.abi,
+                    admin
+                )
+                const socialMinter = social.connect(signer)
+                const inflow = new Inflow(provider, 80001);
+                await burn(socialMinter, inflow.parseERC20("SocialToken", String(TokensToBurn)));
+                console.log("BURN SUCCESSFULL")
+                getBalance();
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+
         return(
             <div className="artist-background">
                 <div className="artist-main">
                     <div className="background">
                         <img src={assetsImages.artistbg} />
-                        <button className='edit-profile' type='button' onClick={() => this.setState({profileModel: !this.state.profileModel})}>
+                        <button className='edit-profile' type='button' onClick={() => setprofileModel(profileModel => !profileModel)}>
                             EDIT PROFILE
                         </button>
                     </div>
@@ -100,7 +297,9 @@ class Artistpic extends Component {
                         <div className="total-balance-row">
                             <div className="heading-cols">
                                 <div className="card-heading">Drake Coin Price</div>
-                                <div className="dollor-price"><span>$</span> 78.55</div>
+                                <div className="dollor-price">
+                                    {displayTokenPrice()}
+                                </div>
                                 <div className="small-heading">+7.3% last week</div>
                             </div>
                             <div className="btn-filter">
@@ -110,6 +309,15 @@ class Artistpic extends Component {
                             </div>
 
                         </div>
+                        <div className="total-balance-row">
+                            <div className="heading-cols">
+                                <div className="card-heading">Available Balance</div>
+                                <div className="dollor-price">
+                                    <div className="dollor-price">{displayBalance()}</div>
+                                </div>
+                                <div className="small-heading">Available Balance</div>
+                            </div>
+                        </div>
                         <div className="total-bal-chart">
                             <Totalbalancechart />
                         </div>
@@ -118,11 +326,11 @@ class Artistpic extends Component {
                             <div className='song-button'>
                                 <img src={assetsImages.button}/>
                                 <div className='button'>
-                                    <button className='btn sell-button' type='button' onClick={() => this.setState({sell: !this.state.sell})}>
-                                        Sell
-                                    </button>
-                                    <button className='btn buy-button'>
+                                    <button className='btn buy-button' type='button' onClick={() => setbuy(buy=>!buy)}>
                                         Buy
+                                    </button>
+                                    <button className='btn sell-button' type='button' onClick={() => setsell(sell=>!sell)}>
+                                        Sell
                                     </button>
                                 </div>
                             </div>
@@ -324,7 +532,7 @@ class Artistpic extends Component {
                     </div>
                 </div>
 
-                <Modal show={this.state.profileModel} className="edit-profile-modal" onHide={() => this.setState({profileModel: !this.state.profileModel})}>
+                <Modal show={profileModel} className="edit-profile-modal" onHide={() => setprofileModel(profileModel => !profileModel)}>
                     <Modal.Header closeButton>
                         <span className='title'>
                             Edit Profile
@@ -359,7 +567,33 @@ class Artistpic extends Component {
                     </Modal.Footer>
                 </Modal>
 
-                <Modal show={this.state.sell} className="edit-profile-modal sell" onHide={() => this.setState({sell: !this.state.sell})}>
+                <Modal show={buy} className="edit-profile-modal sell" onHide={() => setbuy(buy=>!buy)}>
+                    <Modal.Header closeButton>
+                        <span className='title'>
+                            Buy Drake Token
+                        </span>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        <div className='form-group'>
+                            <label>Number of Tokens</label>
+                            <input className='form-control' type='number' value={TokensToMint} placeholder='' onChange={(e) => setTokensToMint(e.target.value)}/>
+                        </div>
+
+
+                        <div className='sell-total-amount'>
+                            Amount you'll spend: ${TokensToMint*MintPrice}
+                        </div>
+                    </Modal.Body>
+
+                    <Modal.Footer>
+                        <button className='save-btn btn-gradiant' onClick={buyTokens}>
+                            buy
+                        </button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={sell} className="edit-profile-modal buy" onHide={() => setsell(sell=>!sell)}>
                     <Modal.Header closeButton>
                         <span className='title'>
                             Sell Drake Token
@@ -369,21 +603,16 @@ class Artistpic extends Component {
                     <Modal.Body>
                         <div className='form-group'>
                             <label>Number of Tokens</label>
-                            <input className='form-control' type='text' placeholder=''/>
+                            <input className='form-control' type='number' value={TokensToBurn} placeholder='' onChange={(e) => setTokensToBurn(e.target.value)}/>
                         </div>
 
-                        <div className='form-group'>
-                            <label>Price</label>
-                            <input className='form-control' type='text' placeholder=''/>
-                        </div>
-
-                        <div className='sell-total-amount'>
-                            Amount you'll earn: $36.55
+                        <div className='buy-total-amount'>
+                            Amount you'll earn: ${TokensToMint*BurnPrice}
                         </div>
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <button className='save-btn btn-gradiant'>
+                        <button className='save-btn btn-gradiant' onClick={sellTokens}>
                             sell
                         </button>
                     </Modal.Footer>
@@ -391,7 +620,6 @@ class Artistpic extends Component {
             </div>
 
         )
-    }
 }
 
-export default Artistpic
+export default Artistpic;

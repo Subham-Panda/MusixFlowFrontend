@@ -311,7 +311,7 @@ a, a:hover, a:active, a:focus {
 }
 
 .Second-row-wave-chart {
-    margin-top: 20px;
+    margin-top: 100px;
     background: #2f3443;
     border-radius: 8px;
     padding: 30px;
@@ -1820,7 +1820,7 @@ ul.following-list li .follower-details .option-btn{
     }
 
     .Second-row-wave-chart {
-        margin-top: 10px;
+        margin-top: 140px;
     }
 
     .first-row-main-dash .left-col .below-row .left-pricing .price-tag {
