@@ -16,92 +16,150 @@ const CreateSocialToken = () => {
     }
 
     const generateSocialToken = async () => {
-        if (
-            typeof window.ethereum !== 'undefined' &&
-            TokenName &&
-            TokenSymbol &&
-            address &&
-            TokenName.trim() !== '' &&
-            TokenSymbol.trim() !== '' &&
-            address !== ''
-        ) {
-            await requestAccount();
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            console.log({ provider });
-            const signer = provider.getSigner();
-            const contract = new ethers.Contract(
-                process.env.REACT_APP_SOCIAL_TOKEN_FACTORY,
-                SocialTokenFactory.abi,
-                signer
-            );
-            console.log(contract);
-            console.log(signer);
-            const signerAddress = await signer.getAddress();
-            console.log(signerAddress);
-            const inflow = new Inflow(provider, 80001);
-            const socialTokenAddress = await inflow.getTokenSocialFactory(address)
-            console.log({socialTokenAddress})
-            if (socialTokenAddress && parseInt(socialTokenAddress, 16) !== 0 ) {
-                setSocialTokenId(socialTokenAddress);
-                console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
-            } else {
-                console.log("HEERREE");
-                const whitelistAddress = await contract.whitelist(
-                    signerAddress
+        try {
+            if (
+                typeof window.ethereum !== 'undefined' &&
+                TokenName &&
+                TokenSymbol &&
+                address &&
+                TokenName.trim() !== '' &&
+                TokenSymbol.trim() !== '' &&
+                address !== ''
+            ) {
+                await requestAccount();
+                const provider = new ethers.providers.Web3Provider(
+                    window.ethereum
                 );
-                whitelistAddress.wait();
-                console.log('WHITELISTED');
-                const socialTokenAddress = await getEventData(
-                    contract.create({
-                        creator: address,
-                        collateral: process.env.REACT_APP_MOCKUSDC,
-                        maxSupply: ethers.utils.parseEther('10000000'),
-                        slope: ethers.utils.parseEther('1'),
-                        name: TokenName.trim(),
-                        symbol: TokenSymbol.trim(),
-                    }),
-                    0
+                console.log({ provider });
+                const signer = provider.getSigner();
+                const contract = new ethers.Contract(
+                    process.env.REACT_APP_SOCIAL_TOKEN_FACTORY,
+                    SocialTokenFactory.abi,
+                    signer
                 );
-                setSocialTokenId(socialTokenAddress);
-                console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
-            } 
+                console.log(contract);
+                console.log(signer);
+                const signerAddress = await signer.getAddress();
+                console.log(signerAddress);
+                const inflow = new Inflow(provider, 80001);
+                const socialTokenAddress = await inflow.getTokenSocialFactory(
+                    address
+                );
+                console.log({ socialTokenAddress });
+                if (
+                    socialTokenAddress &&
+                    parseInt(socialTokenAddress, 16) !== 0
+                ) {
+                    setSocialTokenId(socialTokenAddress);
+                    console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
+                } else {
+                    console.log('HEERREE');
+                    const whitelistAddress = await contract.whitelist(
+                        signerAddress
+                    );
+                    whitelistAddress.wait();
+                    console.log('WHITELISTED');
+                    const socialTokenAddress = await getEventData(
+                        contract.create({
+                            creator: address,
+                            collateral: process.env.REACT_APP_MOCKUSDC,
+                            maxSupply: ethers.utils.parseEther('10000000'),
+                            slope: ethers.utils.parseEther('1'),
+                            name: TokenName.trim(),
+                            symbol: TokenSymbol.trim(),
+                        }),
+                        0
+                    );
+                    setSocialTokenId(socialTokenAddress);
+                    console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
+                }
+            }
+        } catch (error) {
+            console.log(error);
         }
-
-        // if (typeof window.ethereum !== 'undefined' && TokenName && TokenSymbol && TokenName.trim()!=='' && TokenSymbol.trim()!=='') {
-
-        // }
     };
 
     return (
         <>
-            <h1>CREATE SOCIAL TOKEN</h1>
-            <br />
-            <label htmlFor="address">TOKEN NAME: </label>
-            <input
-                onChange={(e) => setAddress(e.target.value)}
-                placeholder="Creator Address"
-                id="address"
-            />
-            <br />
-            <label htmlFor="tokenName">TOKEN NAME: </label>
-            <input
-                onChange={(e) => setTokenName(e.target.value)}
-                placeholder="Social Token Name"
-                id="tokenName"
-            />
-            <br />
-            <label htmlFor="tokenSymbol">TOKEN SYMBOL: </label>
-            <input
-                onChange={(e) => setTokenSymbol(e.target.value)}
-                placeholder="Social Token Symbol"
-                id="tokenSymbol"
-            />
-            <br />
-            <Button variant="primary" size="lg" onClick={generateSocialToken}>
-                CREATE
-            </Button>{' '}
-            <br />
-            <h2>Social token address is : {socialtokenid}</h2>
+            <div className="dashboard-wrapper-main vw-100 vh-100 d-flex flex-column justify-content-center align-items-center">
+                <div className="heading">CREATE SOCIAL TOKEN</div>
+                <div className="tab-settings-main">
+                    <nav>
+                        <div
+                            className="nav nav-tabs nav-fill"
+                            id="nav-tab"
+                            role="tablist"
+                        >
+                            <a
+                                className="nav-item nav-link active"
+                                id="nav-home-tab"
+                                data-toggle="tab"
+                                href="#nav-home"
+                                role="tab"
+                                aria-controls="nav-home"
+                                aria-selected="true"
+                            >
+                                Create Social Token
+                            </a>
+                        </div>
+                    </nav>
+                    <div className="tab-content pt-3" id="nav-tabContent">
+                        <div
+                            className="tab-pane fade show active"
+                            id="nav-home"
+                            role="tabpanel"
+                            aria-labelledby="nav-home-tab"
+                        >
+                            <div className="account-setting-form">
+                                <div className="grids-main-inputs">
+                                    <div className="comman-grids">
+                                        <input
+                                            onChange={(e) =>
+                                                setAddress(e.target.value)
+                                            }
+                                            value={address}
+                                            placeholder="Owner Address"
+                                            id="address"
+                                        />
+                                    </div>
+                                    <div className="comman-grids">
+                                        <input
+                                            onChange={(e) =>
+                                                setTokenName(e.target.value)
+                                            }
+                                            value={TokenName}
+                                            placeholder="Social Token Name"
+                                            id="tokenName"
+                                        />
+                                    </div>
+                                    <div className="comman-grids">
+                                        <input
+                                            onChange={(e) =>
+                                                setTokenSymbol(e.target.value)
+                                            }
+                                            value={TokenSymbol}
+                                            placeholder="Social Token Symbol"
+                                            id="tokenSymbol"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="save-changes-main">
+                                    <Button
+                                        variant="primary"
+                                        size="lg"
+                                        onClick={generateSocialToken}
+                                    >
+                                        CREATE
+                                    </Button>{' '}
+                                </div>
+                            </div>
+                        </div>
+                        <h2 className="p-3 my-3">
+                            Social token address is : {socialtokenid}
+                        </h2>
+                    </div>
+                </div>
+            </div>
         </>
     );
 };
