@@ -45,6 +45,7 @@ const CreateSocialToken = () => {
                 setSocialTokenId(socialTokenAddress);
                 console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
             } else {
+                console.log("HEERREE");
                 const whitelistAddress = await contract.whitelist(
                     signerAddress
                 );

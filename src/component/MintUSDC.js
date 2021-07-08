@@ -25,9 +25,10 @@ const MintUSDC = () => {
         console.log(mockUSDCmint)
         const inflow = new Inflow(provider, 80001);
         console.log(inflow.parseERC20("USDC", String(mockUSDCmint)))
+        const signerAddress = await signer.getAddress();
 		await (await usdcMinter.mint(inflow.parseERC20("USDC", String(mockUSDCmint)))).wait();
 		console.log("MOCK USDC MINT SUCCESSFUL");
-		const usdcBalance = await inflow.balanceOf("USDC", process.env.REACT_APP_MOCKUSDC)
+		const usdcBalance = await inflow.balanceOf("USDC", signerAddress)
 		console.log("USDC BALANCE: ",usdcBalance)
     };
 
