@@ -36,7 +36,7 @@ export const AppRoutes = () => {
             <AdminRoutes path="/allartists" component={AllArtists} exact />
             <AdminRoutes path="/managelabels" component={ManageLabels} exact />
             <AdminRoutes path="/managelabelartists/:labelid" component={ManageLabelArtists} exact />
-            <PrivateRoutes path="/dashboard" component={Mydashboard} exact />
+            {/* <PrivateRoutes path="/dashboard" component={Mydashboard} exact /> */}
             <PublicRoutes path="/news" component={News} exact />
             <PublicRoutes path="/leaderboard" component={Leaderboard} exact />
             <PrivateRoutes

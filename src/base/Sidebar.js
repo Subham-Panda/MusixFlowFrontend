@@ -29,7 +29,7 @@ const Sidebar = () => {
                         <img alt="" src={assetsImages.home} />
                     </div>
                 </Link>
-                <Link to={'/news'}>
+                {/* <Link to={'/news'}>
                     <div
                         className={
                             activePage === 'demo1'
@@ -40,8 +40,8 @@ const Sidebar = () => {
                     >
                         <img alt="" src={assetsImages.dashboard} />
                     </div>
-                </Link>
-                <Link to={'/leaderboard'}>
+                </Link> */}
+                {/* <Link to={'/leaderboard'}>
                     <div
                         className={
                             activePage === 'demo2'
@@ -52,7 +52,7 @@ const Sidebar = () => {
                     >
                         <img alt="" src={assetsImages.wallet} />
                     </div>
-                </Link>
+                </Link> */}
                 {token !== '' ? (
                     <Link to={'/accountsettings'}>
                         <div
@@ -79,7 +79,7 @@ const Sidebar = () => {
                         <img alt="" src={assetsImages.calendar} />
                     </div>
                 </Link>
-                {token !== '' ? (
+                {/* {token !== '' ? (
                     <Link to={'/dashboard'}>
                         <div
                             className={
@@ -92,7 +92,7 @@ const Sidebar = () => {
                             <img alt="" src={assetsImages.orders} />
                         </div>
                     </Link>
-                ) : null}
+                ) : null} */}
 
                 {/* <div
                     className={
