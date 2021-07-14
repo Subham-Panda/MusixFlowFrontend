@@ -107,6 +107,14 @@
 }
 /* ---------------Responsive---------------- */
 
+.common-grids-select {
+    width: 100%;
+    background: #373737;
+    border: none;
+    padding: 20px;
+    color: #ffffff;
+}
+
 
 @media (max-width:1400px){
     .header-main{

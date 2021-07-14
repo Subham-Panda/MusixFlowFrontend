@@ -3,14 +3,14 @@ import './component.css';
 import { assetsImages } from '../constants/images';
 import Dropdown from "react-bootstrap/Dropdown";
 
-class Notification extends Component{
+class Notification extends Component {
     render() {
         return (
             <div className="Dropdown-main-header">
                 <Dropdown>
                     <Dropdown.Toggle id="dropdown-custom-2">
                         <div className="Notification-main">
-                            <img src={assetsImages.bell} />
+                            <img alt="" src={assetsImages.bell} />
                             <span className="badge-name">3</span>
                         </div>
                     </Dropdown.Toggle>
@@ -24,7 +24,7 @@ class Notification extends Component{
 
                             <div className='notification-dropdown-details'>
                                 <div className='img-wrapper'>
-                                    <img src={assetsImages.sale} />
+                                    <img alt="" src={assetsImages.sale} />
                                 </div>
                                 <div className='notification-content-wrapper'>
                                     <div className='notification-content-title'>
@@ -39,7 +39,7 @@ class Notification extends Component{
                                             <div className='item'>
                                                 <h6>Item</h6>
                                                 <div className='details d-flex align-items-center'>
-                                                    <img src={assetsImages.person} />
+                                                    <img alt="" src={assetsImages.person} />
                                                     <div className='content'>
                                                         <h5>Find Your Love</h5>
                                                         <h6>NFT Single</h6>
@@ -64,7 +64,7 @@ class Notification extends Component{
                             </div>
                             <div className='notification-dropdown-details notification-alert'>
                                 <div className='img-wrapper'>
-                                    <img src={assetsImages.reports} />
+                                    <img alt="" src={assetsImages.reports} />
                                 </div>
                                 <div className='notification-content-wrapper'>
                                     <div className='notification-content-title'>
@@ -82,7 +82,7 @@ class Notification extends Component{
                                                         <h5>+13%</h5>
                                                         <h6>SAWEETI</h6>
                                                     </div>
-                                                    <img src={assetsImages.reportIcon} />
+                                                    <img alt="" src={assetsImages.reportIcon} />
                                                 </div>
                                             </div>
                                         </div>
@@ -91,7 +91,7 @@ class Notification extends Component{
                             </div>
                             <div className='notification-dropdown-details notification-new-poll'>
                                 <div className='img-wrapper'>
-                                    <img src={assetsImages.reviews} />
+                                    <img alt="" src={assetsImages.reviews} />
                                 </div>
                                 <div className='notification-content-wrapper'>
                                     <div className='notification-content-title'>
@@ -118,7 +118,7 @@ class Notification extends Component{
 
                             <div className='notification-dropdown-details notification-transfer'>
                                 <div className='img-wrapper'>
-                                    <img src={assetsImages.reports} />
+                                    <img alt="" src={assetsImages.reports} />
                                 </div>
                                 <div className='notification-content-wrapper'>
                                     <div className='notification-content-title'>
@@ -132,7 +132,7 @@ class Notification extends Component{
                                         <div className='item-details'>
                                             <div className='item'>
                                                 <div className='details d-flex align-items-center'>
-                                                    <img src={assetsImages.circle} />
+                                                    <img alt="" src={assetsImages.circle} />
                                                     <div className='d-flex align-items-center justify-content-between w-100'>
                                                         <div className='content'>
                                                             <h5>$1,781.90</h5>
@@ -147,7 +147,7 @@ class Notification extends Component{
                                             </div>
                                             <div className='item'>
                                                 <div className='details d-flex align-items-center'>
-                                                    <img src={assetsImages.circle} />
+                                                    <img alt="" src={assetsImages.circle} />
                                                     <div className='details-border-top d-flex align-items-center justify-content-between w-100'>
                                                         <div className='content'>
                                                             <h5>$589.05</h5>
@@ -167,7 +167,7 @@ class Notification extends Component{
 
                         </div>
                     </Dropdown.Menu>
-        </Dropdown>
+                </Dropdown>
             </div>
         )
     }

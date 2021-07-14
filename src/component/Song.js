@@ -3,14 +3,14 @@ import './component.css';
 import { assetsImages } from '../constants/images';
 
 
-class Song extends Component{
+class Song extends Component {
     render() {
         return (
-           <div className="song-card-main">
+            <div className="song-card-main">
                 <div className="imag-fors-poster">
-                    <img src={assetsImages.songposter} />
+                    <img alt="" src={assetsImages.songposter} />
                     <a href="#" className="play-btn">
-                        <img src={assetsImages.playbtn}/>
+                        <img alt="" src={assetsImages.playbtn} />
                     </a>
                 </div>
                 <div className="song-details">
@@ -18,7 +18,7 @@ class Song extends Component{
                     <div className="artist-name"> Eminem</div>
                 </div>
 
-           </div>
+            </div>
         )
     }
 }

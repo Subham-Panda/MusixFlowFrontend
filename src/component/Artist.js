@@ -7,8 +7,8 @@ import { assetsImages } from '../constants/images';
 // import ProgressBar from "react-bootstrap/ProgressBar";
 // import CircularProgress from "@material-ui/core/CircularProgress";
 import Totalbalancechart from './Totalbalancechart';
-import Song from './Song';
-import Mynftdropdown from './Mynftdropdown';
+// import Song from './Song';
+// import Mynftdropdown from './Mynftdropdown';
 import { Modal } from 'react-bootstrap';
 import Loader from './Loader';
 import SmallLoader from './SmallLoader';
@@ -17,10 +17,15 @@ import { Contract, ethers, Wallet } from 'ethers';
 import SocialToken from '../artifacts/contracts/token/social/SocialToken.sol/SocialToken.json';
 import MockUSDC from '../artifacts/contracts/mocks/MockUSDC.sol/MockUSDC.json';
 import SweetAlert from 'react-bootstrap-sweetalert';
+import { useParams } from 'react-router-dom'
+import Axios from 'axios';
 
 const Artistpic = () => {
+    const { id } = useParams();
+    const [artist, setArtist] = useState({})
+
     // const [SocialTokenAddress, setSocialTokenAddress] = useState("0xa02c6b826ffCD48112a37Fd2495B8f1D0462715B")
-    const SocialTokenAddress = '0x89ced16adedb49B420a7232d6C6Ca7bda0DCd546';
+    // const SocialTokenAddress = '0x89ced16adedb49B420a7232d6C6Ca7bda0DCd546';
     const [profileModel, setprofileModel] = useState(false);
     const [sell, setsell] = useState(false);
     const [buy, setbuy] = useState(false);
@@ -35,18 +40,40 @@ const Artistpic = () => {
     const [failuremint, setfailuremint] = useState(false);
     const [successburn, setsuccessburn] = useState(false);
     const [failureburn, setfailureburn] = useState(false);
+    const [SocialTokenAddress, setSocialTokenAddress] = useState('');
+    const [sellflag, setsellflag] = useState(false)
+    const [buyflag, setbuyflag] = useState(false)
+    const [totalmintprice, settotalmintprice] = useState(0.0)
+    const [totalburnprice, settotalburnprice] = useState(0.0)
+
 
 
     useEffect(() => {
-        const tokenPrice = setInterval(() => {
-            fetchTokenPrice();
-            fetchBurnPrice();
-        }, 10000);
-        getBalance();
-        return () => {
-            clearInterval(tokenPrice);
-        };
-    }, []);
+        const init = async () => {
+            setLoading(true)
+            const { data } = await Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/getbyid`, { id })
+            // // console.log({data})
+            if (data.artist) {
+                // // console.log("HELLO1")
+                setArtist(data.artist)
+                setSocialTokenAddress(data.artist.social_token_id)
+                // // console.log("HELLO2")
+                const tokenPrice = setInterval(() => {
+                    // // console.log("HELLO3")
+                    fetchTokenPrice();
+                    fetchBurnPrice();
+                }, 10000);
+                getBalance();
+                setLoading(false)
+                return () => {
+                    clearInterval(tokenPrice);
+                };
+            }
+        }
+        if (id) {
+            return init();
+        }
+    }, [SocialTokenAddress]);
 
     async function requestAccount() {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -72,9 +99,9 @@ const Artistpic = () => {
                     SocialTokenAddress
                 );
                 setBalance(balance[0]);
-                console.log(`BALANCE: ${balance[0]}`);
+                // // console.log(`BALANCE: ${balance[0]}`);
             } catch (err) {
-                console.log(err);
+                // // console.log(err);
             }
         }
     };
@@ -86,6 +113,7 @@ const Artistpic = () => {
             SocialTokenAddress !== ''
         ) {
             try {
+                // // console.log({ SocialTokenAddress })
                 await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
@@ -96,10 +124,9 @@ const Artistpic = () => {
                     inflow.parseERC20('SocialToken', '1')
                 );
                 setMintPrice(mintPrice[0]);
-                return mintPrice;
-                // console.log(`MINT PRICE: ${mintPrice[0]}`);
+                // // console.log(`MINT PRICE: ${mintPrice[0]}`);
             } catch (err) {
-                console.log(err);
+                // // console.log(err);
             }
         }
     };
@@ -121,9 +148,9 @@ const Artistpic = () => {
                     inflow.parseERC20('SocialToken', '1')
                 );
                 setBurnPrice(burnPrice[0]);
-                console.log(`BURN PRICE: ${burnPrice[0]}`);
+                // // console.log(`BURN PRICE: ${burnPrice[0]}`);
             } catch (err) {
-                console.log(err);
+                // // console.log(err);
             }
         }
     };
@@ -142,7 +169,7 @@ const Artistpic = () => {
 
     const displayBalance = () => {
         if (MintPrice && MintPrice !== '') {
-            return <div className="dollor-price">{Balance}</div>;
+            return <div className="dollor-price">{Balance ? Balance : '0.0'}</div>;
         } else {
             return <SmallLoader />;
         }
@@ -157,12 +184,16 @@ const Artistpic = () => {
     };
 
     const buyTokens = async () => {
+        // // console.log("HMMMM")
+        // // console.log(typeof window.ethereum !== 'undefined')
+        // // console.log(SocialTokenAddress)
         if (
             typeof window.ethereum !== 'undefined' &&
             SocialTokenAddress &&
             SocialTokenAddress !== ''
         ) {
             try {
+                // // console.log("HEERREE")
                 await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
@@ -191,7 +222,7 @@ const Artistpic = () => {
                     'USDC',
                     signerAddress
                 );
-                console.log({ usdcBalance });
+                // // console.log({ usdcBalance });
                 await fetchTokenPrice();
                 if (usdcBalance[0] < TokensToMint * MintPrice) {
                     setLoading(false)
@@ -200,13 +231,13 @@ const Artistpic = () => {
                 }
                 const allowance = await inflow.allowance(
                     'SocialToken',
-                    admin.getAddress(),
+                    SocialTokenAddress,
                     signer.getAddress(),
                     SocialTokenAddress
                 );
-                console.log({ allowance });
+                // // console.log({ allowance });
                 if (allowance > TokensToMint * MintPrice) {
-                    console.log('ALLOWANCE GREATER SO MINTING DIRECTLY');
+                    // // console.log('ALLOWANCE GREATER SO MINTING DIRECTLY');
                     await (
                         await socialMinter.mint(
                             inflow.parseERC20(
@@ -216,13 +247,13 @@ const Artistpic = () => {
                         )
                     ).wait();
                     setLoading(false)
-                    setsuccessmint(successmint=>!successmint)
+                    setsuccessmint(successmint => !successmint)
                     return;
                 }
                 const mintPrice = await socialMinter.getMintPrice(
                     inflow.parseERC20('SocialToken', String(TokensToMint))
                 );
-                console.log('ALLOWANCE LESS SO GETTING APPROVAL');
+                // // console.log('ALLOWANCE LESS SO GETTING APPROVAL');
                 await (
                     await usdcMinter.approve(socialMinter.address, mintPrice)
                 ).wait();
@@ -231,14 +262,14 @@ const Artistpic = () => {
                         inflow.parseERC20('SocialToken', String(TokensToMint))
                     )
                 ).wait();
-                console.log('MINT SUCCESSFULL');
+                // // console.log('MINT SUCCESSFULL');
                 setLoading(false);
-                setsuccessmint(successmint=>!successmint)
+                setsuccessmint(successmint => !successmint)
                 getBalance();
             } catch (err) {
                 setLoading(false);
-                setfailuremint(failuremint=>!failuremint)
-                console.log(err);
+                setfailuremint(failuremint => !failuremint)
+                // // console.log(err);
             }
         }
     };
@@ -278,16 +309,73 @@ const Artistpic = () => {
                     inflow.parseERC20('SocialToken', String(TokensToBurn))
                 );
                 setLoading(false)
-                setsuccessburn(successburn=>!successburn)
-                console.log('BURN SUCCESSFULL');
+                setsuccessburn(successburn => !successburn)
+                // // console.log('BURN SUCCESSFULL');
                 getBalance();
             } catch (err) {
                 setLoading(false);
-                setfailureburn(failureburn=>!failureburn)
-                console.log(err);
+                setfailureburn(failureburn => !failureburn)
+                // // console.log(err);
             }
         }
     };
+
+    const fetchtotalburnprice = async () => {
+        if (
+            typeof window.ethereum !== 'undefined' &&
+            SocialTokenAddress &&
+            SocialTokenAddress !== ''
+        ) {
+            try {
+                setLoading(true);
+                await requestAccount();
+                const provider = new ethers.providers.Web3Provider(
+                    window.ethereum
+                );
+                const inflow = new Inflow(provider, 80001);
+                const burnPrice = await inflow.getBurnPriceSocial(
+                    SocialTokenAddress,
+                    inflow.parseERC20('SocialToken', String(TokensToBurn))
+                );
+                settotalburnprice(burnPrice[0]);
+                // // console.log(`BURN PRICE: ${burnPrice[0]}`);
+                setLoading(false);
+                setsellflag(true);
+            } catch (err) {
+                setLoading(false);
+                // // console.log(err);
+            }
+        }
+    }
+
+    const fetchtotalmintprice = async () => {
+        if (
+            typeof window.ethereum !== 'undefined' &&
+            SocialTokenAddress &&
+            SocialTokenAddress !== ''
+        ) {
+            try {
+                setLoading(true)
+                // // console.log({ SocialTokenAddress })
+                await requestAccount();
+                const provider = new ethers.providers.Web3Provider(
+                    window.ethereum
+                );
+                const inflow = new Inflow(provider, 80001);
+                const mintPrice = await inflow.getMintPriceSocial(
+                    SocialTokenAddress,
+                    inflow.parseERC20('SocialToken', String(TokensToMint))
+                );
+                settotalmintprice(mintPrice[0]);
+                setLoading(false)
+                setbuyflag(true)
+                // // console.log(`MINT PRICE: ${mintPrice[0]}`);
+            } catch (err) {
+                setLoading(false)
+                // // console.log(err);
+            }
+        }
+    }
 
     if (loading) {
         return <Loader />
@@ -297,8 +385,8 @@ const Artistpic = () => {
         <div className="artist-background">
             <div className="artist-main">
                 <div className="background">
-                    <img src={assetsImages.artistbg} />
-                    <button
+                    <img alt="" src={artist.banner_image ? `${process.env.REACT_APP_SERVER_URL}/${artist.banner_image}` : assetsImages.artistbg} />
+                    {/* <button
                         className="edit-profile"
                         type="button"
                         onClick={() =>
@@ -306,16 +394,16 @@ const Artistpic = () => {
                         }
                     >
                         EDIT PROFILE
-                    </button>
+                    </button> */}
                 </div>
                 <div className="artist-details">
                     <div className="artist-main-details">
                         <div className="artis-img mb-0">
-                            <img src={assetsImages.artist} />
+                            <img alt="" src={artist.profile_image ? `${process.env.REACT_APP_SERVER_URL}/${artist.profile_image}` : assetsImages.artist} />
                         </div>
                         <div className="artist-content">
                             <div className="artist-content-details">
-                                <div className="artist-name">Mike Posner</div>
+                                <div className="artist-name">{`${artist.first_name ? artist.first_name : ''} ${artist.last_name ? artist.last_name : ''}`}</div>
                                 <div className="album-name">Hip-Hop/Rap</div>
                                 <ul>
                                     <li>
@@ -331,24 +419,24 @@ const Artistpic = () => {
                                         <div className="song-folder">NFTs</div>
                                     </li>
                                     <li>
-                                        <div className="song-total">$78.5</div>
+                                        <div className="song-total">{displayTokenPrice()}</div>
                                         <div className="song-folder">
                                             Token Price
                                         </div>
                                     </li>
                                 </ul>
                             </div>
-                            <div className="follow-btn">
+                            {/* <div className="follow-btn">
                                 <button>FOLLOW</button>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="artist-tag">
-                        <button className="tag-button">MERCH STORE</button>
+                        {/* <button className="tag-button">MERCH STORE</button>
                         <button className="tag-button">LIVE STREAMS</button>
                         <button className="tag-button">CONTENT</button>
                         <button className="tag-button">EXPERIENCE</button>
-                        <button className="tag-button">VR ROOM</button>
+                        <button className="tag-button">VR ROOM</button> */}
                     </div>
                 </div>
             </div>
@@ -357,7 +445,7 @@ const Artistpic = () => {
                 <div className="Second-row-wave-chart">
                     <div className="total-balance-row">
                         <div className="heading-cols">
-                            <div className="card-heading">Drake Coin Price</div>
+                            <div className="card-heading">{artist.social_token_symbol} Price</div>
                             <div className="dollor-price">
                                 {displayTokenPrice()}
                             </div>
@@ -365,11 +453,11 @@ const Artistpic = () => {
                         </div>
                         <div className="btn-filter">
                             <a href="#">
-                                <img src={assetsImages.filter} />
+                                <img alt="" src={assetsImages.filter} />
                             </a>
                         </div>
                     </div>
-                    <div className="total-balance-row">
+                    {/* <div className="total-balance-row">
                         <div className="heading-cols">
                             <div className="card-heading">
                                 Available Balance
@@ -383,22 +471,15 @@ const Artistpic = () => {
                                 Available Balance
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="total-bal-chart">
                         <Totalbalancechart />
                     </div>
 
                     <div className="song-buy-sell">
                         <div className="song-button">
-                            <img src={assetsImages.button} />
+                            <img alt="" src={assetsImages.button} />
                             <div className="button">
-                                <button
-                                    className="btn buy-button"
-                                    type="button"
-                                    onClick={() => setbuy((buy) => !buy)}
-                                >
-                                    Buy
-                                </button>
                                 <button
                                     className="btn sell-button"
                                     type="button"
@@ -406,12 +487,20 @@ const Artistpic = () => {
                                 >
                                     Sell
                                 </button>
+                                <button
+                                    className="btn buy-button"
+                                    type="button"
+                                    onClick={() => setbuy((buy) => !buy)}
+                                >
+                                    Buy
+                                </button>
+
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="poll-play-song-details">
+                {/* <div className="poll-play-song-details">
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="poll-details">
@@ -487,11 +576,11 @@ const Artistpic = () => {
                             <div className="song-play-list">
                                 <div className="playlist-header">
                                     <span className="like">
-                                        <img src={assetsImages.like} />
+                                        <img alt="" src={assetsImages.like} />
                                         557
                                     </span>
                                     <button className="limited-song-btn">
-                                        <img src={assetsImages.verifed} />
+                                        <img alt="" src={assetsImages.verifed} />
                                         Limited
                                     </button>
                                 </div>
@@ -501,7 +590,7 @@ const Artistpic = () => {
                                         <span>$</span>37.99
                                     </div>
                                     <div className="img-wrapper">
-                                        <img src={assetsImages.poster} />
+                                        <img alt="" src={assetsImages.poster} />
                                     </div>
                                     <div className="playlist-title">
                                         Nothing Was The Same
@@ -514,19 +603,19 @@ const Artistpic = () => {
                                         <span>Tier:</span>
                                         <ul>
                                             <li>
-                                                <img src={assetsImages.star} />
+                                                <img alt="" src={assetsImages.star} />
                                             </li>
                                             <li>
-                                                <img src={assetsImages.star} />
+                                                <img alt="" src={assetsImages.star} />
                                             </li>
                                             <li>
-                                                <img src={assetsImages.star} />
+                                                <img alt="" src={assetsImages.star} />
                                             </li>
                                             <li>
-                                                <img src={assetsImages.star} />
+                                                <img alt="" src={assetsImages.star} />
                                             </li>
                                             <li>
-                                                <img
+                                                <img alt=""
                                                     src={assetsImages.starwhite}
                                                 />
                                             </li>
@@ -539,7 +628,7 @@ const Artistpic = () => {
                                     <div className="playlist-card-footer">
                                         <div className="prev-button">
                                             <button className="btn prev-icon">
-                                                <img src={assetsImages.prev} />
+                                                <img alt="" src={assetsImages.prev} />
                                             </button>
                                         </div>
                                         <div className="center-button">
@@ -555,7 +644,7 @@ const Artistpic = () => {
                                                     placeholder="Enter bid amount"
                                                 />
                                                 <div className="next-icon">
-                                                    <img
+                                                    <img alt=""
                                                         src={assetsImages.next}
                                                     />
                                                 </div>
@@ -566,7 +655,7 @@ const Artistpic = () => {
                                         </div>
                                         <div className="next-button">
                                             <button className="next-icon btn">
-                                                <img src={assetsImages.next} />
+                                                <img alt="" src={assetsImages.next} />
                                             </button>
                                         </div>
                                     </div>
@@ -574,11 +663,11 @@ const Artistpic = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* -----------My-NFTs----------------------- */}
 
-                <div className="mynfts-row-main">
+                {/* <div className="mynfts-row-main">
                     <div className="second-col">
                         <Mynftdropdown />
                     </div>
@@ -587,7 +676,7 @@ const Artistpic = () => {
                     </div>
                     <div className="last-icon">
                         <a href="#">
-                            <img src={assetsImages.filter} />
+                            <img alt="" src={assetsImages.filter} />
                         </a>
                     </div>
                 </div>
@@ -603,7 +692,7 @@ const Artistpic = () => {
                     <Song />
                     <Song />
                     <Song />
-                </div>
+                </div> */}
             </div>
 
             <Modal
@@ -626,14 +715,14 @@ const Artistpic = () => {
                     </div>
 
                     <div className="user-profile">
-                        <img src={assetsImages.artist} />
+                        <img alt="" src={assetsImages.artist} />
                         <button className="upload-profile btn-gradiant">
                             Upload New Profile Picture
                         </button>
                     </div>
 
                     <div className="user-profile-background">
-                        <img src={assetsImages.artistbg} />
+                        <img alt="" src={assetsImages.artistbg} />
                         <button className="upload-profile-background btn-gradiant">
                             Upload New Background Picture
                         </button>
@@ -653,7 +742,7 @@ const Artistpic = () => {
                 onHide={() => setbuy((buy) => !buy)}
             >
                 <Modal.Header closeButton>
-                    <span className="title">Buy Drake Token</span>
+                    <span className="title">Buy {artist.social_token_symbol} Token</span>
                 </Modal.Header>
 
                 <Modal.Body>
@@ -669,16 +758,16 @@ const Artistpic = () => {
                     </div>
 
                     <div className="sell-total-amount">
-                        Amount you'll spend: ${TokensToMint * MintPrice}
+                        Amount you'll spend: ${totalmintprice}
                     </div>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <button
                         className="save-btn btn-gradiant"
-                        onClick={buyTokens}
+                        onClick={buyflag ? buyTokens : fetchtotalmintprice}
                     >
-                        buy
+                        {buyflag ? 'buy' : 'get buying price'}
                     </button>
                 </Modal.Footer>
             </Modal>
@@ -689,7 +778,7 @@ const Artistpic = () => {
                 onHide={() => setsell((sell) => !sell)}
             >
                 <Modal.Header closeButton>
-                    <span className="title">Sell Drake Token</span>
+                    <span className="title">Sell {artist.social_token_symbol} Token</span>
                 </Modal.Header>
 
                 <Modal.Body>
@@ -705,16 +794,16 @@ const Artistpic = () => {
                     </div>
 
                     <div className="buy-total-amount">
-                        Amount you'll earn: ${TokensToMint * BurnPrice}
+                        Amount you'll earn: ${totalburnprice}
                     </div>
                 </Modal.Body>
 
                 <Modal.Footer>
                     <button
                         className="save-btn btn-gradiant"
-                        onClick={sellTokens}
+                        onClick={sellflag ? sellTokens : fetchtotalburnprice}
                     >
-                        sell
+                        {sellflag ? 'sell' : 'get selling price'}
                     </button>
                 </Modal.Footer>
             </Modal>
@@ -725,7 +814,7 @@ const Artistpic = () => {
                 title="Transaction Denied"
                 style={{ color: '#000' }}
                 onConfirm={() => { setlessusdc(lessusdc => !lessusdc) }}
-                onCancel={() => { setlessusdc(lessusdc => !lessusdc) } }
+                onCancel={() => { setlessusdc(lessusdc => !lessusdc) }}
             >
                 Insufficient USDC Balance
             </SweetAlert>
@@ -735,15 +824,15 @@ const Artistpic = () => {
                 title="Transaction Successfull"
                 style={{ color: '#000' }}
                 onConfirm={() => { setsuccessmint(successmint => !successmint) }}
-                onCancel={() => { setsuccessmint(successmint => !successmint) } }
+                onCancel={() => { setsuccessmint(successmint => !successmint) }}
             />
             <SweetAlert
                 danger
                 show={failuremint}
                 title="Transaction Denied"
                 style={{ color: '#000' }}
-                onConfirm={() => { setfailuremint(failuremint=>!failuremint) }}
-                onCancel={() => { setfailuremint(failuremint=>!failuremint) } }
+                onConfirm={() => { setfailuremint(failuremint => !failuremint) }}
+                onCancel={() => { setfailuremint(failuremint => !failuremint) }}
             >
                 Error buying tokens
             </SweetAlert>
@@ -753,7 +842,7 @@ const Artistpic = () => {
                 title="Transaction Successfull"
                 style={{ color: '#000' }}
                 onConfirm={() => { setsuccessburn(successburn => !successburn) }}
-                onCancel={() => { setsuccessburn(successburn => !successburn) } }
+                onCancel={() => { setsuccessburn(successburn => !successburn) }}
             />
             <SweetAlert
                 danger
@@ -761,7 +850,7 @@ const Artistpic = () => {
                 title="Transaction Denied"
                 style={{ color: '#000' }}
                 onConfirm={() => { setfailureburn(failureburn => !failureburn) }}
-                onCancel={() => { setfailureburn(failureburn => !failureburn) } }
+                onCancel={() => { setfailureburn(failureburn => !failureburn) }}
             >
                 Error selling tokens
             </SweetAlert>

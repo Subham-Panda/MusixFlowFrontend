@@ -4,56 +4,56 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 
 class Leaderboard extends Component {
-    render(){
-        return(
+    render() {
+        return (
             <div className="dashboard-wrapper-main">
-                 <div className="heading">Leaderboard</div>
-                 <div className="search-input-main">
-                     <input placeholder="Search for a fan..." />
-                     <button className="search-btn">
-                         <img src={assetsImages.searchwhite} />
-                     </button>
-                 </div>
+                <div className="heading">Leaderboard</div>
+                <div className="search-input-main">
+                    <input placeholder="Search for a fan..." />
+                    <button className="search-btn">
+                        <img alt="" src={assetsImages.searchwhite} />
+                    </button>
+                </div>
                 <div className="table-filter-btn-row">
-                        <div className="left-col-fillter">
-                            <div className="comman-btn">
-                                <Dropdown>
-                                    <Dropdown.Toggle id="dropdown-custom-1">
-                                        Top 50
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu className="super-colors">
+                    <div className="left-col-fillter">
+                        <div className="comman-btn">
+                            <Dropdown>
+                                <Dropdown.Toggle id="dropdown-custom-1">
+                                    Top 50
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu className="super-colors">
                                     <Dropdown.Item eventKey="1">Action</Dropdown.Item>
                                     <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
                                     <Dropdown.Item eventKey="3" active>
                                         Active Item
                                     </Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </div>
-                            <div className="comman-btn">
-                                <Dropdown>
-                                    <Dropdown.Toggle id="dropdown-custom-1">
-                                        Coins & Tokens
-                                    </Dropdown.Toggle>
-                                    <Dropdown.Menu className="super-colors">
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
+                        <div className="comman-btn">
+                            <Dropdown>
+                                <Dropdown.Toggle id="dropdown-custom-1">
+                                    Coins & Tokens
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu className="super-colors">
                                     <Dropdown.Item eventKey="1">Action</Dropdown.Item>
                                     <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
                                     <Dropdown.Item eventKey="3" active>
                                         Active Item
                                     </Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            </div>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
 
+                    </div>
+                    <div className="right-col-filter">
+                        <div className="right-col-btn">
+                            <button>Next 10</button>
                         </div>
-                        <div className="right-col-filter">
-                            <div className="right-col-btn">
-                                <button>Next 10</button>
-                            </div>
-                            <div className="right-col-btn">
-                                <button>View All</button>
-                            </div>
+                        <div className="right-col-btn">
+                            <button>View All</button>
                         </div>
+                    </div>
 
                 </div>
                 <div className="main-table-for-lader-board">
@@ -67,7 +67,7 @@ class Leaderboard extends Component {
                                 <th className="fifth-col">Total NFTs</th>
                                 <th className="sixth-col">Inflow Net Worth Daily Change</th>
                                 <th className="seventh-col">Roster Value</th>
-                            </tr> 
+                            </tr>
 
                         </thead>
                         <tbody>
@@ -77,7 +77,7 @@ class Leaderboard extends Component {
                                 </td>
                                 <td className="second-col">
                                     <div className="artist-pic">
-                                        <img src={assetsImages.person} />
+                                        <img alt="" src={assetsImages.person} />
                                     </div>
                                     <div className="name">Lorem Ipsum</div>
                                 </td>
@@ -94,7 +94,7 @@ class Leaderboard extends Component {
                                     <div className="green-light">0.92%</div>
                                 </td>
                                 <td className="seventh-col">
-                                    <img src={assetsImages.imgchart} />
+                                    <img alt="" src={assetsImages.imgchart} />
                                 </td>
 
                             </tr>
@@ -104,7 +104,7 @@ class Leaderboard extends Component {
                                 </td>
                                 <td className="second-col">
                                     <div className="artist-pic">
-                                        <img src={assetsImages.person} />
+                                        <img alt="" src={assetsImages.person} />
                                     </div>
                                     <div className="name">Lorem Ipsum</div>
                                 </td>
@@ -121,7 +121,7 @@ class Leaderboard extends Component {
                                     <div className="red-light">0.05%</div>
                                 </td>
                                 <td className="seventh-col">
-                                    <img src={assetsImages.imgchart} />
+                                    <img alt="" src={assetsImages.imgchart} />
                                 </td>
 
                             </tr>
@@ -130,9 +130,9 @@ class Leaderboard extends Component {
                     </table>
                 </div>
                 <div className="next-btn-main">
-                                <button>Next 10</button>
+                    <button>Next 10</button>
                 </div>
-                
+
             </div>
         )
     }

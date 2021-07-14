@@ -1,14 +1,32 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import './component.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { assetsImages } from '../constants/images';
 import { logout } from '../store/reducers/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios'
 // import { Redirect } from "react-router-dom";
 
 function Profiledropdown() {
     const dispatch = useDispatch();
     const token = useSelector((state) => state.auth.token);
+    const uid = useSelector((state) => state.auth.data.uid);
+    const [firstname, setfirstname] = useState('');
+    const [country, setcountry] = useState('');
+
+
+    useEffect(() => {
+        getdata();
+    }, [])
+
+    const getdata = async () => {
+        const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/profile/get`, { firebase_user_id: uid })
+        const { user } = data
+        if (user) {
+            setfirstname(user.first_name ? user.first_name : user.name);
+            setcountry(user.country);
+        }
+    }
 
     const onLogin = () => {
         window.location.href = "/login";
@@ -27,7 +45,7 @@ function Profiledropdown() {
         <div className="Dropdown-main-header">
             <Dropdown>
                 <Dropdown.Toggle id="dropdown-custom-1">
-                    <img src={assetsImages.person} />
+                    <img alt="" src={assetsImages.person} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="super-colors profile-dropdown-main">
                     {/*<Dropdown.Item eventKey="1">Action</Dropdown.Item>*/}
@@ -35,46 +53,46 @@ function Profiledropdown() {
                     {/*<Dropdown.Item eventKey="3" onClick={()=> dispatch(logout())} active>*/}
                     {/*    Logout*/}
                     {/*</Dropdown.Item>*/}
-                    <div className="profile-dropdown-card">
+                    <div className="profile-dropdown-card"  style={{minWidth:"300px", height:"300px"}}>
                         <div className="card-header">
                             {/* <span className='close'>X</span> */}
                         </div>
 
                         <div className="Profile-dropdown-img">
                             <div className="background-img-wrapper">
-                                <img src={assetsImages.background} />
+                                <img alt="" src={assetsImages.background} />
                                 <div className="img-wrapper">
                                     <div className="full-scree-icon">
-                                        <img src={assetsImages.fullscreen} />
+                                        <img alt="" src={assetsImages.fullscreen} />
                                     </div>
                                     <div className="profile-img">
-                                        <img src={assetsImages.person} />
+                                        <img alt="" src={assetsImages.person} />
                                     </div>
                                     <div className="money-icon">
-                                        <img src={assetsImages.money} />
+                                        <img alt="" src={assetsImages.money} />
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div className="user-details">
-                            <div className="user-name">Lola Kipp</div>
-                            <div className="user-album">Chicago, IL</div>
+                            <div className="user-name">{firstname}</div>
+                            <div className="user-album">{country}</div>
                             {token === "" ? (
                                 <button className="edit-button" onClick={onLogin} >Login</button>
                             ) : (
                                 <div className="d-flex justify-content-around">
-                                    <button className="edit-button" onClick={ onEdit } >
+                                    {/* <button className="edit-button" onClick={onEdit} >
                                         Edit
-                                    </button>
-                                    <button className="edit-button" onClick={ onLogout } >
+                                    </button> */}
+                                    <button className="edit-button" onClick={onLogout} >
                                         Logout
                                     </button>
                                 </div>
                             )}
                         </div>
 
-                        <div className="user-profile-details">
+                        {/* <div className="user-profile-details">
                             <ul>
                                 <li>
                                     <div className="number">53</div>
@@ -89,14 +107,14 @@ function Profiledropdown() {
                                     <span className="name">New Worth</span>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
 
-                        <div className="profile-card-body">
+                        {/* <div className="profile-card-body">
                             <div className="card-body-title">Following</div>
                             <ul className="following-list">
                                 <li>
                                     <div className="user">
-                                        <img src={assetsImages.person} />
+                                        <img alt="" src={assetsImages.person} />
                                     </div>
                                     <div className="follower-details">
                                         <div className="follower-content">
@@ -108,13 +126,13 @@ function Profiledropdown() {
                                             </span>
                                         </div>
                                         <button className="option-btn">
-                                            <img src={assetsImages.options} />
+                                            <img alt="" src={assetsImages.options} />
                                         </button>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="user">
-                                        <img src={assetsImages.person} />
+                                        <img alt="" src={assetsImages.person} />
                                     </div>
                                     <div className="follower-details">
                                         <div className="follower-content">
@@ -126,13 +144,13 @@ function Profiledropdown() {
                                             </span>
                                         </div>
                                         <button className="option-btn">
-                                            <img src={assetsImages.options} />
+                                            <img alt="" src={assetsImages.options} />
                                         </button>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="user">
-                                        <img src={assetsImages.person} />
+                                        <img alt="" src={assetsImages.person} />
                                     </div>
                                     <div className="follower-details">
                                         <div className="follower-content">
@@ -144,13 +162,13 @@ function Profiledropdown() {
                                             </span>
                                         </div>
                                         <button className="option-btn">
-                                            <img src={assetsImages.options} />
+                                            <img alt="" src={assetsImages.options} />
                                         </button>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="user">
-                                        <img src={assetsImages.person} />
+                                        <img alt="" src={assetsImages.person} />
                                     </div>
                                     <div className="follower-details">
                                         <div className="follower-content">
@@ -162,12 +180,12 @@ function Profiledropdown() {
                                             </span>
                                         </div>
                                         <button className="option-btn">
-                                            <img src={assetsImages.options} />
+                                            <img alt="" src={assetsImages.options} />
                                         </button>
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                     </div>
                 </Dropdown.Menu>
             </Dropdown>

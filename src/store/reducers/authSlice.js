@@ -6,12 +6,14 @@ export const authSlice = createSlice({
   initialState: {
     data: {},
     token: '',
+    isAdmin: false
   },
   reducers: {
     login: (state, action) => {
-        console.log(action.payload)
-        state.data = action.payload
-        state.token = action.payload.token
+      // console.log({ data: action.data })
+      state.data = action.payload
+      state.token = action.payload.token
+      state.isAdmin = action.payload.isAdmin
     },
     logout: () => {
       Wallet.disconnect(true);
@@ -20,7 +22,6 @@ export const authSlice = createSlice({
     }
   },
 })
-
 
 // Action creators are generated for each case reducer function
 export const { login, logout } = authSlice.actions

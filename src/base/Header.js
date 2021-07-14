@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './base.css';
-import Search from '../component/Search';
-import Notification from '../component/Notification';
+// import Search from '../component/Search';
+// import Notification from '../component/Notification';
 import Profiledropdown from '../component/Profiledropdown';
-import {Button} from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import Wallet from '../utils/wallet';
 import SweetAlert from "react-bootstrap-sweetalert";
-import {connect} from "react-redux";
-import {connected, disconnect} from "../store/reducers/walletSlice";
+import { connect } from "react-redux";
+import { connected, disconnect } from "../store/reducers/walletSlice";
 
-class Header extends Component{
+class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,7 +24,7 @@ class Header extends Component{
                 if (!Wallet.ethersProvider) {
                     await Wallet.connect();
                 }
-                this.props.connected({address: Wallet.account})
+                this.props.connected({ address: Wallet.account })
                 this.showAlert('Wallet connected successfully', 'success');
             } else {
                 Wallet.disconnect(true);
@@ -32,39 +32,39 @@ class Header extends Component{
                 this.props.disconnect();
             }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     }
 
     showAlert(title, type) {
         this.setState({
-            alert: <SweetAlert style={{ color: '#000' }} type={type} onConfirm={this.hideAlert} timeout={2000} title={title}/>
+            alert: <SweetAlert style={{ color: '#000' }} type={type} onConfirm={this.hideAlert} timeout={2000} title={title} />
         })
     }
 
     hideAlert() {
-        this.setState({alert: null});
+        this.setState({ alert: null });
     }
 
     render() {
         return (
-          <div className="header-main">
-              {this.state.alert}
+            <div className="header-main">
+                {this.state.alert}
                 <div className="left-col-main">
-                    <Search />
+                    {/* <Search /> */}
                 </div>
                 <div className="right-col-main">
                     <Button size="sm" className="mr-2 wallet-button" onClick={() => this.connectWallet()}>
                         {this.props.wallet.wallet_connected ? 'Disconnect Wallet' : 'Connect Wallet'}
                     </Button>
-                    <div className="notified-main">
+                    {/* <div className="notified-main">
                         <Notification />
-                    </div>
+                    </div> */}
                     <div className="profile-dropdown">
                         <Profiledropdown />
                     </div>
                 </div>
-          </div>
+            </div>
         )
     }
 }
@@ -74,7 +74,7 @@ class Header extends Component{
 const mapStateToProps = state => ({
     wallet: state.wallet,
 });
-const mapDispatchToProps = {connected, disconnect}
+const mapDispatchToProps = { connected, disconnect }
 export default connect(
     mapStateToProps,
     mapDispatchToProps

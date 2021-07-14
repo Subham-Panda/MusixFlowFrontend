@@ -4,41 +4,41 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import { assetsImages } from '../constants/images';
 
 
-class Postgrid extends Component{
+class Postgrid extends Component {
     render() {
         return (
-        
+
             <div className="Main-post-grids-card">
                 <div className="first-row-grids">
-                     <div className="left-col-main">
-                        <img src={assetsImages.artist} className="small-img" />
+                    <div className="left-col-main">
+                        <img alt="" src={assetsImages.artist} className="small-img" />
                         <div className="post-name-col">
                             <div className="artist-name-with-status">
                                 <span className="aritist-name">Drake</span>  Shared a Post
                             </div>
-                            <div className="date-and-time-man">Today at 12.35 PM</div>   
+                            <div className="date-and-time-man">Today at 12.35 PM</div>
                         </div>
-                     </div>   
+                    </div>
                     <div className="share-post-drop">
                         <Dropdown>
                             <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                <img src={assetsImages.threedot} />    
+                                <img alt="" src={assetsImages.threedot} />
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
-                                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item> 
-                                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-                </div> 
+                </div>
 
                 <div className="second-row-for-pics">
                     <div className="inner-grid-main">
-                        <img src={assetsImages.artist}/>
+                        <img alt="" src={assetsImages.artist} />
                     </div>
                     <div className="inner-grid-main">
-                        <img src={assetsImages.artist}/>
+                        <img alt="" src={assetsImages.artist} />
                     </div>
                 </div>
                 <div className="third-row-description">
@@ -47,11 +47,11 @@ class Postgrid extends Component{
 
                 <div className="fourth-row">
                     <div className="comman-col">
-                        <img src={assetsImages.like} className="comman-icon" />
+                        <img alt="" src={assetsImages.like} className="comman-icon" />
                         561 Likes
                     </div>
                     <div className="comman-col">
-                        <img src={assetsImages.commnet} className="comman-icon" />
+                        <img alt="" src={assetsImages.commnet} className="comman-icon" />
                         91 Comments
                     </div>
 

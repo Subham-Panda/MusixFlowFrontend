@@ -37,6 +37,10 @@
     color: #fff;
 }
 
+.web3modal-modal-card {
+    margin-top: 50px;
+}
+
 .Notification-main {
     width: 44px;
     height: 44px;

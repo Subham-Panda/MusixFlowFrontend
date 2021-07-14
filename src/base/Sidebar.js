@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import './base.css';
 import { Link } from 'react-router-dom';
-import settings from '../assets/images/settings.svg';
+// import settings from '../assets/images/settings.svg';
 import { assetsImages } from '../constants/images';
 import { useSelector } from 'react-redux';
 
@@ -13,7 +13,7 @@ const Sidebar = () => {
         <div className="side-bar-main">
             <div className="logo-website-main">
                 <Link to={'/'} className="nav-link">
-                    <img src={assetsImages.logo} />
+                    <img alt="" src={assetsImages.logo} />
                 </Link>
             </div>
             <div className="side-bar-navigation">
@@ -26,7 +26,7 @@ const Sidebar = () => {
                         }
                         onClick={() => updateActivePage('inflowmusic')}
                     >
-                        <img src={assetsImages.home} />
+                        <img alt="" src={assetsImages.home} />
                     </div>
                 </Link>
                 <Link to={'/news'}>
@@ -38,7 +38,7 @@ const Sidebar = () => {
                         }
                         onClick={() => updateActivePage('demo1')}
                     >
-                        <img src={assetsImages.dashboard} />
+                        <img alt="" src={assetsImages.dashboard} />
                     </div>
                 </Link>
                 <Link to={'/leaderboard'}>
@@ -50,7 +50,7 @@ const Sidebar = () => {
                         }
                         onClick={() => updateActivePage('demo2')}
                     >
-                        <img src={assetsImages.wallet} />
+                        <img alt="" src={assetsImages.wallet} />
                     </div>
                 </Link>
                 {token !== '' ? (
@@ -63,11 +63,11 @@ const Sidebar = () => {
                             }
                             onClick={() => updateActivePage('demo3')}
                         >
-                            <img src={assetsImages.inventory} />
+                            <img alt="" src={assetsImages.inventory} />
                         </div>
                     </Link>
                 ) : null}
-                <Link to={'/lebels'}>
+                <Link to={'/labels'}>
                     <div
                         className={
                             activePage === 'demo4'
@@ -76,7 +76,7 @@ const Sidebar = () => {
                         }
                         onClick={() => updateActivePage('demo4')}
                     >
-                        <img src={assetsImages.calendar} />
+                        <img alt="" src={assetsImages.calendar} />
                     </div>
                 </Link>
                 {token !== '' ? (
@@ -89,12 +89,12 @@ const Sidebar = () => {
                             }
                             onClick={() => updateActivePage('demo5')}
                         >
-                            <img src={assetsImages.orders} />
+                            <img alt="" src={assetsImages.orders} />
                         </div>
                     </Link>
                 ) : null}
 
-                <div
+                {/* <div
                     className={
                         activePage === 'demo6'
                             ? 'nav-link-main settings-icon active'
@@ -102,8 +102,8 @@ const Sidebar = () => {
                     }
                     onClick={() => updateActivePage('demo6')}
                 >
-                    <img src={assetsImages.settings} />
-                </div>
+                    <img alt="" src={assetsImages.settings} />
+                </div> */}
             </div>
         </div>
     );

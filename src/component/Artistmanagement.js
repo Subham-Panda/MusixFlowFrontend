@@ -4,7 +4,7 @@ import { assetsImages } from "../constants/images";
 import Customdropdown from "./Customdropdown";
 import Performbar from "./Performbar";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import {Modal} from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 class Artistpic extends Component {
     constructor(props) {
         super(props);
@@ -13,8 +13,8 @@ class Artistpic extends Component {
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="dashboard-wrapper-main artist-management">
                 <div className="heading">Artist Management</div>
                 <div className='row'>
@@ -22,11 +22,11 @@ class Artistpic extends Component {
                         <div className='card'>
                             <div className='artist-title'>
                                 <span>Royalties</span>
-                                <a href="#"><img src={assetsImages.filter}/></a>
+                                <a href="#"><img alt="" src={assetsImages.filter} /></a>
                             </div>
                             <div className='artist-poll'>
                                 <div className='poll-green'>
-                                    <img src={assetsImages.arrowup}/>
+                                    <img alt="" src={assetsImages.arrowup} />
                                     + 1.57%
                                 </div>
                                 <div className='dropdown'>
@@ -39,7 +39,7 @@ class Artistpic extends Component {
                             <div className="first-row-main-dash">
                                 <div className="left-col">
                                     <div className="below-row">
-                                        <Performbar/>
+                                        <Performbar />
                                     </div>
                                 </div>
                             </div>
@@ -55,11 +55,11 @@ class Artistpic extends Component {
                         <div className='card'>
                             <div className='artist-title'>
                                 <span>Token Fees</span>
-                                <a href="#"><img src={assetsImages.filter}/></a>
+                                <a href="#"><img alt="" src={assetsImages.filter} /></a>
                             </div>
                             <div className='artist-poll'>
                                 <div className='poll-green'>
-                                    <img src={assetsImages.arrowup}/>
+                                    <img alt="" src={assetsImages.arrowup} />
                                     + 3.10%
                                 </div>
                                 <div className='dropdown'>
@@ -72,12 +72,12 @@ class Artistpic extends Component {
                             <div className="first-row-main-dash">
                                 <div className="left-col">
                                     <div className="below-row">
-                                        <Performbar/>
+                                        <Performbar />
                                     </div>
                                 </div>
                             </div>
                             <div className='footer-btn'>
-                                <button className='btn-gradiant' onClick={() => this.setState({tokenfrees: !this.state.tokenfrees})}>
+                                <button className='btn-gradiant' onClick={() => this.setState({ tokenfrees: !this.state.tokenfrees })}>
                                     Cash Out
                                 </button>
                             </div>
@@ -88,13 +88,13 @@ class Artistpic extends Component {
                         <div className='card'>
                             <div className='artist-title'>
                                 <span>Top Fans</span>
-                                <a href="#"><img src={assetsImages.filter}/></a>
+                                <a href="#"><img alt="" src={assetsImages.filter} /></a>
                             </div>
                             <div className='fans-list'>
                                 <ul>
                                     <li>
                                         <div className='fan-profile'>
-                                            <img src={assetsImages.artist}/>
+                                            <img alt="" src={assetsImages.artist} />
                                         </div>
                                         <div className='fan-details'>
                                             <div className='fan-details-content'>
@@ -110,7 +110,7 @@ class Artistpic extends Component {
                                     </li>
                                     <li>
                                         <div className='fan-profile'>
-                                            <img src={assetsImages.artist}/>
+                                            <img alt="" src={assetsImages.artist} />
                                         </div>
                                         <div className='fan-details'>
                                             <div className='fan-details-content'>
@@ -126,7 +126,7 @@ class Artistpic extends Component {
                                     </li>
                                     <li>
                                         <div className='fan-profile'>
-                                            <img src={assetsImages.artist}/>
+                                            <img alt="" src={assetsImages.artist} />
                                         </div>
                                         <div className='fan-details'>
                                             <div className='fan-details-content'>
@@ -142,7 +142,7 @@ class Artistpic extends Component {
                                     </li>
                                     <li>
                                         <div className='fan-profile'>
-                                            <img src={assetsImages.artist}/>
+                                            <img alt="" src={assetsImages.artist} />
                                         </div>
                                         <div className='fan-details'>
                                             <div className='fan-details-content'>
@@ -158,7 +158,7 @@ class Artistpic extends Component {
                                     </li>
                                     <li>
                                         <div className='fan-profile'>
-                                            <img src={assetsImages.artist}/>
+                                            <img alt="" src={assetsImages.artist} />
                                         </div>
                                         <div className='fan-details'>
                                             <div className='fan-details-content'>
@@ -174,7 +174,7 @@ class Artistpic extends Component {
                                     </li>
                                     <li>
                                         <div className='fan-profile'>
-                                            <img src={assetsImages.artist}/>
+                                            <img alt="" src={assetsImages.artist} />
                                         </div>
                                         <div className='fan-details'>
                                             <div className='fan-details-content'>
@@ -190,7 +190,7 @@ class Artistpic extends Component {
                                     </li>
                                     <li>
                                         <div className='fan-profile'>
-                                            <img src={assetsImages.artist}/>
+                                            <img alt="" src={assetsImages.artist} />
                                         </div>
                                         <div className='fan-details'>
                                             <div className='fan-details-content'>
@@ -216,7 +216,7 @@ class Artistpic extends Component {
                         <div className='card button-card'>
                             <div className='artist-title'>
                                 <span>Drop NFT</span>
-                                <a href="#"><img src={assetsImages.filter}/></a>
+                                <a href="#"><img alt="" src={assetsImages.filter} /></a>
                             </div>
 
                             <div className='footer-btn'>
@@ -234,11 +234,11 @@ class Artistpic extends Component {
                         <div className='card button-card'>
                             <div className='artist-title'>
                                 <span>New Proposal</span>
-                                <a href="#"><img src={assetsImages.filter}/></a>
+                                <a href="#"><img alt="" src={assetsImages.filter} /></a>
                             </div>
 
                             <div className='footer-btn'>
-                                <button className='btn-gradiant' type='button' onClick={() => this.setState({newvote: !this.state.newvote})}>
+                                <button className='btn-gradiant' type='button' onClick={() => this.setState({ newvote: !this.state.newvote })}>
                                     Create Vote
                                 </button>
                             </div>
@@ -249,7 +249,7 @@ class Artistpic extends Component {
                         <div className='card button-card'>
                             <div className='artist-title'>
                                 <span>Private Links</span>
-                                <a href="#"><img src={assetsImages.filter}/></a>
+                                <a href="#"><img alt="" src={assetsImages.filter} /></a>
                             </div>
                             <div className='footer-btn'>
                                 <button className='btn-gradiant'>
@@ -260,7 +260,7 @@ class Artistpic extends Component {
                     </div>
                 </div>
 
-                <Modal show={this.state.newvote} className="edit-profile-modal newvote" onHide={() => this.setState({newvote: !this.state.newvote})}>
+                <Modal show={this.state.newvote} className="edit-profile-modal newvote" onHide={() => this.setState({ newvote: !this.state.newvote })}>
                     <Modal.Header closeButton>
                         <span className='title'>
                             New Vote
@@ -270,29 +270,29 @@ class Artistpic extends Component {
                     <Modal.Body>
                         <div className='form-group'>
                             <label>Location</label>
-                            <input className='form-control mb-3' type='text' placeholder='Address'/>
-                            <input className='form-control mb-3' type='text' placeholder='Option 1'/>
-                            <input className='form-control mb-3' type='text' placeholder='Option 2'/>
-                            <input className='form-control mb-3' type='text' placeholder='Option 3'/>
-                            <input className='form-control mb-3' type='text' placeholder='Option 4'/>
+                            <input className='form-control mb-3' type='text' placeholder='Address' />
+                            <input className='form-control mb-3' type='text' placeholder='Option 1' />
+                            <input className='form-control mb-3' type='text' placeholder='Option 2' />
+                            <input className='form-control mb-3' type='text' placeholder='Option 3' />
+                            <input className='form-control mb-3' type='text' placeholder='Option 4' />
                             <button className='upload-profile btn-gradiant' >
                                 +
                             </button>
                         </div>
 
                         <div className='form-group'>
-                            <input className='form-control' type='text' placeholder='End Date'/>
+                            <input className='form-control' type='text' placeholder='End Date' />
                         </div>
                     </Modal.Body>
 
                     <Modal.Footer>
-                        <button className='save-btn btn-gradiant' onClick={() => this.setState({success: !this.state.success})}>
+                        <button className='save-btn btn-gradiant' onClick={() => this.setState({ success: !this.state.success })}>
                             Launch Poll
                         </button>
                     </Modal.Footer>
                 </Modal>
 
-                <Modal show={this.state.tokenfrees} className="edit-profile-modal sell" onHide={() => this.setState({tokenfrees: !this.state.tokenfrees})}>
+                <Modal show={this.state.tokenfrees} className="edit-profile-modal sell" onHide={() => this.setState({ tokenfrees: !this.state.tokenfrees })}>
                     <Modal.Header closeButton>
                         <span className='title'>
                             Token Fees
@@ -301,11 +301,11 @@ class Artistpic extends Component {
 
                     <Modal.Body>
                         <div className='form-group'>
-                            <input className='form-control' type='text' placeholder='Amount'/>
+                            <input className='form-control' type='text' placeholder='Amount' />
                         </div>
 
                         <div className='form-group'>
-                            <input className='form-control' type='text' placeholder='Wallet address'/>
+                            <input className='form-control' type='text' placeholder='Wallet address' />
                         </div>
 
                     </Modal.Body>
@@ -317,7 +317,7 @@ class Artistpic extends Component {
                     </Modal.Footer>
                 </Modal>
 
-                <Modal show={this.state.success} className="edit-profile-modal success" onHide={() => this.setState({success: !this.state.success})}>
+                <Modal show={this.state.success} className="edit-profile-modal success" onHide={() => this.setState({ success: !this.state.success })}>
                     <Modal.Header closeButton>
                         <span className='title'>
                             Location of next concert
@@ -326,7 +326,7 @@ class Artistpic extends Component {
 
                     <Modal.Body>
                         <div className='success-popup-content'>
-                            <img src={assetsImages.success}/>
+                            <img alt="" src={assetsImages.success} />
                             <h2 className='title'>
                                 Success!
                             </h2>

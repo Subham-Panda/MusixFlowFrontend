@@ -13,7 +13,7 @@ class Slider extends Component {
 
                     <div className="testimonials">
                         <label className="item" htmlFor="t-1">
-                            <img src={assetsImages.person} alt="picture"/>
+                            <img alt="" src={assetsImages.person} alt="picture" />
                             <div className="information-row">
                                 <div className="name-person">
                                     Drake
@@ -29,22 +29,22 @@ class Slider extends Component {
                         </label>
 
                         <label className="item" htmlFor="t-2">
-                            <img src={assetsImages.person} alt="picture" />
+                            <img alt="" src={assetsImages.person} alt="picture" />
                             <div className="information-row">
                                 <div className="name-person">
                                     Drake
-                                <span className="categories">Rap</span>
+                                    <span className="categories">Rap</span>
                                 </div>
                                 <div className="name-person">
                                     $ 107.88
-                                <span className="up-down">+5.7%</span>
+                                    <span className="up-down">+5.7%</span>
                                 </div>
 
                             </div>
 
                         </label>
                         <label className="item" htmlFor="t-3">
-                            <img src={assetsImages.person} alt="picture" />
+                            <img alt="" src={assetsImages.person} alt="picture" />
                             <div className="information-row">
                                 <div className="name-person">
                                     Drake
@@ -58,7 +58,7 @@ class Slider extends Component {
 
                         </label>
                         <label className="item" htmlFor="t-4">
-                            <img src={assetsImages.person} alt="picture" />
+                            <img alt="" src={assetsImages.person} alt="picture" />
                             <div className="information-row">
                                 <div className="name-person">
                                     Drake
@@ -72,7 +72,7 @@ class Slider extends Component {
                             </div>
                         </label>
                         <label className="item" htmlFor="t-5">
-                            <img src={assetsImages.person} alt="picture"/>
+                            <img alt="" src={assetsImages.person} alt="picture" />
                             <div className="information-row">
                                 <div className="name-person">
                                     Drake
@@ -89,9 +89,9 @@ class Slider extends Component {
                     </div>
                     <div className="dots">
 
-                        <label htmlFor="t-2"/>
-                        <label htmlFor="t-3"/>
-                        <label htmlFor="t-4"/>
+                        <label htmlFor="t-2" />
+                        <label htmlFor="t-3" />
+                        <label htmlFor="t-4" />
 
                     </div>
                 </div>

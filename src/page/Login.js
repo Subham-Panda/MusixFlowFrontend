@@ -15,11 +15,12 @@ import firebase from "firebase";
 import { Link } from 'react-router-dom';
 import Loader from "../component/Loader";
 import SweetAlert from "react-bootstrap-sweetalert";
+import Axios from 'axios'
 
 const Login = () => {
   const dispatch = useDispatch();
   const uData = useSelector((state) => state.auth.data);
-  console.log(uData);
+  // console.log(uData);
   const history = useHistory();
   const [authSelectFlag, setAuthSelectFlag] = useState(true);
   const [forgotPasswordFlag, setForgotPasswordFlag] = useState(false);
@@ -58,7 +59,7 @@ const Login = () => {
   const handleRegister = async (event) => {
     event.preventDefault();
     const { displayName, email, password, phone } = user;
-    //console.log('++++', email, password)
+    //// console.log('++++', email, password)
     const reg =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!reg.test(String(email).toLowerCase())) {
@@ -67,7 +68,7 @@ const Login = () => {
     } else if (password.length < 6) {
       setErrorFlg("password");
       setErrorMessage("Password must be 8 charachter long");
-    }else {
+    } else {
       setErrorFlg("undefined");
       setErrorMessage("");
       try {
@@ -76,9 +77,16 @@ const Login = () => {
             email,
             password
           );
-          dispatch(login({ email, uid: user.uid, token: user.refreshToken }));
-          console.log("+++", user);
-          showAlert('Login Successful', 'success')
+          let isAdmin = false
+          user.getIdTokenResult().then(idTokenResult => {
+            isAdmin = idTokenResult.claims.isAdmin ? true : false
+            dispatch(
+              login({ email: user.email, uid: user.uid, token: user.refreshToken, isAdmin })
+            );
+            Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken })
+          }).then(() => {
+            showAlert('Login Successful', 'success')
+          })
         } else {
           const { user: registeredUser } =
             await auth.createUserWithEmailAndPassword(email, password);
@@ -86,9 +94,16 @@ const Login = () => {
           //   displayName,
           // });
           registeredUser.sendEmailVerification();
-          dispatch(login({ email, uid: user.uid, token: user.refreshToken }));
-          console.log(user.uid);
-          showAlert('Check your email and verify account', 'info')
+          let isAdmin = false
+          user.getIdTokenResult().then(idTokenResult => {
+            isAdmin = idTokenResult.claims.isAdmin ? true : false
+            dispatch(
+              login({ email: user.email, uid: user.uid, token: user.refreshToken, isAdmin })
+            );
+            Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken })
+          }).then(() => {
+            showAlert('Check your email and verify account', 'info')
+          })
         }
         // history.push("/");
       } catch (error) {
@@ -99,7 +114,7 @@ const Login = () => {
   };
 
 
-  const handleRegisterWithPhone =async(event)=> {
+  const handleRegisterWithPhone = async (event) => {
     event.preventDefault();
     setLoading(true);
     if (optSent) {
@@ -112,41 +127,47 @@ const Login = () => {
       // const code = window.prompt('Please enter the verification ' +
       //     'code that was sent to your mobile device.');
       otpConfirmation
-          .confirm(user.otp)
-          .then((result) => {
-            setLoading(false);
-            showAlert('Login Successful', 'success')
-            setTimeout(() => {
-              const loginUser = result.user;
-              dispatch(login({ phoneNumber: user.phone, uid: loginUser.uid, token: loginUser.refreshToken }));
+        .confirm(user.otp)
+        .then((result) => {
+          setLoading(false);
+          showAlert('Login Successful', 'success')
+          setTimeout(() => {
+            const loginUser = result.user;
+            let isAdmin = false
+            loginUser.getIdTokenResult().then(idTokenResult => {
+              isAdmin = idTokenResult.claims.isAdmin ? true : false
+              dispatch(login({ phoneNumber: user.phone, uid: loginUser.uid, token: loginUser.refreshToken, isAdmin }));
+              Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, phone: user.phone, refresh_token: user.refreshToken })
+            }).then(() => {
               hideAlert()
-            }, 2000);
-          })
-          .catch((error) => {
-            showAlert('Invalid OTP', 'error');
-          });
+            })
+          }, 2000);
+        })
+        .catch((error) => {
+          showAlert('Invalid OTP', 'error');
+        });
     } else {
       if (user.phone.length < 10) {
         setErrorFlg("phone");
         setErrorMessage("Phone must be 10 charachter long");
       }
-      else{
+      else {
         window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(captchaRef.current, {
-          'size': 'invisible'})
+          'size': 'invisible'
+        })
         const appVerifier = window.recaptchaVerifier;
         const phoneNumber = '+' + user.phone;
         auth
-            .signInWithPhoneNumber(String(phoneNumber), appVerifier)
-            .then(confirmResult =>
-                {
-                  setOptSent(true);
-                  setOtpConfirmation(confirmResult);
-                  setLoading(false);
-                }
-            )
-            .catch(error =>
-                showAlert(`Sign In With Phone Number Error: ${error.message}`, 'error')
-            );
+          .signInWithPhoneNumber(String(phoneNumber), appVerifier)
+          .then(confirmResult => {
+            setOptSent(true);
+            setOtpConfirmation(confirmResult);
+            setLoading(false);
+          }
+          )
+          .catch(error =>
+            showAlert(`Sign In With Phone Number Error: ${error.message}`, 'error')
+          );
       }
     }
   }
@@ -162,7 +183,7 @@ const Login = () => {
     auth
       .sendPasswordResetEmail(user.email)
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         showAlert('check your email for changing password', 'info');
       })
       .catch((error) => {
@@ -177,11 +198,19 @@ const Login = () => {
         const credential = result.credential;
         const token = credential.accessToken;
         const user = result.user;
-        dispatch(
-          login({ email: user.email, uid: user.uid, token: user.refreshToken })
-        );
-        //console.log('++++++',user.email, user.uid, token);
-        window.location.href="/"
+        let isAdmin = false;
+        // console.log(user.displayName)
+        user.getIdTokenResult().then(idTokenResult => {
+          isAdmin = idTokenResult.claims.isAdmin ? true : false
+          dispatch(
+            login({ email: user.email, uid: user.uid, token: user.refreshToken, isAdmin })
+          );
+          Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken, name: user.displayName })
+        }).then(() => {
+          window.location.href = "/"
+        })
+        //// console.log('++++++',user.email, user.uid, token);
+
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -193,16 +222,16 @@ const Login = () => {
   };
 
   function showAlert(title, type) {
-    setAlert(<SweetAlert style={{ color: '#000' }} type={type} onConfirm={handleAlertConfirm(type)} timeout={3000} title={title}/>)
+    setAlert(<SweetAlert style={{ color: '#000' }} type={type} onConfirm={handleAlertConfirm(type)} timeout={3000} title={title} />)
     setLoading(false);
   }
 
-  function handleAlertConfirm(type){
+  function handleAlertConfirm(type) {
     if (type === 'success') {
       hideAlert();
       setTimeout(() => {
-        window.location.href="/"
-      },2500)
+        window.location.href = "/"
+      }, 2500)
     } else {
       hideAlert();
     }
@@ -214,12 +243,12 @@ const Login = () => {
 
   return (
     <div className="login-page-main">
-      {loading && <Loader/>}
+      {loading && <Loader />}
       {alert}
       <div className='recaptcha-container' ref={captchaRef}></div>
       <div className="left-cols-main">
         <div className="logos-row">
-          <img src={assetsImages.logo} />
+          <img alt="" src={assetsImages.logo} />
           Inflow
         </div>
         <div className="new-row-for-descriptions">
@@ -255,61 +284,61 @@ const Login = () => {
           {forgotPasswordFlag
             ? "Forgot Passowrd"
             : authSelectFlag
-            ? "Login Account"
-            : "Create Account"}
+              ? "Login Account"
+              : "Create Account"}
         </div>
         {forgotPasswordFlag ? null : (
           <div className="social-icons">
             {/*<a className="mail-icon" href="#" onClick={() => setPhoneRegisterFlag(false)}>*/}
             {/*  {" "}*/}
-            {/*  <img src={assetsImages.envelope} />*/}
+            {/*  <img alt="" src={assetsImages.envelope} />*/}
             {/*</a>*/}
             <a className="call-icon" href="#" onClick={() => setPhoneRegisterFlag(true)}>
               {" "}
-              <img src={assetsImages.telephone} />
+              <img alt="" src={assetsImages.telephone} />
             </a>
             <a
               href="#"
               onClick={() => signInWithSocialAccount(facebookProvider)}
             >
               {" "}
-              <img src={assetsImages.facebook} />
+              <img alt="" src={assetsImages.facebook} />
             </a>
             <a href="#" onClick={() => signInWithSocialAccount(googleProvider)}>
               {" "}
-              <img src={assetsImages.google} />
+              <img alt="" src={assetsImages.google} />
+            </a>
+            {/* <a href="#">
+              {" "}
+              <img alt="" src={assetsImages.twitter} />
             </a>
             <a href="#">
               {" "}
-              <img src={assetsImages.twitter} />
-            </a>
-            <a href="#">
-              {" "}
-              <img src={assetsImages.linkedin} />
-            </a>
+              <img alt="" src={assetsImages.linkedin} />
+            </a> */}
           </div>
         )}
         <div className="or-use">
           {forgotPasswordFlag
             ? "use email for forgot password"
             : phoneRegisterFlag
-            ? "use phone number for registration"
-            : authSelectFlag
-            ? "or use email for login"
-            : "or use email for registration"}
+              ? "use phone number for registration"
+              : authSelectFlag
+                ? "or use email for login"
+                : "or use email for registration"}
         </div>
         {phoneRegisterFlag ? (
           <form onSubmit={handleRegisterWithPhone}>
             {!authSelectFlag &&
-            <div className="comman-row-input persons-row">
-              <input
+              <div className="comman-row-input persons-row">
+                <input
                   placeholder="Name"
                   type="text"
                   name="displayName"
                   value={user.displayName}
                   onChange={handleChange}
-              />
-            </div>}
+                />
+              </div>}
             <div className="comman-row-input email-row">
               <PhoneInput
                 country={"us"}
@@ -320,38 +349,38 @@ const Login = () => {
               />
             </div>
             {errorFlg == "phone" ? (
-                  <div
-                    style={{
-                      color: "red",
-                      marginTop: `-13px`,
-                      marginBottom: "15px",
-                      fontSize: "14px",
-                    }}
-                  >
-                    {errorMessage}
-                  </div>
-                ) : null}
+              <div
+                style={{
+                  color: "red",
+                  marginTop: `-13px`,
+                  marginBottom: "15px",
+                  fontSize: "14px",
+                }}
+              >
+                {errorMessage}
+              </div>
+            ) : null}
             {optSent ? <>
               <div className="comman-row-input password-row">
                 <input
-                    placeholder="OTP"
-                    type="text"
-                    name="otp"
-                    value={user.otp}
-                    onChange={handleChange}
+                  placeholder="OTP"
+                  type="text"
+                  name="otp"
+                  value={user.otp}
+                  onChange={handleChange}
                 />
               </div>
               {errorFlg == "otp" ? (
-                  <div
-                      style={{
-                        color: "red",
-                        marginTop: `-13px`,
-                        marginBottom: "15px",
-                        fontSize: "14px",
-                      }}
-                  >
-                    {errorMessage}
-                  </div>
+                <div
+                  style={{
+                    color: "red",
+                    marginTop: `-13px`,
+                    marginBottom: "15px",
+                    fontSize: "14px",
+                  }}
+                >
+                  {errorMessage}
+                </div>
               ) : null}
             </> : null}
             <button type="submit" className="sign-up-btn">
@@ -364,18 +393,18 @@ const Login = () => {
             {forgotPasswordFlag
               ? null
               : !authSelectFlag && (
-                  <>
-                    <div className="comman-row-input persons-row">
-                      <input
-                        placeholder="Name"
-                        type="text"
-                        name="displayName"
-                        value={user.displayName}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </>
-                )}
+                <>
+                  <div className="comman-row-input persons-row">
+                    <input
+                      placeholder="Name"
+                      type="text"
+                      name="displayName"
+                      value={user.displayName}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </>
+              )}
             <div className="comman-row-input email-row">
               <input
                 placeholder="Email"

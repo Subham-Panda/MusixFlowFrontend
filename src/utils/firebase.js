@@ -3,12 +3,13 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const config = {
-  apiKey: "AIzaSyAR4w1n83q38fcGOO_rDlsQxfiRyvFbfmc",
-  authDomain: "inflow-29b14.firebaseapp.com",
-  projectId: "inflow-29b14",
-  storageBucket: "inflow-29b14.appspot.com",
-  messagingSenderId: "72465436102",
-  appId: "1:72465436102:web:637e2320f5c9b5c17f36c7",
+  apiKey: "AIzaSyAZg2nArlAzBsqdxu8RnA22HqJxyvE_EOI",
+  authDomain: "firstnft.firebaseapp.com",
+  projectId: "firstnft",
+  storageBucket: "firstnft.appspot.com",
+  messagingSenderId: "217647268540",
+  appId: "1:217647268540:web:606a6b7215168eb90386b9",
+  measurementId: "G-MGKYJX21XR"
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -30,7 +31,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         ...additionalData,
       });
     } catch (error) {
-      console.log("error creating user", error);
+      // console.log("error creating user", error);
     }
   }
   return userRef;
