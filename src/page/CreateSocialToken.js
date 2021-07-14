@@ -5,6 +5,8 @@ import { ethers } from 'ethers';
 import { getEventData } from '../utils/blockchain';
 import { Inflow } from '../inflow-solidity-sdk/src/Inflow';
 import SocialTokenFactory from '../artifacts/contracts/token/social/SocialTokenFactory.sol/SocialTokenFactory.json';
+import {MOCKUSDC, SOCIAL_TOKEN_FACTORY} from '../utils/addresses'
+
 
 const CreateSocialToken = () => {
     const [socialtokenid, setSocialTokenId] = useState('');
@@ -87,7 +89,7 @@ const CreateSocialToken = () => {
                 // console.log({ provider });
                 const signer = provider.getSigner();
                 const contract = new ethers.Contract(
-                    process.env.REACT_APP_SOCIAL_TOKEN_FACTORY,
+                    SOCIAL_TOKEN_FACTORY,
                     SocialTokenFactory.abi,
                     signer
                 );
@@ -116,7 +118,7 @@ const CreateSocialToken = () => {
                     const socialTokenAddress = await getEventData(
                         contract.create({
                             creator: walletaddress,
-                            collateral: process.env.REACT_APP_MOCKUSDC,
+                            collateral: MOCKUSDC,
                             maxSupply: ethers.utils.parseEther(String(maxsupply)),
                             slope: ethers.utils.parseEther(String(slope)),
                             name: TokenName.trim(),

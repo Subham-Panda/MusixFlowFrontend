@@ -19,6 +19,7 @@ import MockUSDC from '../artifacts/contracts/mocks/MockUSDC.sol/MockUSDC.json';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { useParams } from 'react-router-dom'
 import Axios from 'axios';
+import {MOCKUSDC} from '../utils/addresses'
 
 const Artistpic = () => {
     const { id } = useParams();
@@ -198,21 +199,21 @@ const Artistpic = () => {
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
                 );
-                const admin = new Wallet(
-                    process.env.REACT_APP_ADMIN_PVT_KEY,
-                    provider
-                );
+                // const admin = new Wallet(
+                //     process.env.REACT_APP_ADMIN_PVT_KEY,
+                //     provider
+                // );
                 const signer = provider.getSigner();
                 const social = new Contract(
                     SocialTokenAddress,
                     SocialToken.abi,
-                    admin
+                    signer
                 );
                 const socialMinter = social.connect(signer);
                 const usdc = new Contract(
-                    process.env.REACT_APP_MOCKUSDC,
+                    MOCKUSDC,
                     MockUSDC.abi,
-                    admin
+                    signer
                 );
                 const usdcMinter = usdc.connect(signer);
                 const inflow = new Inflow(provider, 80001);
@@ -292,15 +293,15 @@ const Artistpic = () => {
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
                 );
-                const admin = new Wallet(
-                    process.env.REACT_APP_ADMIN_PVT_KEY,
-                    provider
-                );
+                // const admin = new Wallet(
+                //     process.env.REACT_APP_ADMIN_PVT_KEY,
+                //     provider
+                // );
                 const signer = provider.getSigner();
                 const social = new Contract(
                     SocialTokenAddress,
                     SocialToken.abi,
-                    admin
+                    signer
                 );
                 const socialMinter = social.connect(signer);
                 const inflow = new Inflow(provider, 80001);
