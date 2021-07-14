@@ -29,7 +29,7 @@ export const AppRoutes = () => {
         <Switch>
             <PublicRoutes path="/login" component={Login} exact />
             <PublicRoutes path="/" component={Inflowmusic} exact />
-            <AdminRoutes path="/createsocialtoken" component={CreateSocialToken} exact />
+            <AdminRoutes path="/artistonboarding" component={CreateSocialToken} exact />
             <AdminRoutes path="/getmintprice" component={GetMintPrice} exact />
             <AdminRoutes path="/mintusdc" component={MintUSDC} exact />
             <AdminRoutes path="/addadmin" component={AddAdmin} exact />
