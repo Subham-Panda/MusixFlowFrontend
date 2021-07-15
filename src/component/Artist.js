@@ -225,7 +225,7 @@ const Artistpic = () => {
                 );
                 // // console.log({ usdcBalance });
                 await fetchTokenPrice();
-                if (usdcBalance[0] < TokensToMint * MintPrice) {
+                if (usdcBalance[0] < totalmintprice) {
                     setLoading(false)
                     setlessusdc((lessusdc) => !lessusdc);
                     return;
@@ -237,7 +237,7 @@ const Artistpic = () => {
                     SocialTokenAddress
                 );
                 // // console.log({ allowance });
-                if (allowance > TokensToMint * MintPrice) {
+                if (allowance > totalmintprice) {
                     // // console.log('ALLOWANCE GREATER SO MINTING DIRECTLY');
                     await (
                         await socialMinter.mint(
@@ -754,7 +754,7 @@ const Artistpic = () => {
                             type="number"
                             value={TokensToMint}
                             placeholder=""
-                            onChange={(e) => setTokensToMint(e.target.value)}
+                            onChange={(e) => { setTokensToMint(e.target.value); setbuyflag(false)}}
                         />
                     </div>
 
@@ -790,7 +790,7 @@ const Artistpic = () => {
                             type="number"
                             value={TokensToBurn}
                             placeholder=""
-                            onChange={(e) => setTokensToBurn(e.target.value)}
+                            onChange={(e) => { setTokensToBurn(e.target.value); setsellflag(false)}}
                         />
                     </div>
 
