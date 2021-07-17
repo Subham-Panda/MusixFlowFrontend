@@ -115,7 +115,7 @@ const Artistpic = () => {
         ) {
             try {
                 // // console.log({ SocialTokenAddress })
-                await requestAccount();
+                // await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
                 );
@@ -139,7 +139,7 @@ const Artistpic = () => {
             SocialTokenAddress !== ''
         ) {
             try {
-                await requestAccount();
+                // await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
                 );
@@ -329,7 +329,7 @@ const Artistpic = () => {
         ) {
             try {
                 setLoading(true);
-                await requestAccount();
+                // await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
                 );
@@ -358,7 +358,7 @@ const Artistpic = () => {
             try {
                 setLoading(true)
                 // // console.log({ SocialTokenAddress })
-                await requestAccount();
+                // await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
                 );
