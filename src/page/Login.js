@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../store/reducers/authSlice";
+import { login, setArtist } from "../store/reducers/authSlice";
 import { assetsImages } from "../constants/images";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom';
 import Loader from "../component/Loader";
 import SweetAlert from "react-bootstrap-sweetalert";
 import Axios from 'axios'
+import { setclienturl } from "../store/reducers/graphqlSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -85,6 +86,15 @@ const Login = () => {
             );
             Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken })
           }).then(() => {
+            Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email })
+          }).then((response) => {
+            console.log(response.data);
+            dispatch(setArtist({ isArtist: response.data.isArtist }))
+            if (response.data.isArtist) {
+              dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
+            } else {
+              dispatch(setclienturl({ clienturl: '' }))
+            }
             showAlert('Login Successful', 'success')
           })
         } else {
@@ -102,8 +112,17 @@ const Login = () => {
             );
             Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken })
           }).then(() => {
+            Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email })
+          }).then((response) => {
+            console.log(response.data);
+            dispatch(setArtist({ isArtist: response.data.isArtist }))
+            if (response.data.isArtist) {
+              dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
+            } else {
+              dispatch(setclienturl({ clienturl: '' }))
+            }
             showAlert('Check your email and verify account', 'info')
-          })
+          });
         }
         // history.push("/");
       } catch (error) {
@@ -139,8 +158,17 @@ const Login = () => {
               dispatch(login({ phoneNumber: user.phone, uid: loginUser.uid, token: loginUser.refreshToken, isAdmin }));
               Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, phone: user.phone, refresh_token: user.refreshToken })
             }).then(() => {
-              hideAlert()
-            })
+              Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email })
+            }).then((response) => {
+              console.log(response.data);
+              dispatch(setArtist({ isArtist: response.data.isArtist }))
+              if (response.data.isArtist) {
+                dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
+              } else {
+                dispatch(setclienturl({ clienturl: '' }))
+              }
+              hideAlert();
+            });
           }, 2000);
         })
         .catch((error) => {
@@ -207,6 +235,15 @@ const Login = () => {
           );
           Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken, name: user.displayName })
         }).then(() => {
+          Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email })
+        }).then((response) => {
+          console.log(response.data);
+          dispatch(setArtist({ isArtist: response.data.isArtist }));
+          if (response.data.isArtist) {
+            dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
+          } else {
+            dispatch(setclienturl({ clienturl: '' }))
+          }
           window.location.href = "/"
         })
         //// console.log('++++++',user.email, user.uid, token);

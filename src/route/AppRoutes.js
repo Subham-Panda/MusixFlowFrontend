@@ -14,6 +14,7 @@ import LabelArtists from '../page/LabelArtists';
 import PublicRoutes from './PublicRoutes';
 import PrivateRoutes from './PrivateRoutes';
 import AdminRoutes from './AdminRoutes';
+import ArtistRoutes from './ArtistRoutes';
 import Artistpic from '../component/Artistpic';
 import Artist from '../component/Artist';
 import Artistmanagement from '../component/Artistmanagement';
@@ -36,6 +37,16 @@ export const AppRoutes = () => {
             <AdminRoutes path="/allartists" component={AllArtists} exact />
             <AdminRoutes path="/managelabels" component={ManageLabels} exact />
             <AdminRoutes path="/managelabelartists/:labelid" component={ManageLabelArtists} exact />
+            {/* <ArtistRoutes
+                path="/artistmanage"
+                component={Artistmanagement}
+                exact
+            /> */}
+            <PrivateRoutes
+                path="/artistmanage"
+                component={Artistmanagement}
+                exact
+            />
             {/* <PrivateRoutes path="/dashboard" component={Mydashboard} exact /> */}
             <PublicRoutes path="/news" component={News} exact />
             <PublicRoutes path="/leaderboard" component={Leaderboard} exact />
@@ -48,12 +59,6 @@ export const AppRoutes = () => {
             <PublicRoutes path="/labels/:labelid" component={LabelArtists} exact />
             <PublicRoutes path="/artist/:id" component={Artist} exact />
             <PublicRoutes path="/artist" component={Artist} exact />
-
-            <PrivateRoutes
-                path="/artistmanage"
-                component={Artistmanagement}
-                exact
-            />
             {/* <PrivateRoutes path="/demo" component={DemoPage} exact />
             <PrivateRoutes path="/login" component={Login} exact /> */}
         </Switch>

@@ -14,6 +14,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+
 //Redux Store
 import store from "./store/configureStore";
 import App from "./App";
@@ -27,7 +28,7 @@ const persistor = persistStore(store);
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <App />
+        <App />
     </PersistGate>
   </Provider>,
   document.getElementById("root")
