@@ -333,7 +333,7 @@ const Artistpic = () => {
             SocialTokenAddress !== ''
         ) {
             try {
-                setLoading(true);
+                setsellmodalloading(true);
                 // await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
@@ -345,10 +345,10 @@ const Artistpic = () => {
                 );
                 settotalburnprice(burnPrice[0]);
                 // // console.log(`BURN PRICE: ${burnPrice[0]}`);
-                setLoading(false);
+                setsellmodalloading(false);
                 setsellflag(true);
             } catch (err) {
-                setLoading(false);
+                setsellmodalloading(false);
                 // // console.log(err);
             }
         }
@@ -361,7 +361,7 @@ const Artistpic = () => {
             SocialTokenAddress !== ''
         ) {
             try {
-                setLoading(true)
+                setbuymodalloading(true)
                 // // console.log({ SocialTokenAddress })
                 // await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
@@ -373,11 +373,11 @@ const Artistpic = () => {
                     inflow.parseERC20('SocialToken', String(TokensToMint))
                 );
                 settotalmintprice(mintPrice[0]);
-                setLoading(false)
+                setbuymodalloading(false)
                 setbuyflag(true)
                 // // console.log(`MINT PRICE: ${mintPrice[0]}`);
             } catch (err) {
-                setLoading(false)
+                setbuymodalloading(false)
                 // // console.log(err);
             }
         }
@@ -410,7 +410,7 @@ const Artistpic = () => {
                         <div className="artist-content">
                             <div className="artist-content-details">
                                 <div className="artist-name">{`${artist.first_name ? artist.first_name : ''} ${artist.last_name ? artist.last_name : ''}`}</div>
-                                <div className="album-name">Hip-Hop/Rap</div>
+                                <div className="album-name">--</div>
                                 <ul>
                                     <li>
                                         <div className="song-total">
@@ -487,7 +487,7 @@ const Artistpic = () => {
                             <img alt="" src={assetsImages.button} />
                             <div className="button">
                                 {
-                                    token.trim()!=="" ?
+                                    token.trim() !== "" ?
                                         (<button
                                             className="btn sell-button"
                                             type="button"
@@ -495,17 +495,17 @@ const Artistpic = () => {
                                         >
                                             Sell
                                         </button>) :
-                                        (   <button
+                                        (<button
                                             className="btn sell-button test"
                                             type="button"
                                             onClick={() => { window.location.href = "/login" }}
-                                            >
-                                                Sell
-                                            </button>)
+                                        >
+                                            Sell
+                                        </button>)
                                 }
 
                                 {
-                                    token.trim()!=="" ? (<button
+                                    token.trim() !== "" ? (<button
                                         className="btn buy-button"
                                         type="button"
                                         onClick={() => setbuy((buy) => !buy)}
@@ -514,7 +514,7 @@ const Artistpic = () => {
                                     </button>) : (<button
                                         className="btn buy-button test"
                                         type="button"
-                                        onClick={() => {window.location.href="/login"}}
+                                        onClick={() => { window.location.href = "/login" }}
                                     >
                                         Buy
                                     </button>)
@@ -774,7 +774,7 @@ const Artistpic = () => {
 
                 <Modal.Body>
                     {
-                        buymodalloading ? <SmallLoader /> : (
+                        buymodalloading ? <div className="d-flex justify-content-center align-items-center flex-column"><SmallLoader /></div> : (
                             <>
                                 <div className="form-group">
                                     <label>Number of Tokens</label>
@@ -806,6 +806,7 @@ const Artistpic = () => {
             </Modal>
 
             <Modal
+                
                 show={sell}
                 className="edit-profile-modal buy"
                 onHide={() => setsell((sell) => !sell)}
@@ -814,8 +815,8 @@ const Artistpic = () => {
                     <span className="title">Sell {artist.social_token_symbol} Token</span>
                 </Modal.Header>
 
-                <Modal.Body>
-                    {sellmodalloading ? <SmallLoader /> : (
+                <Modal.Body className="d-flex justify-content-center align-items-center">
+                    {sellmodalloading ? <div className="d-flex justify-content-center align-items-center flex-column"><SmallLoader /></div> : (
                         <>
                             <div className="form-group">
                                 <label>Number of Tokens</label>
