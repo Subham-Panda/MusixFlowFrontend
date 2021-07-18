@@ -24,48 +24,49 @@ const Totalbalancechart = () => {
       let tempvalues = []
       data.minteds.forEach(item => {
         templabels.push(new Date(item.timestamp * 1000).toLocaleString())
-        tempvalues.push(item.mintPrice)
+        tempvalues.push(item.mintPrice/1000000)
       })
       setvalues(tempvalues);
       setlabels(templabels);
     }
-  }, [data]);
+}, [data]);
 
-  const graphdata = {
-    labels: labels,
+const graphdata = {
+  labels: labels,
 
-    datasets: [
+  datasets: [
+    {
+      label: 'Price of Token',
+      data: values,
+      fill: true,
+      backgroundColor: 'rgba(87, 47, 163, 1)',
+
+      borderCapStyle: "round",
+      borderJoinStyle: 'miter'
+    },
+  ],
+};
+
+const options = {
+  maintainAspectRatio: false,
+  responsive: true,
+  scales: {
+    yAxes: [
       {
-        data: values,
-        fill: true,
-        backgroundColor: 'rgba(87, 47, 163, 1)',
-
-        borderCapStyle: "round",
-        borderJoinStyle: 'miter'
+        ticks: {
+          beginAtZero: true,
+        },
       },
     ],
-  };
-
-  const options = {
-    maintainAspectRatio: false,
-    responsive: true,
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
-  };
-  return (
-    <>
-      {
-        loading ? <SmallLoader /> : <Line data={graphdata} options={options} height={250} />
-      }
-    </>
-  )
+  },
+};
+return (
+  <>
+    {
+      loading ? <SmallLoader /> : <Line data={graphdata} options={options} height={250} />
+    }
+  </>
+)
 }
 
 

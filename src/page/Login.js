@@ -219,43 +219,78 @@ const Login = () => {
       });
   };
 
-  const signInWithSocialAccount = (provider) => {
-    auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        const credential = result.credential;
-        const token = credential.accessToken;
-        const user = result.user;
-        let isAdmin = false;
-        // console.log(user.displayName)
-        user.getIdTokenResult().then(idTokenResult => {
-          isAdmin = idTokenResult.claims.isAdmin ? true : false
-          dispatch(
-            login({ email: user.email, uid: user.uid, token: user.refreshToken, isAdmin })
-          );
-          Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken, name: user.displayName })
-        }).then(() => {
-          Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email })
-        }).then((response) => {
-          console.log(response.data);
-          dispatch(setArtist({ isArtist: response.data.isArtist }));
-          if (response.data.isArtist) {
-            dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
-          } else {
-            dispatch(setclienturl({ clienturl: '' }))
-          }
-          window.location.href = "/"
-        })
-        //// console.log('++++++',user.email, user.uid, token);
+  const signInWithSocialAccount = async (provider) => {
+    // auth
+    //   .signInWithPopup(provider)
+    //   .then((result) => {
+    //     const credential = result.credential;
+    //     const token = credential.accessToken;
+    //     const user = result.user;
+    //     let isAdmin = false;
+    //     // console.log(user.displayName)
+    //     user.getIdTokenResult().then(idTokenResult => {
+    //       isAdmin = idTokenResult.claims.isAdmin ? true : false
+    //       dispatch(
+    //         login({ email: user.email, uid: user.uid, token: user.refreshToken, isAdmin })
+    //       );
+    //       Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken, name: user.displayName })
+    //     }).then(() => {
+    //       Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email })
+    //     }).then((response) => {
+    //       if (response) {
+    //         console.log({ response });
+    //         dispatch(setArtist({ isArtist: response.data.isArtist }));
+    //         if (response.data.isArtist) {
+    //           dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
+    //         } else {
+    //           dispatch(setclienturl({ clienturl: '' }))
+    //         }
+    //         window.location.href = "/"
+    //       }
 
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.email;
-        const credential = error.credential;
-        console.error(credential, errorMessage, email);
-      });
+    //     })
+    //     //// console.log('++++++',user.email, user.uid, token);
+
+    //   })
+    //   .catch((error) => {
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     const email = error.email;
+    //     const credential = error.credential;
+    //     console.error(credential, errorMessage, email);
+    //   });
+
+    try {
+      const result = await auth.signInWithPopup(provider);
+      const credential = result.credential;
+      const token = credential.accessToken;
+      const user = result.user;
+      let isAdmin = false;
+      const idTokenResult = await user.getIdTokenResult();
+      isAdmin = idTokenResult.claims.isAdmin ? true : false
+      dispatch(
+        login({ email: user.email, uid: user.uid, token: user.refreshToken, isAdmin })
+      );
+      await Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken, name: user.displayName })
+      const response = await Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email })
+      console.log(response.data)
+      dispatch(setArtist({ isArtist: response.data.isArtist }));
+      if (response.data.isArtist) {
+        dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
+      } else {
+        dispatch(setclienturl({ clienturl: '' }))
+      }
+      window.location.href = "/"
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.email;
+      const credential = error.credential;
+      console.error(credential, errorMessage, email);
+    }
+
+
+
   };
 
   function showAlert(title, type) {

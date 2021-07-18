@@ -7,6 +7,9 @@ import Performbar from "./Performbar";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { Modal } from "react-bootstrap";
 import Loader from "./Loader";
+import { Inflow } from '../inflow-solidity-sdk/src/Inflow';
+import { ethers } from 'ethers';
+import SmallLoader from "./SmallLoader";
 
 const GET_TOKEN_FEES = gql`
     query {
@@ -26,18 +29,26 @@ const Artistpic = () => {
 
     const { error, loading, data } = useQuery(GET_TOKEN_FEES);
     const [tokenfees, settokenfees] = useState(0.0);
+
+
     useEffect(() => {
         if (data) {
             let tokenfees = 0;
             data.minteds.forEach(item => {
                 tokenfees += item.royaltyPaid;
             })
-            settokenfees(tokenfees);
+            formatAndSetTokenFees(tokenfees);
         }
     }, [data]);
 
-    if (loading) {
-        return <Loader />
+    const formatAndSetTokenFees = async (value) => {
+        const provider = new ethers.providers.Web3Provider(
+            window.ethereum
+        );
+        const inflow = new Inflow(provider, 80001);
+        const tokenfees = inflow.formatERC20('USDC', String(value))
+        console.log({tokenfees})
+        settokenfees(tokenfees);
     }
 
     return (
@@ -59,8 +70,13 @@ const Artistpic = () => {
                             <div className='dropdown'>
 
                             </div>
-                            <div className='amount'>
-                                {tokenfees}
+                            <div className='amount d-flex justify-content-center align-items-center text-wrap' style={{wordWrap: "break-word"}}>
+                                {
+                                    loading ?
+                                    <SmallLoader />
+                                    :
+                                    tokenfees
+                                }
                             </div>
                         </div>
                         <div className="first-row-main-dash">

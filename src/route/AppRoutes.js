@@ -42,7 +42,7 @@ export const AppRoutes = () => {
                 component={Artistmanagement}
                 exact
             /> */}
-            <PrivateRoutes
+            <ArtistRoutes
                 path="/artistmanage"
                 component={Artistmanagement}
                 exact
