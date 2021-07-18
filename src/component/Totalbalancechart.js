@@ -23,50 +23,63 @@ const Totalbalancechart = () => {
       let templabels = [];
       let tempvalues = []
       data.minteds.forEach(item => {
-        templabels.push(new Date(item.timestamp * 1000).toLocaleString())
-        tempvalues.push(item.mintPrice/1000000)
+        if (templabels.length > 0) {
+          if ((templabels[templabels.length - 1].getMonth() === new Date(item.timestamp * 1000).getMonth() && templabels[templabels.length - 1].getDate() < new Date(item.timestamp * 1000).getDate()) || (templabels[templabels.length - 1].getMonth() !== new Date(item.timestamp * 1000).getMonth())) {
+            templabels.push(new Date(item.timestamp * 1000));
+            tempvalues.push(item.mintPrice / 1000000)
+          }
+        } else {
+          templabels.push(new Date(item.timestamp * 1000));
+          tempvalues.push(item.mintPrice / 1000000)
+        }
       })
       setvalues(tempvalues);
       setlabels(templabels);
     }
-}, [data]);
+  }, [data]);
 
-const graphdata = {
-  labels: labels,
+  
 
-  datasets: [
-    {
-      label: 'Price of Token',
-      data: values,
-      fill: true,
-      backgroundColor: 'rgba(87, 47, 163, 1)',
-
-      borderCapStyle: "round",
-      borderJoinStyle: 'miter'
-    },
-  ],
-};
-
-const options = {
-  maintainAspectRatio: false,
-  responsive: true,
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
+  const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
         },
-      },
-    ],
-  },
-};
-return (
-  <>
-    {
-      loading ? <SmallLoader /> : <Line data={graphdata} options={options} height={250} />
-    }
-  </>
-)
+      ],
+    },
+  };
+
+  const getgraphdata = () => {
+    const updatedLabels = labels.map(label => label.toLocaleDateString())
+    const graphdata = {
+      labels: updatedLabels,
+  
+      datasets: [
+        {
+          label: 'Price of Token',
+          data: values,
+          fill: true,
+          backgroundColor: 'rgba(87, 47, 163, 1)',
+  
+          borderCapStyle: "round",
+          borderJoinStyle: 'miter'
+        },
+      ],
+    };
+    return graphdata;
+  }
+  return (
+    <>
+      {
+        loading ? <SmallLoader /> : <Line data={getgraphdata()} options={options} height={250} />
+      }
+    </>
+  )
 }
 
 

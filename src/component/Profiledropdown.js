@@ -13,6 +13,7 @@ function Profiledropdown() {
     const uid = useSelector((state) => state.auth.data.uid);
     const [firstname, setfirstname] = useState('');
     const [country, setcountry] = useState('');
+    const [profileimage, setprofileimage] = useState('');
 
 
     useEffect(() => {
@@ -24,7 +25,8 @@ function Profiledropdown() {
         const { user } = data
         if (user) {
             setfirstname(user.first_name ? user.first_name : user.name);
-            setcountry(user.country);
+            setcountry(user.country ? user.country : '');
+            setprofileimage(user.profile_image)
         }
     }
 
@@ -45,7 +47,7 @@ function Profiledropdown() {
         <div className="Dropdown-main-header">
             <Dropdown>
                 <Dropdown.Toggle id="dropdown-custom-1">
-                    <img alt="" src={assetsImages.person} />
+                    <img alt="" src={profileimage!==''?`${process.env.REACT_APP_SERVER_URL}/${profileimage}`:assetsImages.person} />
                 </Dropdown.Toggle>
                 <Dropdown.Menu className="super-colors profile-dropdown-main">
                     {/*<Dropdown.Item eventKey="1">Action</Dropdown.Item>*/}
@@ -66,7 +68,7 @@ function Profiledropdown() {
                                         <img alt="" src={assetsImages.fullscreen} />
                                     </div>
                                     <div className="profile-img">
-                                        <img alt="" src={assetsImages.person} />
+                                        <img alt="" src={profileimage!==''?`${process.env.REACT_APP_SERVER_URL}/${profileimage}`:assetsImages.person} />
                                     </div>
                                     <div className="money-icon">
                                         <img alt="" src={assetsImages.money} />

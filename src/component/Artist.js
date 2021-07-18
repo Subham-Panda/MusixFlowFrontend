@@ -20,8 +20,12 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 import { useParams } from 'react-router-dom'
 import Axios from 'axios';
 import { MOCKUSDC } from '../utils/addresses'
+import { useSelector } from 'react-redux';
+import { Link } from '@material-ui/core';
 
 const Artistpic = () => {
+    const token = useSelector(state => state.auth.token)
+    // console.log({token})
     const { id } = useParams();
     const [artist, setArtist] = useState({})
 
@@ -46,6 +50,8 @@ const Artistpic = () => {
     const [buyflag, setbuyflag] = useState(false)
     const [totalmintprice, settotalmintprice] = useState(0.0)
     const [totalburnprice, settotalburnprice] = useState(0.0)
+    const [buymodalloading, setbuymodalloading] = useState(false)
+    const [sellmodalloading, setsellmodalloading] = useState(false)
 
 
 
@@ -216,7 +222,7 @@ const Artistpic = () => {
                 );
                 const usdcMinter = usdc.connect(signer);
                 const inflow = new Inflow(provider, 80001);
-                setLoading(true);
+                setbuymodalloading(true);
                 const signerAddress = await signer.getAddress();
                 const usdcBalance = await inflow.balanceOf(
                     'USDC',
@@ -263,11 +269,11 @@ const Artistpic = () => {
                     )
                 ).wait();
                 // // console.log('MINT SUCCESSFULL');
-                setLoading(false);
+                setbuymodalloading(false);
                 setsuccessmint(successmint => !successmint)
                 // getBalance();
             } catch (err) {
-                setLoading(false);
+                setbuymodalloading(false);
                 setfailuremint(failuremint => !failuremint)
                 // // console.log(err);
             }
@@ -287,7 +293,7 @@ const Artistpic = () => {
             SocialTokenAddress !== ''
         ) {
             try {
-                setLoading(true);
+                setsellmodalloading(true);
                 await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
@@ -308,12 +314,12 @@ const Artistpic = () => {
                     socialMinter,
                     inflow.parseERC20('SocialToken', String(TokensToBurn))
                 );
-                setLoading(false)
+                setsellmodalloading(false);
                 setsuccessburn(successburn => !successburn)
                 // // console.log('BURN SUCCESSFULL');
                 // getBalance();
             } catch (err) {
-                setLoading(false);
+                setsellmodalloading(false);
                 setfailureburn(failureburn => !failureburn)
                 // // console.log(err);
             }
@@ -408,14 +414,14 @@ const Artistpic = () => {
                                 <ul>
                                     <li>
                                         <div className="song-total">
-                                            125,987
+                                            --
                                         </div>
                                         <div className="song-folder">
                                             Superfans
                                         </div>
                                     </li>
                                     <li>
-                                        <div className="song-total">78</div>
+                                        <div className="song-total">--</div>
                                         <div className="song-folder">NFTs</div>
                                     </li>
                                     <li>
@@ -449,7 +455,7 @@ const Artistpic = () => {
                             <div className="dollor-price">
                                 {displayTokenPrice()}
                             </div>
-                            <div className="small-heading">+7.3% last week</div>
+                            <div className="small-heading">--</div>
                         </div>
                         <div className="btn-filter">
                             <a href="#">
@@ -480,20 +486,41 @@ const Artistpic = () => {
                         <div className="song-button">
                             <img alt="" src={assetsImages.button} />
                             <div className="button">
-                                <button
-                                    className="btn sell-button"
-                                    type="button"
-                                    onClick={() => setsell((sell) => !sell)}
-                                >
-                                    Sell
-                                </button>
-                                <button
-                                    className="btn buy-button"
-                                    type="button"
-                                    onClick={() => setbuy((buy) => !buy)}
-                                >
-                                    Buy
-                                </button>
+                                {
+                                    token.trim()!=="" ?
+                                        (<button
+                                            className="btn sell-button"
+                                            type="button"
+                                            onClick={() => setsell((sell) => !sell)}
+                                        >
+                                            Sell
+                                        </button>) :
+                                        (   <button
+                                            className="btn sell-button test"
+                                            type="button"
+                                            onClick={() => { window.location.href = "/login" }}
+                                            >
+                                                Sell
+                                            </button>)
+                                }
+
+                                {
+                                    token.trim()!=="" ? (<button
+                                        className="btn buy-button"
+                                        type="button"
+                                        onClick={() => setbuy((buy) => !buy)}
+                                    >
+                                        Buy
+                                    </button>) : (<button
+                                        className="btn buy-button test"
+                                        type="button"
+                                        onClick={() => {window.location.href="/login"}}
+                                    >
+                                        Buy
+                                    </button>)
+
+                                }
+
 
                             </div>
                         </div>
@@ -746,20 +773,26 @@ const Artistpic = () => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <div className="form-group">
-                        <label>Number of Tokens</label>
-                        <input
-                            className="form-control"
-                            type="number"
-                            value={TokensToMint}
-                            placeholder=""
-                            onChange={(e) => { setTokensToMint(e.target.value); setbuyflag(false) }}
-                        />
-                    </div>
+                    {
+                        buymodalloading ? <SmallLoader /> : (
+                            <>
+                                <div className="form-group">
+                                    <label>Number of Tokens</label>
+                                    <input
+                                        className="form-control"
+                                        type="number"
+                                        value={TokensToMint}
+                                        placeholder=""
+                                        onChange={(e) => { setTokensToMint(e.target.value); setbuyflag(false) }}
+                                    />
+                                </div>
 
-                    <div className="sell-total-amount">
-                        Amount you'll spend: ${totalmintprice}
-                    </div>
+                                <div className="sell-total-amount">
+                                    Amount you'll spend: ${totalmintprice}
+                                </div>
+                            </>
+                        )
+                    }
                 </Modal.Body>
 
                 <Modal.Footer>
@@ -782,20 +815,24 @@ const Artistpic = () => {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <div className="form-group">
-                        <label>Number of Tokens</label>
-                        <input
-                            className="form-control"
-                            type="number"
-                            value={TokensToBurn}
-                            placeholder=""
-                            onChange={(e) => { setTokensToBurn(e.target.value); setsellflag(false) }}
-                        />
-                    </div>
+                    {sellmodalloading ? <SmallLoader /> : (
+                        <>
+                            <div className="form-group">
+                                <label>Number of Tokens</label>
+                                <input
+                                    className="form-control"
+                                    type="number"
+                                    value={TokensToBurn}
+                                    placeholder=""
+                                    onChange={(e) => { setTokensToBurn(e.target.value); setsellflag(false) }}
+                                />
+                            </div>
 
-                    <div className="buy-total-amount">
-                        Amount you'll earn: ${totalburnprice}
-                    </div>
+                            <div className="buy-total-amount">
+                                Amount you'll earn: ${totalburnprice}
+                            </div>
+                        </>
+                    )}
                 </Modal.Body>
 
                 <Modal.Footer>

@@ -115,6 +115,15 @@
     color: #ffffff;
 }
 
+.modal-content {
+    background-color: rgb(27, 26, 26) !important;
+    color: #fff;
+}
+
+.modal-header > button > span {
+    color:white;
+}
+
 
 @media (max-width:1400px){
     .header-main{
