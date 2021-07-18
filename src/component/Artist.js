@@ -19,7 +19,7 @@ import MockUSDC from '../artifacts/contracts/mocks/MockUSDC.sol/MockUSDC.json';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import { useParams } from 'react-router-dom'
 import Axios from 'axios';
-import {MOCKUSDC} from '../utils/addresses'
+import { MOCKUSDC } from '../utils/addresses'
 
 const Artistpic = () => {
     const { id } = useParams();
@@ -64,7 +64,7 @@ const Artistpic = () => {
                     fetchTokenPrice();
                     fetchBurnPrice();
                 }, 10000);
-                getBalance();
+                // getBalance();
                 setLoading(false)
                 return () => {
                     clearInterval(tokenPrice);
@@ -80,32 +80,31 @@ const Artistpic = () => {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
     }
 
-    const getBalance = async () => {
-        if (
-            typeof window.ethereum !== 'undefined' &&
-            SocialTokenAddress &&
-            SocialTokenAddress !== ''
-        ) {
-            try {
-                await requestAccount();
-                const provider = new ethers.providers.Web3Provider(
-                    window.ethereum
-                );
-                const signer = provider.getSigner();
-                const signerAddress = await signer.getAddress();
-                const inflow = new Inflow(provider, 80001);
-                const balance = await inflow.balanceOf(
-                    'SocialToken',
-                    signerAddress,
-                    SocialTokenAddress
-                );
-                setBalance(balance[0]);
-                // // console.log(`BALANCE: ${balance[0]}`);
-            } catch (err) {
-                // // console.log(err);
-            }
-        }
-    };
+    // const getBalance = async () => {
+    //     if (
+    //         typeof window.ethereum !== 'undefined' &&
+    //         SocialTokenAddress &&
+    //         SocialTokenAddress !== ''
+    //     ) {
+    //         try {
+    //             const provider = new ethers.providers.Web3Provider(
+    //                 window.ethereum
+    //             );
+    //             const signer = provider.getSigner();
+    //             const signerAddress = await signer.getAddress();
+    //             const inflow = new Inflow(provider, 80001);
+    //             const balance = await inflow.balanceOf(
+    //                 'SocialToken',
+    //                 signerAddress,
+    //                 SocialTokenAddress
+    //             );
+    //             setBalance(balance[0]);
+    //             // // console.log(`BALANCE: ${balance[0]}`);
+    //         } catch (err) {
+    //             // // console.log(err);
+    //         }
+    //     }
+    // };
 
     const fetchTokenPrice = async () => {
         if (
@@ -168,13 +167,13 @@ const Artistpic = () => {
         }
     };
 
-    const displayBalance = () => {
-        if (MintPrice && MintPrice !== '') {
-            return <div className="dollor-price">{Balance ? Balance : '0.0'}</div>;
-        } else {
-            return <SmallLoader />;
-        }
-    };
+    // const displayBalance = () => {
+    //     if (MintPrice && MintPrice !== '') {
+    //         return <div className="dollor-price">{Balance ? Balance : '0.0'}</div>;
+    //     } else {
+    //         return <SmallLoader />;
+    //     }
+    // };
 
     const mint = async (social, usdc, amount) => {
         const mintPrice = await social.getMintPrice(amount);
@@ -266,7 +265,7 @@ const Artistpic = () => {
                 // // console.log('MINT SUCCESSFULL');
                 setLoading(false);
                 setsuccessmint(successmint => !successmint)
-                getBalance();
+                // getBalance();
             } catch (err) {
                 setLoading(false);
                 setfailuremint(failuremint => !failuremint)
@@ -312,7 +311,7 @@ const Artistpic = () => {
                 setLoading(false)
                 setsuccessburn(successburn => !successburn)
                 // // console.log('BURN SUCCESSFULL');
-                getBalance();
+                // getBalance();
             } catch (err) {
                 setLoading(false);
                 setfailureburn(failureburn => !failureburn)
@@ -754,7 +753,7 @@ const Artistpic = () => {
                             type="number"
                             value={TokensToMint}
                             placeholder=""
-                            onChange={(e) => { setTokensToMint(e.target.value); setbuyflag(false)}}
+                            onChange={(e) => { setTokensToMint(e.target.value); setbuyflag(false) }}
                         />
                     </div>
 
@@ -790,7 +789,7 @@ const Artistpic = () => {
                             type="number"
                             value={TokensToBurn}
                             placeholder=""
-                            onChange={(e) => { setTokensToBurn(e.target.value); setsellflag(false)}}
+                            onChange={(e) => { setTokensToBurn(e.target.value); setsellflag(false) }}
                         />
                     </div>
 
