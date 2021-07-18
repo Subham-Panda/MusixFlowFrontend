@@ -58,7 +58,7 @@ class Wallet {
                 },
                 options: {
                     appName: "App name", // Your app name
-                    networkUrl: `https://mainnet.infura.io/v3/${INFURA_ID}`,
+                    networkUrl: `https://mainnet.infura.io/v3/36b9397d38ae4fd3a9d3c4b469fd3127`,
                     chainId: this.chainId,
                 },
                 package: WalletLink,

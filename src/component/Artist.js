@@ -223,9 +223,9 @@ const Artistpic = () => {
                     'USDC',
                     signerAddress
                 );
-                // // console.log({ usdcBalance });
                 await fetchTokenPrice();
-                if (usdcBalance[0] < totalmintprice) {
+                if (parseFloat(usdcBalance[0]) < parseFloat(totalmintprice)) {
+                    console.log("HELLO")
                     setLoading(false)
                     setlessusdc((lessusdc) => !lessusdc);
                     return;
@@ -237,7 +237,7 @@ const Artistpic = () => {
                     SocialTokenAddress
                 );
                 // // console.log({ allowance });
-                if (allowance > totalmintprice) {
+                if (parseFloat(allowance) > parseFloat(totalmintprice)) {
                     // // console.log('ALLOWANCE GREATER SO MINTING DIRECTLY');
                     await (
                         await socialMinter.mint(
