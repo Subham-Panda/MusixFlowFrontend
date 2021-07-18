@@ -5,7 +5,7 @@ import SmallLoader from './SmallLoader';
 
 const GET_GRAPH_DATA = gql`
     query {
-      minteds{
+      minteds(orderBy:timestamp){
         timestamp
         mintPrice
       }

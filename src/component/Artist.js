@@ -13,7 +13,7 @@ import { Modal } from 'react-bootstrap';
 import Loader from './Loader';
 import SmallLoader from './SmallLoader';
 import { Inflow } from '../inflow-solidity-sdk/src/Inflow';
-import { Contract, ethers, Wallet } from 'ethers';
+import { Contract, ethers } from 'ethers';
 import SocialToken from '../artifacts/contracts/token/social/SocialToken.sol/SocialToken.json';
 import MockUSDC from '../artifacts/contracts/mocks/MockUSDC.sol/MockUSDC.json';
 import SweetAlert from 'react-bootstrap-sweetalert';
@@ -21,11 +21,11 @@ import { useParams } from 'react-router-dom'
 import Axios from 'axios';
 import { MOCKUSDC } from '../utils/addresses'
 import { useSelector } from 'react-redux';
-import { Link } from '@material-ui/core';
+// import { Link } from '@material-ui/core';
 
 const Artistpic = () => {
     const token = useSelector(state => state.auth.token)
-    // console.log({token})
+    console.log({ token })
     const { id } = useParams();
     const [artist, setArtist] = useState({})
 
@@ -36,10 +36,10 @@ const Artistpic = () => {
     const [buy, setbuy] = useState(false);
     const [lessusdc, setlessusdc] = useState(false);
     const [MintPrice, setMintPrice] = useState();
-    const [BurnPrice, setBurnPrice] = useState();
+    // const [BurnPrice, setBurnPrice] = useState();
     const [TokensToMint, setTokensToMint] = useState(0);
     const [TokensToBurn, setTokensToBurn] = useState(0);
-    const [Balance, setBalance] = useState();
+    // const [Balance, setBalance] = useState();
     const [loading, setLoading] = useState(false);
     const [successmint, setsuccessmint] = useState(false);
     const [failuremint, setfailuremint] = useState(false);
@@ -52,6 +52,7 @@ const Artistpic = () => {
     const [totalburnprice, settotalburnprice] = useState(0.0)
     const [buymodalloading, setbuymodalloading] = useState(false)
     const [sellmodalloading, setsellmodalloading] = useState(false)
+    
 
 
 
@@ -59,22 +60,24 @@ const Artistpic = () => {
         const init = async () => {
             setLoading(true)
             const { data } = await Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/getbyid`, { id })
-            // // console.log({data})
+            console.log({ data })
             if (data.artist) {
-                // // console.log("HELLO1")
+                console.log("HELLO1")
                 setArtist(data.artist)
                 setSocialTokenAddress(data.artist.social_token_id)
-                // // console.log("HELLO2")
-                const tokenPrice = setInterval(() => {
-                    // // console.log("HELLO3")
-                    fetchTokenPrice();
-                    fetchBurnPrice();
-                }, 10000);
+                console.log("HELLO2")
+                fetchTokenPrice();
+                // fetchBurnPrice();
+                // const tokenPrice = setInterval(() => {
+                //     console.log("HELLO3")
+                //     fetchTokenPrice();
+                //     fetchBurnPrice();
+                // }, 10000);
                 // getBalance();
                 setLoading(false)
-                return () => {
-                    clearInterval(tokenPrice);
-                };
+                // return () => {
+                //     clearInterval(tokenPrice);
+                // };
             }
         }
         if (id) {
@@ -105,61 +108,85 @@ const Artistpic = () => {
     //                 SocialTokenAddress
     //             );
     //             setBalance(balance[0]);
-    //             // // console.log(`BALANCE: ${balance[0]}`);
+    //             console.log(`BALANCE: ${balance[0]}`);
     //         } catch (err) {
-    //             // // console.log(err);
+    //             console.log(err);
     //         }
     //     }
     // };
 
     const fetchTokenPrice = async () => {
+        const provider = new ethers.providers.JsonRpcProvider("https://explorer-mumbai.maticvigil.com/");
+        console.log({ provider })
+        try {
+            console.log({ SocialTokenAddress })
+            // await requestAccount();
+            // const provider = new ethers.providers.Web3Provider(
+            //     window.ethereum
+            // );
+            console.log({provider})
+            const inflow = new Inflow(provider, 80001);
+            console.log("HEEEREEEE")
+            const mintPrice = await inflow.getMintPriceSocial(
+                SocialTokenAddress,
+                inflow.parseERC20('SocialToken', '1')
+            );
+            console.log({mintPrice})
+            setMintPrice(mintPrice[0]);
+            console.log(`MINT PRICE: ${mintPrice[0]}`);
+        } catch (err) {
+            console.log(err);
+        }
         if (
             typeof window.ethereum !== 'undefined' &&
             SocialTokenAddress &&
             SocialTokenAddress !== ''
         ) {
             try {
-                // // console.log({ SocialTokenAddress })
+                console.log({ SocialTokenAddress })
                 // await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
                 );
+                console.log({provider})
                 const inflow = new Inflow(provider, 80001);
+                console.log("HEEEREEEE")
                 const mintPrice = await inflow.getMintPriceSocial(
                     SocialTokenAddress,
                     inflow.parseERC20('SocialToken', '1')
                 );
+                console.log({mintPrice})
                 setMintPrice(mintPrice[0]);
-                // // console.log(`MINT PRICE: ${mintPrice[0]}`);
+                console.log(`MINT PRICE: ${mintPrice[0]}`);
             } catch (err) {
-                // // console.log(err);
+                console.log(err);
             }
         }
     };
 
-    const fetchBurnPrice = async () => {
-        if (
-            typeof window.ethereum !== 'undefined' &&
-            SocialTokenAddress &&
-            SocialTokenAddress !== ''
-        ) {
-            try {
-                // await requestAccount();
-                const provider = new ethers.providers.Web3Provider(
-                    window.ethereum
-                );
-                const inflow = new Inflow(provider, 80001);
-                const burnPrice = await inflow.getBurnPriceSocial(
-                    SocialTokenAddress,
-                    inflow.parseERC20('SocialToken', '1')
-                );
-                setBurnPrice(burnPrice[0]);
-                // // console.log(`BURN PRICE: ${burnPrice[0]}`);
-            } catch (err) {
-                // // console.log(err);
-            }
-        }
-    };
+    // const fetchBurnPrice = async () => {
+    //     if (
+    //         typeof window.ethereum !== 'undefined' &&
+    //         SocialTokenAddress &&
+    //         SocialTokenAddress !== ''
+    //     ) {
+    //         try {
+    //             // await requestAccount();
+    //             const provider = new ethers.providers.Web3Provider(
+    //                 window.ethereum
+    //             );
+    //             const inflow = new Inflow(provider, 80001);
+    //             const burnPrice = await inflow.getBurnPriceSocial(
+    //                 SocialTokenAddress,
+    //                 inflow.parseERC20('SocialToken', '1')
+    //             );
+    //             setBurnPrice(burnPrice[0]);
+    //             console.log(`BURN PRICE: ${burnPrice[0]}`);
+    //         } catch (err) {
+    //             console.log(err);
+    //         }
+    //     }
+    // };
 
     const displayTokenPrice = () => {
         if (MintPrice && MintPrice !== '') {
@@ -190,16 +217,16 @@ const Artistpic = () => {
     };
 
     const buyTokens = async () => {
-        // // console.log("HMMMM")
-        // // console.log(typeof window.ethereum !== 'undefined')
-        // // console.log(SocialTokenAddress)
+        console.log("HMMMM")
+        console.log(typeof window.ethereum !== 'undefined')
+        console.log(SocialTokenAddress)
         if (
             typeof window.ethereum !== 'undefined' &&
             SocialTokenAddress &&
             SocialTokenAddress !== ''
         ) {
             try {
-                // // console.log("HEERREE")
+                console.log("HEERREE")
                 await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
@@ -241,9 +268,9 @@ const Artistpic = () => {
                     signer.getAddress(),
                     SocialTokenAddress
                 );
-                // // console.log({ allowance });
+                console.log({ allowance });
                 if (parseFloat(allowance) > parseFloat(totalmintprice)) {
-                    // // console.log('ALLOWANCE GREATER SO MINTING DIRECTLY');
+                    console.log('ALLOWANCE GREATER SO MINTING DIRECTLY');
                     await (
                         await socialMinter.mint(
                             inflow.parseERC20(
@@ -254,12 +281,15 @@ const Artistpic = () => {
                     ).wait();
                     setLoading(false)
                     setsuccessmint(successmint => !successmint)
+                    setInterval(() => {
+                        window.location.reload();
+                    },2000)
                     return;
                 }
                 const mintPrice = await socialMinter.getMintPrice(
                     inflow.parseERC20('SocialToken', String(TokensToMint))
                 );
-                // // console.log('ALLOWANCE LESS SO GETTING APPROVAL');
+                console.log('ALLOWANCE LESS SO GETTING APPROVAL');
                 await (
                     await usdcMinter.approve(socialMinter.address, mintPrice)
                 ).wait();
@@ -268,14 +298,17 @@ const Artistpic = () => {
                         inflow.parseERC20('SocialToken', String(TokensToMint))
                     )
                 ).wait();
-                // // console.log('MINT SUCCESSFULL');
+                console.log('MINT SUCCESSFULL');
                 setbuymodalloading(false);
                 setsuccessmint(successmint => !successmint)
+                setInterval(() => {
+                    window.location.reload();
+                },2000)
                 // getBalance();
             } catch (err) {
                 setbuymodalloading(false);
                 setfailuremint(failuremint => !failuremint)
-                // // console.log(err);
+                console.log(err);
             }
         }
     };
@@ -316,12 +349,15 @@ const Artistpic = () => {
                 );
                 setsellmodalloading(false);
                 setsuccessburn(successburn => !successburn)
-                // // console.log('BURN SUCCESSFULL');
+                setInterval(() => {
+                    window.location.reload();
+                },2000)
+                console.log('BURN SUCCESSFULL');
                 // getBalance();
             } catch (err) {
                 setsellmodalloading(false);
                 setfailureburn(failureburn => !failureburn)
-                // // console.log(err);
+                console.log(err);
             }
         }
     };
@@ -344,12 +380,12 @@ const Artistpic = () => {
                     inflow.parseERC20('SocialToken', String(TokensToBurn))
                 );
                 settotalburnprice(burnPrice[0]);
-                // // console.log(`BURN PRICE: ${burnPrice[0]}`);
+                console.log(`BURN PRICE: ${burnPrice[0]}`);
                 setsellmodalloading(false);
                 setsellflag(true);
             } catch (err) {
                 setsellmodalloading(false);
-                // // console.log(err);
+                console.log(err);
             }
         }
     }
@@ -362,7 +398,7 @@ const Artistpic = () => {
         ) {
             try {
                 setbuymodalloading(true)
-                // // console.log({ SocialTokenAddress })
+                console.log({ SocialTokenAddress })
                 // await requestAccount();
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
@@ -375,10 +411,10 @@ const Artistpic = () => {
                 settotalmintprice(mintPrice[0]);
                 setbuymodalloading(false)
                 setbuyflag(true)
-                // // console.log(`MINT PRICE: ${mintPrice[0]}`);
+                console.log(`MINT PRICE: ${mintPrice[0]}`);
             } catch (err) {
                 setbuymodalloading(false)
-                // // console.log(err);
+                console.log(err);
             }
         }
     }
@@ -806,7 +842,7 @@ const Artistpic = () => {
             </Modal>
 
             <Modal
-                
+
                 show={sell}
                 className="edit-profile-modal buy"
                 onHide={() => setsell((sell) => !sell)}
@@ -815,7 +851,7 @@ const Artistpic = () => {
                     <span className="title">Sell {artist.social_token_symbol} Token</span>
                 </Modal.Header>
 
-                <Modal.Body className="d-flex justify-content-center align-items-center">
+                <Modal.Body>
                     {sellmodalloading ? <div className="d-flex justify-content-center align-items-center flex-column"><SmallLoader /></div> : (
                         <>
                             <div className="form-group">

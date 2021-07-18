@@ -20,7 +20,7 @@ const Labels = () => {
             setloading(false);
         } catch (error) {
             setloading(false);
-            // console.log(error);
+            console.log(error);
         }
     }
     if (loading) {

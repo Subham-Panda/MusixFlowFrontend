@@ -27,7 +27,7 @@ const ManageLabels = () => {
 			setloading(false);
 		} catch (error) {
 			setloading(false);
-			// console.log(error);
+			console.log(error);
 		}
 	}
 
@@ -39,7 +39,7 @@ const ManageLabels = () => {
 			setloading(false)
 		} catch (error) {
 			setloading(false)
-			// console.log(error);
+			console.log(error);
 		}
 	}
 
@@ -55,7 +55,7 @@ const ManageLabels = () => {
 			setloading(false)
 		} catch (error) {
 			setloading(false)
-			// console.log(error);
+			console.log(error);
 		}
 	}
 

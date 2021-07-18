@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import Web3Modal from 'web3modal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
-import { INFURA_ID, FORTMATIC_KEY, PORTIS_ID} from "./constants";
+import { INFURA_ID, FORTMATIC_KEY, PORTIS_ID } from "./constants";
 import Portis from "@portis/web3";
 import Fortmatic from "fortmatic";
 import Torus from "@toruslabs/torus-embed";
@@ -108,7 +108,7 @@ class Wallet {
         this.account = account;
         this.chainId = network.chainId;
         this.networkName = network.name;
-        // console.log(account, network);
+        console.log(account, network);
         // this.dispatch(connected({address: account}));
     }
 

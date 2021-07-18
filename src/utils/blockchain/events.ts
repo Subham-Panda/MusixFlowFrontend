@@ -31,11 +31,13 @@ export async function getEventData(
             ? await input
             : input
     ) as ContractTransaction;
-    const { events } = await tx.wait();
+    const data = await tx.wait();
+    console.log({ data })
+    const { events } = data;
     if (events === undefined) throw new Error('events array undefined');
-    // console.log("EVENTS",{events})
+    console.log('EVENTS', { events });
     const { args } = events[eventsIdx ?? events.length - 1];
-    // console.log("ARGS",{args})
+    console.log('ARGS', { args });
     if (args === undefined) throw new Error('args array undefined');
     return argsIdx === undefined ? args : args[argsIdx];
 }

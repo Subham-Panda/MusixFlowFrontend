@@ -32,7 +32,7 @@ class Header extends Component {
                 this.props.disconnect();
             }
         } catch (e) {
-            // console.log(e);
+            console.log(e);
         }
     }
 

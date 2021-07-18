@@ -33,9 +33,9 @@ const GetMintPrice = () => {
                 const inflow = new Inflow(provider, 80001);
                 const mintPrice = await inflow.getMintPriceSocial(SocialTokenAddress, inflow.parseERC20("SocialToken", "1"))
                 setMintPrice(mintPrice[0]);
-                // console.log(`MINT PRICE: ${mintPrice[0]}`);
+                console.log(`MINT PRICE: ${mintPrice[0]}`);
             } catch (err) {
-                // console.log(err);
+                console.log(err);
             }
         }
     };
@@ -76,9 +76,9 @@ const GetMintPrice = () => {
                 const usdcMinter = usdc.connect(signer);
                 const inflow = new Inflow(provider, 80001);
                 await mint(socialMinter, usdcMinter, inflow.parseERC20("SocialToken", String(TokensToMint)));
-                // console.log("MINT SUCCESSFULL")
+                console.log("MINT SUCCESSFULL")
             } catch (err) {
-                // console.log(err);
+                console.log(err);
             }
         }
     }
@@ -97,9 +97,9 @@ const GetMintPrice = () => {
                 const inflow = new Inflow(provider, 80001);
                 const burnPrice = await inflow.getBurnPriceSocial(SocialTokenAddress, inflow.parseERC20("SocialToken", "1"))
                 setBurnPrice(burnPrice[0]);
-                // console.log(`BURN PRICE: ${burnPrice[0]}`);
+                console.log(`BURN PRICE: ${burnPrice[0]}`);
             } catch (err) {
-                // console.log(err);
+                console.log(err);
             }
         }
     }
@@ -131,9 +131,9 @@ const GetMintPrice = () => {
                 const socialMinter = social.connect(signer)
                 const inflow = new Inflow(provider, 80001);
                 await burn(socialMinter, inflow.parseERC20("SocialToken", String(TokensToBurn)));
-                // console.log("BURN SUCCESSFULL")
+                console.log("BURN SUCCESSFULL")
             } catch (err) {
-                // console.log(err);
+                console.log(err);
             }
         }
     }
@@ -154,9 +154,9 @@ const GetMintPrice = () => {
                 const inflow = new Inflow(provider, 80001);
                 const balance = await inflow.balanceOf("SocialToken", signerAddress, SocialTokenAddress)
                 setBalance(balance[0]);
-                // console.log(`BALANCE: ${balance[0]}`);
+                console.log(`BALANCE: ${balance[0]}`);
             } catch (err) {
-                // console.log(err);
+                console.log(err);
             }
         }
     }

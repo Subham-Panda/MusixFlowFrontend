@@ -21,7 +21,7 @@ import { setclienturl } from "../store/reducers/graphqlSlice";
 const Login = () => {
   const dispatch = useDispatch();
   const uData = useSelector((state) => state.auth.data);
-  // console.log(uData);
+  console.log(uData);
   const history = useHistory();
   const [authSelectFlag, setAuthSelectFlag] = useState(true);
   const [forgotPasswordFlag, setForgotPasswordFlag] = useState(false);
@@ -60,7 +60,7 @@ const Login = () => {
   const handleRegister = async (event) => {
     event.preventDefault();
     const { displayName, email, password, phone } = user;
-    //// console.log('++++', email, password)
+    //console.log('++++', email, password)
     const reg =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (!reg.test(String(email).toLowerCase())) {
@@ -211,7 +211,7 @@ const Login = () => {
     auth
       .sendPasswordResetEmail(user.email)
       .then((result) => {
-        // console.log(result);
+        console.log(result);
         showAlert('check your email for changing password', 'info');
       })
       .catch((error) => {
@@ -227,7 +227,7 @@ const Login = () => {
     //     const token = credential.accessToken;
     //     const user = result.user;
     //     let isAdmin = false;
-    //     // console.log(user.displayName)
+    //     console.log(user.displayName)
     //     user.getIdTokenResult().then(idTokenResult => {
     //       isAdmin = idTokenResult.claims.isAdmin ? true : false
     //       dispatch(
@@ -249,7 +249,7 @@ const Login = () => {
     //       }
 
     //     })
-    //     //// console.log('++++++',user.email, user.uid, token);
+    //     //console.log('++++++',user.email, user.uid, token);
 
     //   })
     //   .catch((error) => {

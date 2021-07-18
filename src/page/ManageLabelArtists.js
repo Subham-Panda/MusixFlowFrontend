@@ -20,12 +20,13 @@ const ManageLabelArtists = () => {
 		try {
 			setloading(true)
 			const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/label/getlabelartists`, { labelid })
+			console.log({data})
 			setArtists(data.artists);
 			setartistremain(data.remainingartists);
 			setloading(false)
 		} catch (error) {
 			setloading(false)
-			// console.log(error)
+			console.log(error)
 		}
 	}
 
@@ -38,7 +39,7 @@ const ManageLabelArtists = () => {
 			setloading(false)
 		} catch (error) {
 			setloading(false)
-			// console.log(error)
+			console.log(error)
 		}
 	}
 
@@ -56,14 +57,14 @@ const ManageLabelArtists = () => {
 
 	const addArtistToLabel = async () => {
 		try {
-			// console.log({ sartistid });
+			console.log({ sartistid });
 			setloading(true)
 			await axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/label/addartist`, { labelid, artistid: sartistid })
 			await getlabelartists();
 			setloading(false)
 		} catch (error) {
 			setloading(false)
-			// console.log(error)
+			console.log(error)
 		}
 	}
 

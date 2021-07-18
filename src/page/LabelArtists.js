@@ -15,6 +15,7 @@ const LabelArtists = () => {
     const [loading, setloading] = useState(false);
     const [artistremain, setartistremain] = useState([]);
     const [tokenPrices, setTokenPrices] = useState({});
+    const [testprice, settestprice] = useState(0.0)
 
     useEffect(() => {
         getlabelartists();
@@ -28,25 +29,30 @@ const LabelArtists = () => {
             setartistremain(data.remainingartists);
             setlabel(data.label);
             setloading(false)
-            gettokenprices();
+            await gettokenprices(data.artists);
         } catch (error) {
             setloading(false)
-            // console.log(error)
+            console.log(error)
         }
     }
 
-    const gettokenprices = async () => {
+    const gettokenprices = async (artists) => {
+        console.log("HEERE")
         try {
-            let temp = tokenPrices;
+            let temp = {...tokenPrices};
+            console.log({ temp });
+            console.log({artists})
             await Promise.all(artists.map(async (artist) => {
+                console.log("HMM")
                 const p = await fetchTokenPrice(artist.social_token_id);
+                console.log({p})
                 temp[artist.social_token_id] = p;
                 setTokenPrices(temp)
                 temp = tokenPrices;
                 return null;
             }));
         } catch (error) {
-            // console.log(error)
+            console.log(error)
         }
     }
 
@@ -55,30 +61,24 @@ const LabelArtists = () => {
     }
 
     const fetchTokenPrice = async (socialtoken) => {
-        if (
-            typeof window.ethereum !== 'undefined'
-        ) {
-            try {
-                // // console.log({ SocialTokenAddress })
-                await requestAccount();
-                const provider = new ethers.providers.Web3Provider(
-                    window.ethereum
-                );
-                const inflow = new Inflow(provider, 80001);
-                const mintPrice = await inflow.getMintPriceSocial(
-                    socialtoken,
-                    inflow.parseERC20('SocialToken', '1')
-                );
-                return mintPrice[0];
-            } catch (err) {
-                // // console.log(err);
-            }
+        console.log({socialtoken})
+        const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com/");
+        try {
+            const inflow = new Inflow(provider, 80001);
+            const mintPrice = await inflow.getMintPriceSocial(
+                socialtoken,
+                inflow.parseERC20('SocialToken', '1')
+            );
+            settestprice(mintPrice[0])
+            return mintPrice[0];
+        } catch (err) {
+            console.log(err);
         }
     };
 
     const displayTokenPrice = (socialtoken) => {
         if (tokenPrices[socialtoken]) {
-            return tokenPrices[socialtoken];
+            return `$ ${tokenPrices[socialtoken]}`;
         }
         return <SmallLoader />
     }
@@ -140,8 +140,6 @@ const LabelArtists = () => {
 
 
                         </tbody>
-
-
                     </table>
 
                 </div>

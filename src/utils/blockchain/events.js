@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function () { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -43,7 +43,7 @@ function getTxEventData(input, eventFragment, contractInterface, _idx) {
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    if (!(input && Object.prototype.toString.call(input) === "[object Promise]")) return [3 /*break*/, 2];
+                    if (!(input && Object.prototype.toString.call(input) === '[object Promise]')) return [3 /*break*/, 2];
                     return [4 /*yield*/, input];
                 case 1:
                     _a = _b.sent();
@@ -65,11 +65,11 @@ function getTxEventData(input, eventFragment, contractInterface, _idx) {
 exports.getTxEventData = getTxEventData;
 function getEventData(input, argsIdx, eventsIdx) {
     return __awaiter(this, void 0, void 0, function () {
-        var tx, _a, events, args;
+        var tx, _a, data, events, args;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    if (!(input && Object.prototype.toString.call(input) === "[object Promise]")) return [3 /*break*/, 2];
+                    if (!(input && Object.prototype.toString.call(input) === '[object Promise]')) return [3 /*break*/, 2];
                     return [4 /*yield*/, input];
                 case 1:
                     _a = _b.sent();
@@ -81,13 +81,16 @@ function getEventData(input, argsIdx, eventsIdx) {
                     tx = (_a);
                     return [4 /*yield*/, tx.wait()];
                 case 4:
-                    events = (_b.sent()).events;
+                    data = _b.sent();
+                    console.log({ data: data });
+                    events = data.events;
                     if (events === undefined)
-                        throw new Error("events array undefined");
-                    // console.log({ events: events });
+                        throw new Error('events array undefined');
+                    console.log('EVENTS', { events: events });
                     args = events[eventsIdx !== null && eventsIdx !== void 0 ? eventsIdx : events.length - 1].args;
+                    console.log('ARGS', { args: args });
                     if (args === undefined)
-                        throw new Error("args array undefined");
+                        throw new Error('args array undefined');
                     return [2 /*return*/, argsIdx === undefined ? args : args[argsIdx]];
             }
         });
