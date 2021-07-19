@@ -6,9 +6,11 @@ import { getEventData } from '../utils/blockchain';
 import { Inflow } from '../inflow-solidity-sdk/src/Inflow';
 import SocialTokenFactory from '../artifacts/contracts/token/social/SocialTokenFactory.sol/SocialTokenFactory.json';
 import { MOCKUSDC, SOCIAL_TOKEN_FACTORY } from '../utils/addresses'
+import { useSelector } from 'react-redux';
 
 
 const CreateSocialToken = () => {
+    const wallet = useSelector(state => state.wallet);
     const [socialtokenid, setSocialTokenId] = useState('');
     const [TokenName, setTokenName] = useState('');
     const [TokenSymbol, setTokenSymbol] = useState('');
@@ -31,8 +33,9 @@ const CreateSocialToken = () => {
     const onboardArtist = async () => {
         try {
             await generateSocialToken();
-            // console.log({ socialtokenid })
-            if (socialtokenaddress && socialtokenaddress.length) {
+            console.log({ socialtokenid })
+            if (socialtokenid && socialtokenid.length) {
+                console.log("HELLO")
                 const data = new FormData();
                 // console.log("HELLO");
                 // console.log({ TokenName })
@@ -47,7 +50,7 @@ const CreateSocialToken = () => {
                 data.append("wallet_id", walletaddress);
                 data.append("social_token_name", TokenName);
                 data.append("social_token_symbol", TokenSymbol);
-                data.append("social_token_id", socialtokenaddress);
+                data.append("social_token_id", socialtokenid);
                 data.append("profile", profileimage);
                 data.append("banner", bannerimage);
                 // console.log(process.env.REACT_APP_SERVER_URL)
@@ -61,76 +64,123 @@ const CreateSocialToken = () => {
 
 
 
-    async function requestAccount() {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-    }
+    // async function requestAccount() {
+    //     await window.ethereum.request({ method: 'eth_requestAccounts' });
+    // }
 
     const generateSocialToken = async () => {
         try {
+            setSocialTokenId('');
+            // await requestAccount();
+            const provider = wallet.provider;
+            // console.log({ provider });
+            const signer = provider.getSigner();
+            const contract = new ethers.Contract(
+                SOCIAL_TOKEN_FACTORY,
+                SocialTokenFactory.abi,
+                signer
+            );
+            // console.log(contract);
+            // console.log(signer);
+            const signerAddress = await signer.getAddress();
+            // console.log(signerAddress);
+            const inflow = new Inflow(provider, 80001);
+            const socialTokenAddress = await inflow.getTokenSocialFactory(
+                walletaddress
+            );
+            // console.log({ socialTokenAddress });
             if (
-                typeof window.ethereum !== 'undefined' &&
-                TokenName &&
-                TokenSymbol &&
-                walletaddress &&
-                maxsupply &&
-                slope &&
-                TokenName.trim() !== '' &&
-                TokenSymbol.trim() !== '' &&
-                walletaddress.trim() !== '' &&
-                maxsupply.trim() !== '' &&
-                slope.trim() !== ''
-
+                socialTokenAddress &&
+                parseInt(socialTokenAddress, 16) !== 0
             ) {
-                setSocialTokenId('');
-                await requestAccount();
-                const provider = new ethers.providers.Web3Provider(
-                    window.ethereum
+                setSocialTokenId(socialTokenAddress);
+                // console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
+            } else {
+                // console.log('HEERREE');
+                const whitelistAddress = await contract.whitelist(
+                    signerAddress
                 );
-                // console.log({ provider });
-                const signer = provider.getSigner();
-                const contract = new ethers.Contract(
-                    SOCIAL_TOKEN_FACTORY,
-                    SocialTokenFactory.abi,
-                    signer
+                whitelistAddress.wait();
+                // console.log('WHITELISTED');
+                const socialTokenAddress = await getEventData(
+                    contract.create({
+                        creator: walletaddress,
+                        collateral: MOCKUSDC,
+                        maxSupply: ethers.utils.parseEther(String(maxsupply)),
+                        slope: ethers.utils.parseEther(String(slope)),
+                        name: TokenName.trim(),
+                        symbol: TokenSymbol.trim(),
+                    }),
+                    0
                 );
-                // console.log(contract);
-                // console.log(signer);
-                const signerAddress = await signer.getAddress();
-                // console.log(signerAddress);
-                const inflow = new Inflow(provider, 80001);
-                const socialTokenAddress = await inflow.getTokenSocialFactory(
-                    walletaddress
-                );
-                // console.log({ socialTokenAddress });
-                if (
-                    socialTokenAddress &&
-                    parseInt(socialTokenAddress, 16) !== 0
-                ) {
-                    setSocialTokenId(socialTokenAddress);
-                    // console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
-                } else {
-                    // console.log('HEERREE');
-                    const whitelistAddress = await contract.whitelist(
-                        signerAddress
-                    );
-                    whitelistAddress.wait();
-                    // console.log('WHITELISTED');
-                    const socialTokenAddress = await getEventData(
-                        contract.create({
-                            creator: walletaddress,
-                            collateral: MOCKUSDC,
-                            maxSupply: ethers.utils.parseEther(String(maxsupply)),
-                            slope: ethers.utils.parseEther(String(slope)),
-                            name: TokenName.trim(),
-                            symbol: TokenSymbol.trim(),
-                        }),
-                        0
-                    );
-                    setSocialTokenId(socialTokenAddress);
-                    socialtokenaddress = socialTokenAddress;
-                    // console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
-                }
+                setSocialTokenId(socialTokenAddress);
+                socialtokenaddress = socialTokenAddress;
+                // console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
             }
+            // if (
+            //     typeof window.ethereum !== 'undefined' &&
+            //     TokenName &&
+            //     TokenSymbol &&
+            //     walletaddress &&
+            //     maxsupply &&
+            //     slope &&
+            //     TokenName.trim() !== '' &&
+            //     TokenSymbol.trim() !== '' &&
+            //     walletaddress.trim() !== '' &&
+            //     maxsupply.trim() !== '' &&
+            //     slope.trim() !== ''
+
+            // ) {
+            //     setSocialTokenId('');
+            //     await requestAccount();
+            //     const provider = new ethers.providers.Web3Provider(
+            //         window.ethereum
+            //     );
+            //     // console.log({ provider });
+            //     const signer = provider.getSigner();
+            //     const contract = new ethers.Contract(
+            //         SOCIAL_TOKEN_FACTORY,
+            //         SocialTokenFactory.abi,
+            //         signer
+            //     );
+            //     // console.log(contract);
+            //     // console.log(signer);
+            //     const signerAddress = await signer.getAddress();
+            //     // console.log(signerAddress);
+            //     const inflow = new Inflow(provider, 80001);
+            //     const socialTokenAddress = await inflow.getTokenSocialFactory(
+            //         walletaddress
+            //     );
+            //     // console.log({ socialTokenAddress });
+            //     if (
+            //         socialTokenAddress &&
+            //         parseInt(socialTokenAddress, 16) !== 0
+            //     ) {
+            //         setSocialTokenId(socialTokenAddress);
+            //         // console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
+            //     } else {
+            //         // console.log('HEERREE');
+            //         const whitelistAddress = await contract.whitelist(
+            //             signerAddress
+            //         );
+            //         whitelistAddress.wait();
+            //         // console.log('WHITELISTED');
+            //         const socialTokenAddress = await getEventData(
+            //             contract.create({
+            //                 creator: walletaddress,
+            //                 collateral: MOCKUSDC,
+            //                 maxSupply: ethers.utils.parseEther(String(maxsupply)),
+            //                 slope: ethers.utils.parseEther(String(slope)),
+            //                 name: TokenName.trim(),
+            //                 symbol: TokenSymbol.trim(),
+            //             }),
+            //             0
+            //         );
+            //         setSocialTokenId(socialTokenAddress);
+            //         socialtokenaddress = socialTokenAddress;
+            //         // console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
+            //     }
+            // }
         } catch (error) {
             // console.log(error);
         }
