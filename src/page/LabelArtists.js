@@ -35,7 +35,7 @@ const LabelArtists = () => {
             await gettokenprices(data.artists);
         } catch (error) {
             setloading(false)
-            console.log(error)
+            // console.log(error)
         }
     }
 
@@ -54,7 +54,7 @@ const LabelArtists = () => {
             }));
             setTokenPrices(temp);
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
     }
 
@@ -82,7 +82,7 @@ const LabelArtists = () => {
             settestprice(mintPrice[0])
             return mintPrice[0];
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             
         }
     };
