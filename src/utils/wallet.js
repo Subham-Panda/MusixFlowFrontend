@@ -15,6 +15,7 @@ class Wallet {
     chainId = 1;
     networkName = '';
     account = null;
+    provider = null;
 
     constructor() {
         this.providerOptions = {
@@ -36,19 +37,19 @@ class Wallet {
                     key: FORTMATIC_KEY, // required
                 },
             },
-            torus: {
-                package: Torus, // required
-                options: {
-                    networkParams: {
-                        host: "https://localhost:8545", // optional
-                        chainId: 1337, // optional
-                        networkId: 1337, // optional
-                    },
-                    config: {
-                        buildEnv: "development", // optional
-                    },
-                },
-            },
+            // torus: {
+            //     package: Torus, // required
+            //     options: {
+            //         networkParams: {
+            //             host: "https://rpc-mumbai.matic.today/", // optional
+            //             chainId: 80001, // optional
+            //             networkId: 80001, // optional
+            //         },
+            //         config: {
+            //             buildEnv: "development", // optional
+            //         },
+            //     },
+            // },
             "custom-walletlink": {
                 display: {
                     logo:
@@ -72,12 +73,12 @@ class Wallet {
                     return provider;
                 },
             },
-            mewconnect: {
-                package: MewConnect, // required
-                options: {
-                    infuraId: "INFURA_ID", // required
-                },
-            },
+            // mewconnect: {
+            //     package: MewConnect, // required
+            //     options: {
+            //         infuraId: "INFURA_ID", // required
+            //     },
+            // },
         };
         this.init();
     }
@@ -98,9 +99,11 @@ class Wallet {
 
     async connect() {
         let web3Provider = await this.web3Modal.connect();
+        console.log({web3Provider})
         await this.subscribeProvider(web3Provider);
 
         const ethersProvider = new ethers.providers.Web3Provider(web3Provider);
+        console.log({ethersProvider})
         const accounts = await ethersProvider.listAccounts();
         let account = ethers.utils.getAddress(accounts[0]);
         let network = await ethersProvider.getNetwork();
