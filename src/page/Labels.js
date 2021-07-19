@@ -20,7 +20,7 @@ const Labels = () => {
             setloading(false);
         } catch (error) {
             setloading(false);
-            console.log(error);
+            // console.log(error);
         }
     }
     if (loading) {
@@ -38,7 +38,7 @@ const Labels = () => {
 
                 <div className="labels-grid-main">
                     {
-                        labels.map((label,i) => {
+                        labels.map((label, i) => {
                             return <Link key={i} to={`/labels/${label._id}`}> <Labelscompo labelname={label.name} imglink={`${process.env.REACT_APP_SERVER_URL}/${label.image}`} /></Link>
                         })
                     }

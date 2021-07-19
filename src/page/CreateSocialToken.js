@@ -31,11 +31,11 @@ const CreateSocialToken = () => {
     const onboardArtist = async () => {
         try {
             await generateSocialToken();
-            console.log({ socialtokenid })
+            // console.log({ socialtokenid })
             if (socialtokenaddress && socialtokenaddress.length) {
                 const data = new FormData();
-                console.log("HELLO");
-                console.log({ TokenName })
+                // console.log("HELLO");
+                // console.log({ TokenName })
                 data.append("first_name", firstname);
                 data.append("last_name", lastname);
                 data.append("address", artistaddress);
@@ -50,11 +50,11 @@ const CreateSocialToken = () => {
                 data.append("social_token_id", socialtokenaddress);
                 data.append("profile", profileimage);
                 data.append("banner", bannerimage);
-                console.log(process.env.REACT_APP_SERVER_URL)
+                // console.log(process.env.REACT_APP_SERVER_URL)
                 await Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/onboarding`, data)
             }
         } catch (error) {
-            console.log(error)
+            // console.log(error)
         }
 
     }
@@ -86,35 +86,35 @@ const CreateSocialToken = () => {
                 const provider = new ethers.providers.Web3Provider(
                     window.ethereum
                 );
-                console.log({ provider });
+                // console.log({ provider });
                 const signer = provider.getSigner();
                 const contract = new ethers.Contract(
                     SOCIAL_TOKEN_FACTORY,
                     SocialTokenFactory.abi,
                     signer
                 );
-                console.log(contract);
-                console.log(signer);
+                // console.log(contract);
+                // console.log(signer);
                 const signerAddress = await signer.getAddress();
-                console.log(signerAddress);
+                // console.log(signerAddress);
                 const inflow = new Inflow(provider, 80001);
                 const socialTokenAddress = await inflow.getTokenSocialFactory(
                     walletaddress
                 );
-                console.log({ socialTokenAddress });
+                // console.log({ socialTokenAddress });
                 if (
                     socialTokenAddress &&
                     parseInt(socialTokenAddress, 16) !== 0
                 ) {
                     setSocialTokenId(socialTokenAddress);
-                    console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
+                    // console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
                 } else {
-                    console.log('HEERREE');
+                    // console.log('HEERREE');
                     const whitelistAddress = await contract.whitelist(
                         signerAddress
                     );
                     whitelistAddress.wait();
-                    console.log('WHITELISTED');
+                    // console.log('WHITELISTED');
                     const socialTokenAddress = await getEventData(
                         contract.create({
                             creator: walletaddress,
@@ -128,11 +128,11 @@ const CreateSocialToken = () => {
                     );
                     setSocialTokenId(socialTokenAddress);
                     socialtokenaddress = socialTokenAddress;
-                    console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
+                    // console.log(`SOCIAL TOKEN ADDRESS: ${socialTokenAddress}`);
                 }
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     };
 

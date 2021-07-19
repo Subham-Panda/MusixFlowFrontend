@@ -33,7 +33,7 @@ const Accountsettings = () => {
         setloading(true)
         const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/profile/get`, { firebase_user_id: uid })
         const { user } = data
-        console.log({ user })
+        // console.log({ user })
         if (user) {
             setfirstname(user.first_name ? user.first_name : user.name);
             setlastname(user.last_name);
@@ -65,7 +65,7 @@ const Accountsettings = () => {
         await axios.patch(`${process.env.REACT_APP_SERVER_URL}/v1/user/profile/update`, data)
         await getdata();
         setloading(false)
-        window.location.href="/accountsettings"
+        window.location.href = "/accountsettings"
     }
 
     if (loading) {
@@ -138,7 +138,7 @@ const Accountsettings = () => {
                                         id="bannerimage"
                                         type="file"
                                     />
-                                </div>): null}
+                                </div>) : null}
                                 <div className="comman-grids">
                                     {/* <Dropdown>
                                         <Dropdown.Toggle id="dropdown-custom-1">

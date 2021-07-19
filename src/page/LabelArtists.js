@@ -35,26 +35,26 @@ const LabelArtists = () => {
             await gettokenprices(data.artists);
         } catch (error) {
             setloading(false)
-            // console.log(error)
+            // // console.log(error)
         }
     }
 
     const gettokenprices = async (artists) => {
-        console.log("HEERE")
+        // console.log("HEERE")
         try {
             let temp = {}
-            console.log({ temp });
-            console.log({artists})
+            // console.log({ temp });
+            // console.log({artists})
             await Promise.all(artists.map(async (artist) => {
-                console.log("HMM")
+                // console.log("HMM")
                 const p = await fetchTokenPrice(artist.social_token_id);
-                console.log({p})
+                // console.log({p})
                 temp[artist.social_token_id] = p;
                 return null;
             }));
             setTokenPrices(temp);
         } catch (error) {
-            // console.log(error)
+            // // console.log(error)
         }
     }
 
@@ -69,9 +69,9 @@ const LabelArtists = () => {
                 window.ethereum
             );
             const inflow = new Inflow(provider, 80001);
-            // console.log(localStorage.getItem('oncereloadlabelartists'))
+            // // console.log(localStorage.getItem('oncereloadlabelartists'))
             // if (!localStorage.getItem('oncereloadlabelartists')) {
-            //     console.log("HERE")
+            //     // console.log("HERE")
             //     localStorage.setItem('oncereloadlabelartists', true)
             //     window.location.reload();
             // }
@@ -82,8 +82,8 @@ const LabelArtists = () => {
             settestprice(mintPrice[0])
             return mintPrice[0];
         } catch (err) {
-            // console.log(err)
-            
+            // // console.log(err)
+
         }
     };
 
@@ -124,7 +124,7 @@ const LabelArtists = () => {
                         </thead>
                         <tbody>
                             {
-                                artists.map((artist,i) => {
+                                artists.map((artist, i) => {
                                     return (
                                         <tr key={i}>
                                             <td className="first-col"><img alt="" src={`${process.env.REACT_APP_SERVER_URL}/${artist.profile_image}`} width="80" /> </td>

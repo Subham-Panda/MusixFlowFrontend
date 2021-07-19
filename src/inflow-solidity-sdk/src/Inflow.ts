@@ -412,7 +412,7 @@ export class Inflow {
         }
         const content = new Blob(blobParts, options);
         const cid = await this.ipfsClient.storeBlob(content);
-        console.log('CID:', cid);
+        // console.log('CID:', cid);
         return cid;
     }
 
@@ -427,7 +427,7 @@ export class Inflow {
                 new File(fileBits, fileNames, options)
         );
         const cid = await this.ipfsClient.storeDirectory(data);
-        console.log('CID:', cid);
+        // console.log('CID:', cid);
         return cid;
     }
 

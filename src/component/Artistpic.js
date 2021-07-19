@@ -3,7 +3,7 @@ import './component.css';
 import { assetsImages } from "../constants/images";
 
 const Artistpic = (props) => {
-    console.log({ props })
+    // console.log({ props })
     return (
         <div className="artist-main">
             <div className="artis-img">

@@ -47,7 +47,7 @@ const Artistpic = () => {
         );
         const inflow = new Inflow(provider, 80001);
         const tokenfees = inflow.formatERC20('USDC', String(value))
-        console.log({tokenfees})
+        // console.log({tokenfees})
         settokenfees(tokenfees);
     }
 
@@ -70,12 +70,12 @@ const Artistpic = () => {
                             <div className='dropdown'>
 
                             </div>
-                            <div className='amount d-flex justify-content-center align-items-center text-wrap' style={{wordWrap: "break-word"}}>
+                            <div className='amount d-flex justify-content-center align-items-center text-wrap' style={{ wordWrap: "break-word" }}>
                                 {
                                     loading ?
-                                    <SmallLoader />
-                                    :
-                                    tokenfees
+                                        <SmallLoader />
+                                        :
+                                        tokenfees
                                 }
                             </div>
                         </div>

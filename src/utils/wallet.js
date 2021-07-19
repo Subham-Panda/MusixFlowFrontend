@@ -99,10 +99,10 @@ class Wallet {
 
     async connect() {
         let web3Provider = await this.web3Modal.connect();
-        console.log({web3Provider})
+        // console.log({web3Provider})
         await this.subscribeProvider(web3Provider);
         const ethersProvider = new ethers.providers.Web3Provider(web3Provider);
-        console.log({ethersProvider})
+        // console.log({ethersProvider})
         const accounts = await ethersProvider.listAccounts();
         let account = ethers.utils.getAddress(accounts[0]);
         let network = await ethersProvider.getNetwork();
@@ -110,12 +110,12 @@ class Wallet {
         this.account = account;
         this.chainId = network.chainId;
         this.networkName = network.name;
-        console.log(account, network);
+        // console.log(account, network);
         // this.dispatch(connected({address: account}));
     }
 
     disconnect(clearCache) {
-        console.log("DISCONNECTING WALLET")
+        // console.log("DISCONNECTING WALLET")
         // this.dispatch(disconnect());
         if (this.ethersProvider) {
             localStorage.removeItem('walletconnect');

@@ -11,7 +11,7 @@ export const authSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      console.log({ data: action.data })
+      // console.log({ data: action.data })
       state.data = action.payload
       state.token = action.payload.token
       state.isAdmin = action.payload.isAdmin

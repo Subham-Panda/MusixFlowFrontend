@@ -27,7 +27,7 @@ const ManageLabels = () => {
 			setloading(false);
 		} catch (error) {
 			setloading(false);
-			console.log(error);
+			// console.log(error);
 		}
 	}
 
@@ -39,7 +39,7 @@ const ManageLabels = () => {
 			setloading(false)
 		} catch (error) {
 			setloading(false)
-			console.log(error);
+			// console.log(error);
 		}
 	}
 
@@ -55,12 +55,12 @@ const ManageLabels = () => {
 			setloading(false)
 		} catch (error) {
 			setloading(false)
-			console.log(error);
+			// console.log(error);
 		}
 	}
 
 	const displayLabels = () => {
-		return labels.map((label,i) => {
+		return labels.map((label, i) => {
 			return (
 				<tr key={i}>
 					<td className="text-center">{label.name}</td>

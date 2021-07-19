@@ -21,7 +21,7 @@ const MintUSDC = () => {
 		} catch (error) {
 			setLoading(false)
 			setfailureadmin(failureadmin => !failureadmin)
-			console.log(error);
+			// console.log(error);
 		}
 
 	}

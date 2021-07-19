@@ -15,7 +15,7 @@ const Header = () => {
     const dispatch = useDispatch()
     const [alert, setalert] = useState(null);
 
-    console.log({wallet})
+    // console.log({wallet})
 
     const connectWallet = async () => {
         if (!token) {
@@ -35,7 +35,7 @@ const Header = () => {
                 dispatch(disconnect());
             }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
     }
 
