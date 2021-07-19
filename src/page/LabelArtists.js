@@ -7,6 +7,9 @@ import { ethers } from 'ethers';
 import { Inflow } from '../inflow-solidity-sdk/src/Inflow';
 import SmallLoader from "../component/SmallLoader";
 
+// if (localStorage.getItem('oncereloadlabelartists') === null || localStorage.getItem('oncereloadlabelartists') === undefined) {
+//     localStorage.setItem('oncereloadlabelartists',false);
+// }
 
 const LabelArtists = () => {
     const { labelid } = useParams();
@@ -60,10 +63,18 @@ const LabelArtists = () => {
     }
 
     const fetchTokenPrice = async (socialtoken) => {
-        console.log({socialtoken})
-        const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com/");
         try {
+            await requestAccount();
+            const provider = new ethers.providers.Web3Provider(
+                window.ethereum
+            );
             const inflow = new Inflow(provider, 80001);
+            // console.log(localStorage.getItem('oncereloadlabelartists'))
+            // if (!localStorage.getItem('oncereloadlabelartists')) {
+            //     console.log("HERE")
+            //     localStorage.setItem('oncereloadlabelartists', true)
+            //     window.location.reload();
+            // }
             const mintPrice = await inflow.getMintPriceSocial(
                 socialtoken,
                 inflow.parseERC20('SocialToken', '1')
@@ -71,7 +82,8 @@ const LabelArtists = () => {
             settestprice(mintPrice[0])
             return mintPrice[0];
         } catch (err) {
-            console.log(err);
+            console.log(err)
+            
         }
     };
 
