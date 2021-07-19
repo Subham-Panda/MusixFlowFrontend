@@ -39,7 +39,7 @@ const LabelArtists = () => {
     const gettokenprices = async (artists) => {
         console.log("HEERE")
         try {
-            let temp = {...tokenPrices};
+            let temp = {}
             console.log({ temp });
             console.log({artists})
             await Promise.all(artists.map(async (artist) => {
@@ -47,10 +47,9 @@ const LabelArtists = () => {
                 const p = await fetchTokenPrice(artist.social_token_id);
                 console.log({p})
                 temp[artist.social_token_id] = p;
-                setTokenPrices(temp)
-                temp = tokenPrices;
                 return null;
             }));
+            setTokenPrices(temp);
         } catch (error) {
             console.log(error)
         }

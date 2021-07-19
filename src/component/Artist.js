@@ -67,13 +67,10 @@ const Artistpic = () => {
                 setSocialTokenAddress(data.artist.social_token_id)
                 console.log("HELLO2")
                 fetchTokenPrice();
-                // fetchBurnPrice();
                 // const tokenPrice = setInterval(() => {
                 //     console.log("HELLO3")
                 //     fetchTokenPrice();
-                //     fetchBurnPrice();
                 // }, 10000);
-                // getBalance();
                 setLoading(false)
                 // return () => {
                 //     clearInterval(tokenPrice);
@@ -136,31 +133,6 @@ const Artistpic = () => {
             console.log(`MINT PRICE: ${mintPrice[0]}`);
         } catch (err) {
             console.log(err);
-        }
-        if (
-            typeof window.ethereum !== 'undefined' &&
-            SocialTokenAddress &&
-            SocialTokenAddress !== ''
-        ) {
-            try {
-                console.log({ SocialTokenAddress })
-                // await requestAccount();
-                const provider = new ethers.providers.Web3Provider(
-                    window.ethereum
-                );
-                console.log({provider})
-                const inflow = new Inflow(provider, 80001);
-                console.log("HEEEREEEE")
-                const mintPrice = await inflow.getMintPriceSocial(
-                    SocialTokenAddress,
-                    inflow.parseERC20('SocialToken', '1')
-                );
-                console.log({mintPrice})
-                setMintPrice(mintPrice[0]);
-                console.log(`MINT PRICE: ${mintPrice[0]}`);
-            } catch (err) {
-                console.log(err);
-            }
         }
     };
 
