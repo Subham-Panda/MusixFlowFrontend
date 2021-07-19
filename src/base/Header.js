@@ -6,19 +6,16 @@ import Profiledropdown from '../component/Profiledropdown';
 import { Button } from "react-bootstrap";
 import Wallet from '../utils/wallet';
 import SweetAlert from "react-bootstrap-sweetalert";
-import { connect, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { connected, disconnect } from "../store/reducers/walletSlice";
 
-const Header = (props) => {
+const Header = () => {
     const token = useSelector(state => state.auth.token);
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         alert: null
-    //     }
-    //     this.hideAlert = this.hideAlert.bind(this);
-    // }
+    const wallet = useSelector(state => state.wallet);
+    const dispatch = useDispatch()
     const [alert, setalert] = useState(null);
+
+    console.log({wallet})
 
     const connectWallet = async () => {
         if (!token) {
@@ -26,17 +23,16 @@ const Header = (props) => {
             return;
         }
         try {
-            if (!props.wallet.wallet_connected) {
+            if (!wallet.wallet_connected) {
                 if (!Wallet.ethersProvider) {
                     await Wallet.connect();
                 }
-
-                props.connected({ address: Wallet.account, provider: Wallet.ethersProvider })
+                dispatch(connected({ address: Wallet.account, provider: Wallet.ethersProvider }));
                 showAlert('Wallet connected successfully', 'success');
             } else {
                 Wallet.disconnect(true);
                 showAlert('Wallet disconnected', 'info');
-                props.disconnect();
+                dispatch(disconnect());
             }
         } catch (e) {
             console.log(e);
@@ -59,7 +55,7 @@ const Header = (props) => {
             </div>
             <div className="right-col-main">
                 <Button size="sm" className="mr-2 wallet-button" onClick={() => connectWallet()}>
-                    {props.wallet.wallet_connected ? 'Disconnect Wallet' : 'Connect Wallet'}
+                    {wallet.wallet_connected ? 'Disconnect Wallet' : 'Connect Wallet'}
                 </Button>
                 {/* <div className="notified-main">
                         <Notification />
@@ -74,11 +70,4 @@ const Header = (props) => {
 
 
 
-const mapStateToProps = state => ({
-    wallet: state.wallet,
-});
-const mapDispatchToProps = { connected, disconnect }
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Header);
+export default Header;

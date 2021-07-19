@@ -19,66 +19,66 @@ class Wallet {
 
     constructor() {
         this.providerOptions = {
-            walletconnect: {
-                package: WalletConnectProvider,
-                options: {
-                    infuraId: INFURA_ID,
-                },
-            },
-            portis: {
-                package: Portis, // required
-                options: {
-                    id: PORTIS_ID, // required
-                },
-            },
-            fortmatic: {
-                package: Fortmatic, // required
-                options: {
-                    key: FORTMATIC_KEY, // required
-                },
-            },
-            // torus: {
-            //     package: Torus, // required
+            // walletconnect: {
+            //     package: WalletConnectProvider,
             //     options: {
-            //         networkParams: {
-            //             host: "https://rpc-mumbai.matic.today/", // optional
-            //             chainId: 80001, // optional
-            //             networkId: 80001, // optional
-            //         },
-            //         config: {
-            //             buildEnv: "development", // optional
-            //         },
+            //         infuraId: INFURA_ID,
             //     },
             // },
-            "custom-walletlink": {
-                display: {
-                    logo:
-                        "https://raw.githubusercontent.com/walletlink/walletlink/1acb5599f4382ad657d1d1545eca2d7e54f3f001/web/src/images/wallets/coinbase-wallet.svg", // Path to wallet link logo. Source https://github.com/walletlink/walletlink/blob/master/web/src/images/wallets/coinbase-wallet.svg
-                    name: "WalletLink",
-                    description: "Scan with WalletLink to connect",
-                },
-                options: {
-                    appName: "App name", // Your app name
-                    networkUrl: `https://mainnet.infura.io/v3/36b9397d38ae4fd3a9d3c4b469fd3127`,
-                    chainId: this.chainId,
-                },
-                package: WalletLink,
-                connector: async (_, options) => {
-                    const { appName, networkUrl, chainId } = options;
-                    const walletLink = new WalletLink({
-                        appName,
-                    });
-                    const provider = walletLink.makeWeb3Provider(networkUrl, chainId);
-                    await provider.enable();
-                    return provider;
-                },
-            },
-            // mewconnect: {
-            //     package: MewConnect, // required
+            // portis: {
+            //     package: Portis, // required
             //     options: {
-            //         infuraId: "INFURA_ID", // required
+            //         id: PORTIS_ID, // required
             //     },
             // },
+            // fortmatic: {
+            //     package: Fortmatic, // required
+            //     options: {
+            //         key: FORTMATIC_KEY, // required
+            //     },
+            // },
+            // // torus: {
+            // //     package: Torus, // required
+            // //     options: {
+            // //         networkParams: {
+            // //             host: "https://rpc-mumbai.matic.today/", // optional
+            // //             chainId: 80001, // optional
+            // //             networkId: 80001, // optional
+            // //         },
+            // //         config: {
+            // //             buildEnv: "development", // optional
+            // //         },
+            // //     },
+            // // },
+            // "custom-walletlink": {
+            //     display: {
+            //         logo:
+            //             "https://raw.githubusercontent.com/walletlink/walletlink/1acb5599f4382ad657d1d1545eca2d7e54f3f001/web/src/images/wallets/coinbase-wallet.svg", // Path to wallet link logo. Source https://github.com/walletlink/walletlink/blob/master/web/src/images/wallets/coinbase-wallet.svg
+            //         name: "WalletLink",
+            //         description: "Scan with WalletLink to connect",
+            //     },
+            //     options: {
+            //         appName: "App name", // Your app name
+            //         networkUrl: `https://mainnet.infura.io/v3/36b9397d38ae4fd3a9d3c4b469fd3127`,
+            //         chainId: this.chainId,
+            //     },
+            //     package: WalletLink,
+            //     connector: async (_, options) => {
+            //         const { appName, networkUrl, chainId } = options;
+            //         const walletLink = new WalletLink({
+            //             appName,
+            //         });
+            //         const provider = walletLink.makeWeb3Provider(networkUrl, chainId);
+            //         await provider.enable();
+            //         return provider;
+            //     },
+            // },
+            // // mewconnect: {
+            // //     package: MewConnect, // required
+            // //     options: {
+            // //         infuraId: "INFURA_ID", // required
+            // //     },
+            // // },
         };
         this.init();
     }
@@ -101,7 +101,6 @@ class Wallet {
         let web3Provider = await this.web3Modal.connect();
         console.log({web3Provider})
         await this.subscribeProvider(web3Provider);
-
         const ethersProvider = new ethers.providers.Web3Provider(web3Provider);
         console.log({ethersProvider})
         const accounts = await ethersProvider.listAccounts();
@@ -116,6 +115,7 @@ class Wallet {
     }
 
     disconnect(clearCache) {
+        console.log("DISCONNECTING WALLET")
         // this.dispatch(disconnect());
         if (this.ethersProvider) {
             localStorage.removeItem('walletconnect');

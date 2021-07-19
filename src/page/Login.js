@@ -79,50 +79,44 @@ const Login = () => {
             password
           );
           let isAdmin = false
-          user.getIdTokenResult().then(idTokenResult => {
-            isAdmin = idTokenResult.claims.isAdmin ? true : false
-            dispatch(
-              login({ email: user.email, uid: user.uid, token: user.refreshToken, isAdmin })
-            );
-            Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken })
-          }).then(() => {
-            Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email })
-          }).then((response) => {
-            console.log(response.data);
-            dispatch(setArtist({ isArtist: response.data.isArtist }))
-            if (response.data.isArtist) {
-              dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
-            } else {
-              dispatch(setclienturl({ clienturl: '' }))
-            }
-            showAlert('Login Successful', 'success')
-          })
+          const idTokenResult = await user.getIdTokenResult();
+          isAdmin = idTokenResult.claims.isAdmin ? true : false
+          dispatch(
+            login({ email: user.email, uid: user.uid, token: user.refreshToken, isAdmin })
+          );
+          await Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken })
+          const response = await Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email })
+          console.log(response.data);
+          dispatch(setArtist({ isArtist: response.data.isArtist }))
+          if (response.data.isArtist) {
+            dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
+          } else {
+            dispatch(setclienturl({ clienturl: '' }))
+          }
+          showAlert('Login Successful', 'success')
         } else {
-          const { user: registeredUser } =
+          const { user } =
             await auth.createUserWithEmailAndPassword(email, password);
           // const data = await createUserProfileDocument(registeredUser, {
           //   displayName,
           // });
-          registeredUser.sendEmailVerification();
+          user.sendEmailVerification();
           let isAdmin = false
-          user.getIdTokenResult().then(idTokenResult => {
-            isAdmin = idTokenResult.claims.isAdmin ? true : false
+          const idTokenResult = await user.getIdTokenResult()
+          isAdmin = idTokenResult.claims.isAdmin ? true : false
             dispatch(
               login({ email: user.email, uid: user.uid, token: user.refreshToken, isAdmin })
             );
-            Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken })
-          }).then(() => {
-            Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email })
-          }).then((response) => {
-            console.log(response.data);
-            dispatch(setArtist({ isArtist: response.data.isArtist }))
-            if (response.data.isArtist) {
-              dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
-            } else {
-              dispatch(setclienturl({ clienturl: '' }))
-            }
-            showAlert('Check your email and verify account', 'info')
-          });
+          await Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/user/register`, { firebase_user_id: user.uid, email: user.email, refresh_token: user.refreshToken })
+          const response = await Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/isArtist`, { email: user.email });
+          console.log(response.data);
+          dispatch(setArtist({ isArtist: response.data.isArtist }))
+          if (response.data.isArtist) {
+            dispatch(setclienturl({ clienturl: response.data.artist.graphqlurl }))
+          } else {
+            dispatch(setclienturl({ clienturl: '' }))
+          }
+          showAlert('Check your email and verify account', 'info')
         }
         // history.push("/");
       } catch (error) {
@@ -294,7 +288,7 @@ const Login = () => {
   };
 
   function showAlert(title, type) {
-    setAlert(<SweetAlert style={{ color: '#000' }} type={type} onConfirm={handleAlertConfirm(type)} timeout={3000} title={title} />)
+    setAlert(<SweetAlert style={{ color: '#000' }} type={type} onConfirm={() => handleAlertConfirm(type)} timeout={3000} title={title} />)
     setLoading(false);
   }
 
@@ -342,7 +336,7 @@ const Login = () => {
               {authSelectFlag ? "Sign Up" : "Login"}
             </button>
             <button
-              className="login-btn d-none"
+              className="login-btn"
               onClick={() => setForgotPasswordFlag(!forgotPasswordFlag)}
             >
               Forgot Password
@@ -361,10 +355,10 @@ const Login = () => {
         </div>
         {forgotPasswordFlag ? null : (
           <div className="social-icons">
-            {/*<a className="mail-icon" href="#" onClick={() => setPhoneRegisterFlag(false)}>*/}
-            {/*  {" "}*/}
-            {/*  <img alt="" src={assetsImages.envelope} />*/}
-            {/*</a>*/}
+            <a className="mail-icon" href="#" onClick={() => setPhoneRegisterFlag(false)}>
+              {" "}
+              <img alt="" src={assetsImages.envelope} />
+            </a>
             <a className="call-icon" href="#" onClick={() => setPhoneRegisterFlag(true)}>
               {" "}
               <img alt="" src={assetsImages.telephone} />
@@ -396,8 +390,8 @@ const Login = () => {
             : phoneRegisterFlag
               ? "use phone number for registration"
               : authSelectFlag
-                ? "or use email for login"
-                : "or use email for registration"}
+                ? "use email for login"
+                : "use email for registration"}
         </div>
         {phoneRegisterFlag ? (
           <form onSubmit={handleRegisterWithPhone}>

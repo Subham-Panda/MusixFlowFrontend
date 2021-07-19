@@ -47,6 +47,7 @@ const Artistpic = () => {
     const [failuremint, setfailuremint] = useState(false);
     const [successburn, setsuccessburn] = useState(false);
     const [failureburn, setfailureburn] = useState(false);
+    const [connectedwallet, setconnectedwallet] = useState(true);
     const [SocialTokenAddress, setSocialTokenAddress] = useState('');
     const [sellflag, setsellflag] = useState(false)
     const [buyflag, setbuyflag] = useState(false)
@@ -56,6 +57,9 @@ const Artistpic = () => {
     const [sellmodalloading, setsellmodalloading] = useState(false)
 
     useEffect(() => {
+        if (!wallet.wallet_connected) {
+            setconnectedwallet(false)
+        }
         const init = async () => {
             setLoading(true)
             const { data } = await Axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/artist/getbyid`, { id })
@@ -621,37 +625,51 @@ const Artistpic = () => {
                             <img alt="" src={assetsImages.button} />
                             <div className="button">
                                 {
-                                    token.trim() !== "" ?
-                                        (<button
-                                            className="btn sell-button"
-                                            type="button"
-                                            onClick={() => setsell((sell) => !sell)}
-                                        >
-                                            Sell
-                                        </button>) :
+                                    token.trim() === "" ?
                                         (<button
                                             className="btn sell-button test"
                                             type="button"
                                             onClick={() => { window.location.href = "/login" }}
                                         >
                                             Sell
-                                        </button>)
+                                        </button>) :
+                                        (connectedwallet ? (<button
+                                            className="btn sell-button"
+                                            type="button"
+                                            onClick={() => setsell((sell) => !sell)}
+                                        >
+                                            Sell
+                                        </button>) : (
+                                            <button
+                                                className="btn sell-button"
+                                                type="button"
+                                                onClick={() => setconnectedwallet((connectedwallet) => !connectedwallet)}
+                                            >
+                                                Sell
+                                            </button>
+                                        ))
                                 }
 
                                 {
-                                    token.trim() !== "" ? (<button
+                                    token.trim() === "" ? (<button
+                                        className="btn buy-button test"
+                                        type="button"
+                                        onClick={() => { window.location.href = "/login" }}
+                                    >
+                                        Buy
+                                    </button>) : (connectedwallet ? (<button
                                         className="btn buy-button"
                                         type="button"
                                         onClick={() => setbuy((buy) => !buy)}
                                     >
                                         Buy
                                     </button>) : (<button
-                                        className="btn buy-button test"
+                                        className="btn buy-button"
                                         type="button"
-                                        onClick={() => { window.location.href = "/login" }}
+                                        onClick={() => setconnectedwallet((connectedwallet) => !connectedwallet)}
                                     >
                                         Buy
-                                    </button>)
+                                    </button>))
 
                                 }
 
@@ -1025,6 +1043,16 @@ const Artistpic = () => {
                 onCancel={() => { setfailureburn(failureburn => !failureburn) }}
             >
                 Error selling tokens
+            </SweetAlert>
+            <SweetAlert
+                danger
+                show={!connectedwallet}
+                title="Please Connect Wallet"
+                style={{ color: '#000' }}
+                onConfirm={() => { setconnectedwallet(connectedwallet => !connectedwallet) }}
+                onCancel={() => { setconnectedwallet(connectedwallet => !connectedwallet) }}
+            >
+                Unable to fetch token price
             </SweetAlert>
         </div>
     );

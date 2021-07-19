@@ -9,6 +9,7 @@ export const walletSlice = createSlice({
     },
     reducers: {
         connected: (state, action) => {
+            console.log({ action });
             state.wallet_address = action.payload.address
             state.provider = action.payload.provider
             state.wallet_connected = true
