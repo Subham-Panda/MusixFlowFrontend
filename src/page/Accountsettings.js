@@ -106,7 +106,7 @@ const Accountsettings = () => {
                                 <div className="comman-grids">
                                     <select name="countries" id="countries" form="carform" className="common-grids-select" value={country} onChange={(e) => setcountry(e.target.value)} >
                                         <option value="Country" active>Country</option>
-                                        {country_list.map(country => <option value={country}>{country}</option>)}
+                                        {country_list.map((country, i) => <option key={i} value={country}>{country}</option>)}
                                     </select>
                                 </div>
                                 <div className="comman-grids Address-main">

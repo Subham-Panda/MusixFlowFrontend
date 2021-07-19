@@ -44,9 +44,9 @@ const ManageLabelArtists = () => {
 	}
 
 	const displayArtists = () => {
-		return artists.map(artist => {
+		return artists.map((artist,i) => {
 			return (
-				<tr>
+				<tr key={i}>
 					<td className="text-center">{artist.social_token_id}</td>
 					<td className="text-center">{artist.first_name ? `${artist.first_name} ${artist.last_name ? artist.last_name : ''}` : artist.name}</td>
 					<td className="text-center"><Button variant="danger" id={artist._id} onClick={removelabelartist}>Remove</Button></td>
@@ -102,8 +102,8 @@ const ManageLabelArtists = () => {
 				<Modal.Body>
 					<select name="addartists" id="addartists" onChange={(e) => setsartistid(e.target.value)}>
 						<option value="">Choose Artist</option>
-						{artistremain.map(artist => {
-							return <option value={artist._id}>{artist.first_name ? `${artist.first_name} ${artist.last_name ? artist.last_name : ''}` : artist.name}</option>
+						{artistremain.map((artist, i) => {
+							return <option key={i} value={artist._id}>{artist.first_name ? `${artist.first_name} ${artist.last_name ? artist.last_name : ''}` : artist.name}</option>
 						})}
 
 					</select>

@@ -59,9 +59,9 @@ const AllArtists = () => {
 	}
 
 	const displayArtists = () => {
-		return artists.map(artist => {
+		return artists.map((artist,i) => {
 			return (
-				<tr>
+				<tr key={i}>
 					<td>
 						<img style={{ borderRadius: "50%", height: "80px", width: "80px" }} src={artist.profile_image !== '' ? `${process.env.REACT_APP_SERVER_URL}/${artist.profile_image}` : assetsImages.person} alt={artist.first_name ? artist.first_name : ''} />
 					</td>

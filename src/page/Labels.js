@@ -38,8 +38,8 @@ const Labels = () => {
 
                 <div className="labels-grid-main">
                     {
-                        labels.map(label => {
-                            return <Link to={`/labels/${label._id}`}> <Labelscompo labelname={label.name} imglink={`${process.env.REACT_APP_SERVER_URL}/${label.image}`} /></Link>
+                        labels.map((label,i) => {
+                            return <Link key={i} to={`/labels/${label._id}`}> <Labelscompo labelname={label.name} imglink={`${process.env.REACT_APP_SERVER_URL}/${label.image}`} /></Link>
                         })
                     }
                     {/* <Link to={'/rocnations'}> <Labelscompo /></Link>

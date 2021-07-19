@@ -124,9 +124,9 @@ const LabelArtists = () => {
                         </thead>
                         <tbody>
                             {
-                                artists.map((artist) => {
+                                artists.map((artist,i) => {
                                     return (
-                                        <tr>
+                                        <tr key={i}>
                                             <td className="first-col"><img alt="" src={`${process.env.REACT_APP_SERVER_URL}/${artist.profile_image}`} width="80" /> </td>
                                             <td className="second-col">{artist.name ? artist.name : `${artist.first_name} ${artist.last_name ? artist.last_name : ''}`}</td>
                                             <td className="third-col">{displayTokenPrice(artist.social_token_id)}</td>

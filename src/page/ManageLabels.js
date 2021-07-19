@@ -60,9 +60,9 @@ const ManageLabels = () => {
 	}
 
 	const displayLabels = () => {
-		return labels.map(label => {
+		return labels.map((label,i) => {
 			return (
-				<tr>
+				<tr key={i}>
 					<td className="text-center">{label.name}</td>
 					<td className="text-center"><Button variant="primary" id={label.name} onClick={() => history.push(`/managelabelartists/${label._id}`)}>Manage Artists</Button></td>
 					<td className="text-center"><Button variant="danger" id={label._id} onClick={deleteLabel}>Delete</Button></td>

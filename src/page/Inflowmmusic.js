@@ -22,9 +22,9 @@ const Inflowmusic = () => {
 
     const displayArtists = () => {
         if (artists && artists.length > 0) {
-            return artists.map(artist => {
+            return artists.map((artist, i) => {
                 console.log(`${process.env.REACT_APP_SERVER_URL}/${artist.profile_image}`)
-                return (<Link to={`/artist/${artist._id}`}>
+                return (<Link to={`/artist/${artist._id}`} key={i}>
                     <Artistpic imglink={`${process.env.REACT_APP_SERVER_URL}/${artist.profile_image}`} name={`${artist.first_name} ${artist.last_name}`} />
                 </Link>)
             })
