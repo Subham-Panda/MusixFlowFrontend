@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Banner from '../component/Banner';
 import Artistpic from '../component/Artistpic';
-import Song from '../component/Song';
+// import Song from '../component/Song';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import Loader from '../component/Loader';
-import { assetsImages } from "../constants/images";
+// import { assetsImages } from "../constants/images";
 
 const Inflowmusic = () => {
     const [artists, setArtists] = useState();

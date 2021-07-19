@@ -4,7 +4,6 @@ import SweetAlert from 'react-bootstrap-sweetalert';
 import Axios from 'axios';
 import Loader from '../component/Loader';
 import { assetsImages } from '../constants/images';
-import { get } from 'http';
 
 
 const AllArtists = () => {

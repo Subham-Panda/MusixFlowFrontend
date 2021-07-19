@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import './component.css';
 import { assetsImages } from "../constants/images";
-import Customdropdown from "./Customdropdown";
+// import Customdropdown from "./Customdropdown";
 import Performbar from "./Performbar";
-import ProgressBar from "react-bootstrap/ProgressBar";
+// import ProgressBar from "react-bootstrap/ProgressBar";
 import { Modal } from "react-bootstrap";
-import Loader from "./Loader";
+// import Loader from "./Loader";
 import { Inflow } from '../inflow-solidity-sdk/src/Inflow';
 import { ethers } from 'ethers';
 import SmallLoader from "./SmallLoader";
@@ -21,13 +21,13 @@ const GET_TOKEN_FEES = gql`
 
 const Artistpic = () => {
 
-    const [profileModel, setProfileModel] = useState(false);
+    // const [profileModel, setProfileModel] = useState(false);
     const [tokenfrees, settokenfrees] = useState(false);
     const [newvote, setnewvote] = useState(false);
     const [success, setsuccess] = useState(false);
 
 
-    const { error, loading, data } = useQuery(GET_TOKEN_FEES);
+    const { loading, data } = useQuery(GET_TOKEN_FEES);
     const [tokenfees, settokenfees] = useState(0.0);
 
 

@@ -1,12 +1,12 @@
 import { ethers } from "ethers";
 import Web3Modal from 'web3modal';
-import WalletConnectProvider from '@walletconnect/web3-provider';
-import { INFURA_ID, FORTMATIC_KEY, PORTIS_ID } from "./constants";
-import Portis from "@portis/web3";
-import Fortmatic from "fortmatic";
-import Torus from "@toruslabs/torus-embed";
-import WalletLink from "walletlink";
-import MewConnect from "@myetherwallet/mewconnect-web-client";
+// import WalletConnectProvider from '@walletconnect/web3-provider';
+// import { INFURA_ID, FORTMATIC_KEY, PORTIS_ID } from "./constants";
+// import Portis from "@portis/web3";
+// import Fortmatic from "fortmatic";
+// import Torus from "@toruslabs/torus-embed";
+// import WalletLink from "walletlink";
+// import MewConnect from "@myetherwallet/mewconnect-web-client";
 
 class Wallet {
     ethersProvider = null;

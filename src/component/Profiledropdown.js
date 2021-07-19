@@ -34,9 +34,9 @@ function Profiledropdown() {
         window.location.href = "/login";
     }
 
-    const onEdit = () => {
-        window.location.href = "/accountsettings";
-    }
+    // const onEdit = () => {
+    //     window.location.href = "/accountsettings";
+    // }
 
     const onLogout = () => {
         dispatch(logout())

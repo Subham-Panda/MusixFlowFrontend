@@ -13,7 +13,7 @@ import { Modal } from 'react-bootstrap';
 import Loader from './Loader';
 import SmallLoader from './SmallLoader';
 import { Inflow } from '../inflow-solidity-sdk/src/Inflow';
-import { Contract, ethers } from 'ethers';
+import { Contract } from 'ethers';
 import SocialToken from '../artifacts/contracts/token/social/SocialToken.sol/SocialToken.json';
 import MockUSDC from '../artifacts/contracts/mocks/MockUSDC.sol/MockUSDC.json';
 import SweetAlert from 'react-bootstrap-sweetalert';
@@ -85,9 +85,9 @@ const Artistpic = () => {
         }
     }, [SocialTokenAddress]);
 
-    async function requestAccount() {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-    }
+    // async function requestAccount() {
+    //     await window.ethereum.request({ method: 'eth_requestAccounts' });
+    // }
 
     // const getBalance = async () => {
     //     if (
@@ -189,13 +189,13 @@ const Artistpic = () => {
     //     }
     // };
 
-    const mint = async (social, usdc, amount) => {
-        const mintPrice = await social.getMintPrice(amount);
-        await (await usdc.mint(mintPrice)).wait(); // this line to be removed if the balance of usdc wallet issue is fixed
-        await (await usdc.approve(social.address, mintPrice)).wait();
-        await (await social.mint(amount)).wait();
-        return mintPrice;
-    };
+    // const mint = async (social, usdc, amount) => {
+    //     const mintPrice = await social.getMintPrice(amount);
+    //     await (await usdc.mint(mintPrice)).wait(); // this line to be removed if the balance of usdc wallet issue is fixed
+    //     await (await usdc.approve(social.address, mintPrice)).wait();
+    //     await (await social.mint(amount)).wait();
+    //     return mintPrice;
+    // };
 
     const buyTokens = async () => {
         // console.log("HMMMM")

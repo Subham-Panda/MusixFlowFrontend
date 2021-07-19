@@ -6,7 +6,7 @@ import Profiledropdown from '../component/Profiledropdown';
 import { Button } from "react-bootstrap";
 import Wallet from '../utils/wallet';
 import SweetAlert from "react-bootstrap-sweetalert";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { connected, disconnect } from "../store/reducers/walletSlice";
 
 const Header = () => {

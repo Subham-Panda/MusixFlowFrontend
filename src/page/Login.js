@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, setArtist } from "../store/reducers/authSlice";
 import { assetsImages } from "../constants/images";
@@ -7,12 +7,11 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import {
   auth,
-  createUserProfileDocument,
   googleProvider,
   facebookProvider,
 } from "../utils/firebase";
 import firebase from "firebase";
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Loader from "../component/Loader";
 import SweetAlert from "react-bootstrap-sweetalert";
 import Axios from 'axios'
@@ -22,7 +21,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const uData = useSelector((state) => state.auth.data);
   console.log(uData);
-  const history = useHistory();
+  // const history = useHistory();
   const [authSelectFlag, setAuthSelectFlag] = useState(true);
   const [forgotPasswordFlag, setForgotPasswordFlag] = useState(false);
   const [phoneRegisterFlag, setPhoneRegisterFlag] = useState(true);
@@ -46,20 +45,20 @@ const Login = () => {
     //window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container')
   }, [uData]);
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    const { email, password } = user;
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      setUser({ email: "", password: "" });
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const handleLogin = async (event) => {
+  //   event.preventDefault();
+  //   const { email, password } = user;
+  //   try {
+  //     await auth.signInWithEmailAndPassword(email, password);
+  //     setUser({ email: "", password: "" });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const handleRegister = async (event) => {
     event.preventDefault();
-    const { displayName, email, password, phone } = user;
+    const { email, password } = user;
     //console.log('++++', email, password)
     const reg =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -256,8 +255,8 @@ const Login = () => {
 
     try {
       const result = await auth.signInWithPopup(provider);
-      const credential = result.credential;
-      const token = credential.accessToken;
+      // const credential = result.credential;
+      // const token = credential.accessToken;
       const user = result.user;
       let isAdmin = false;
       const idTokenResult = await user.getIdTokenResult();
@@ -276,7 +275,7 @@ const Login = () => {
       }
       window.location.href = "/"
     } catch (error) {
-      const errorCode = error.code;
+      // const errorCode = error.code;
       const errorMessage = error.message;
       const email = error.email;
       const credential = error.credential;
@@ -410,11 +409,11 @@ const Login = () => {
                 country={"us"}
                 value={user.phone}
                 onChange={(value) => {
-                  setUser({ ["phone"]: value });
+                  setUser({ "phone": value });
                 }}
               />
             </div>
-            {errorFlg == "phone" ? (
+            {errorFlg === "phone" ? (
               <div
                 style={{
                   color: "red",
@@ -436,7 +435,7 @@ const Login = () => {
                   onChange={handleChange}
                 />
               </div>
-              {errorFlg == "otp" ? (
+              {errorFlg === "otp" ? (
                 <div
                   style={{
                     color: "red",
@@ -480,7 +479,7 @@ const Login = () => {
                 onChange={handleChange}
               />
             </div>
-            {errorFlg == "email" ? (
+            {errorFlg === "email" ? (
               <div
                 style={{
                   color: "red",
@@ -503,7 +502,7 @@ const Login = () => {
                     onChange={handleChange}
                   />
                 </div>
-                {errorFlg == "password" ? (
+                {errorFlg === "password" ? (
                   <div
                     style={{
                       color: "red",

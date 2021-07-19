@@ -14,7 +14,7 @@ const GET_GRAPH_DATA = gql`
 
 
 const Totalbalancechart = () => {
-  const { error, loading, data } = useQuery(GET_GRAPH_DATA);
+  const { loading, data } = useQuery(GET_GRAPH_DATA);
   const [labels, setlabels] = useState([]);
   const [values, setvalues] = useState([]);
 

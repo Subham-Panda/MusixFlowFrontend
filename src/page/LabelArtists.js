@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { assetsImages } from "../constants/images"
+// import { assetsImages } from "../constants/images"
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Loader from "../component/Loader";
@@ -16,7 +16,7 @@ const LabelArtists = () => {
     const [label, setlabel] = useState({})
     const [artists, setArtists] = useState([]);
     const [loading, setloading] = useState(false);
-    const [artistremain, setartistremain] = useState([]);
+    // const [artistremain, setartistremain] = useState([]);
     const [tokenPrices, setTokenPrices] = useState({});
     const [testprice, settestprice] = useState(0.0)
 
@@ -29,7 +29,7 @@ const LabelArtists = () => {
             setloading(true)
             const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/v1/label/getlabelartists`, { labelid })
             setArtists(data.artists);
-            setartistremain(data.remainingartists);
+            // setartistremain(data.remainingartists);
             setlabel(data.label);
             setloading(false)
             await gettokenprices(data.artists);
