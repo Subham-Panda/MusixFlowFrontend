@@ -633,7 +633,7 @@ const Artistpic = () => {
                                         >
                                             Sell
                                         </button>) :
-                                        (connectedwallet ? (<button
+                                        (wallet.wallet_connected ? (<button
                                             className="btn sell-button"
                                             type="button"
                                             onClick={() => setsell((sell) => !sell)}
@@ -657,7 +657,7 @@ const Artistpic = () => {
                                         onClick={() => { window.location.href = "/login" }}
                                     >
                                         Buy
-                                    </button>) : (connectedwallet ? (<button
+                                    </button>) : (wallet.wallet_connected ? (<button
                                         className="btn buy-button"
                                         type="button"
                                         onClick={() => setbuy((buy) => !buy)}
@@ -1052,7 +1052,6 @@ const Artistpic = () => {
                 onConfirm={() => { setconnectedwallet(connectedwallet => !connectedwallet) }}
                 onCancel={() => { setconnectedwallet(connectedwallet => !connectedwallet) }}
             >
-                Unable to fetch token price
             </SweetAlert>
         </div>
     );

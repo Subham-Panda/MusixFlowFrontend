@@ -13,6 +13,7 @@ let country_list = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "A
 
 const Accountsettings = () => {
     const uid = useSelector((state) => state.auth.data.uid);
+    const isArtist = useSelector((state) => state.auth.isArtist)
     const [firstname, setfirstname] = useState('');
     const [lastname, setlastname] = useState('');
     const [city, setcity] = useState('');
@@ -127,7 +128,7 @@ const Accountsettings = () => {
                                         type="file"
                                     />
                                 </div>
-                                <div className="comman-grids">
+                                {isArtist ? (<div className="comman-grids">
                                     Update Banner Image:
                                     <input
                                         onChange={(e) =>
@@ -137,7 +138,7 @@ const Accountsettings = () => {
                                         id="bannerimage"
                                         type="file"
                                     />
-                                </div>
+                                </div>): null}
                                 <div className="comman-grids">
                                     {/* <Dropdown>
                                         <Dropdown.Toggle id="dropdown-custom-1">
